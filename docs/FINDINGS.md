@@ -696,3 +696,33 @@ E diff == 意图、限定区域、header pristine、CRC=0x928C、sum=0xA88D、ex
 ### 待实机确认
 Home/End 键 → Home（最后一个未验证键位）；全键复扫；Fn 层（Fn+Home/End=KP+ 为
 JIS 默认；想要 End 需 Hook fn_100AC，挂起）。
+
+## §25 v6 实机结果 + v7——CT 门与 FF 位真相（2026-10-23）
+
+### v6 刷后用户报告
+Home/End 还是没对（仍 '='）；**Fn 键变成 Home** → raw 0x20 是 Fn 键，stock E=0x96
+是 Fn 特殊码（v6 的 0x8B 让 Fn 出 Home）。§16 的 "0x96→gp[-0xd8]=0x55" 记录是
+另一处代码（0x1F0A0 区，0x96 输出替换）的片段，不能当成 "0x96='='" 用。
+
+### fn_123A4 CT 门反汇编定案（ghidra_out/conv2.txt 0x12400-0x12434）
+E 值 ≥0xE0（含 0xFF）走 CT 门；选表逐键决定（slot 标志 gp[-0xd6] & RAM[0x8004b9]）：
+- CT1'[0xFF] = fw[0x2941F] = 0x79 → 丢弃（§17 "FF=drop" 仅对 CT1 成立）
+- **CT2'[0xFF] = fw[0x2943F] = 0x55 → 8042 → KEY_EQUAL**
+
+Home/End 键踩在某个 pristine-FF 位且其 slot 选 CT2 → '='。§17 的 "FF dropped
+BEFORE conversion" 推断错误——FF 照样过 CT 门。Backslash 当年"死在 FF 位"同理
+（其 slot 选 CT1 → 0x79 丢弃）。
+
+### v7 方案（一次刷机）
+- E[0x20]=0x96 恢复（Fn 救回）。
+- **FF 全覆盖**：38 个 pristine-FF 位（除 0x3E=Backslash）统一写 0x8B (Home)。
+  FF 位上无物理键则无反应；活键中只有 Home/End 踩 FF 位。若刷后有别的键
+  意外出 Home，把该 idx 单独退回 FF 即可（说明那是第二个 FF 活键位）。
+
+### v7 验证
+48 处 E diff == 意图（10 核心 + 0x3E + 38 毯覆）、限定区域、header pristine、
+CRC=0x1843、sum=0xA88D、exe 胶囊往返 == 镜像、Fn=0x96、LShift 完好。
+基线 SHA256：exe 7d061b50…9ce6 / img 31d8d4ae…f813 / cap 5f4b0837…f79c。
+
+### 待实机确认
+Fn 恢复；Home/End → Home；全键复扫（特别注意有没有第二个键出 Home）。

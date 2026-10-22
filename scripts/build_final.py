@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
-"""Build the FINAL v6 patched EC firmware (stock L19 code + E-table fixes only).
+"""Build the FINAL v7 patched EC firmware (stock L19 code + E-table fixes only).
 
-v6 (after v5 flash report: EQ fixed, Home/End STILL '='; keyd shows KEY_EQUAL,
-NOT kpequal): Home/End key raw = 0x20 — pristine E[0x20]=0x96, and 0x96 is the
-SPECIAL path: fn_123A4 reads gp[-0xd8] (=0x55) -> set-2 0x55 -> 8042 -> set-1
-0x0D '='. Untouched in v1..v5, which is why Home/End emitted '=' in EVERY
-version. §16 stock-era note already listed both '=' positions: p=32 (0x20,
-0x96-path) and p=60 (0x3C, direct 0x55). Sibling 0x21 = FF (empty,
-single-parity safe). E[0x20]=0x8B (Home, slot13); E[0x50] reverted to FF
-(v4/v5 proved 0x50/0x51 have NO live key: v4's 0x55 there produced no '=',
-v5's 0x8B there produced no Home).
+v7 (after v6 flash report: Home/End STILL '=', Fn key became Home):
+  - raw 0x20 = the FN key (stock E=0x96 is the Fn special code; v6's 0x8B made
+    Fn emit Home). E[0x20]=0x96 RESTORED — Fn works again.
+  - Home/End key still emits KEY_EQUAL. fn_123A4 disasm (conv2.txt 0x12400+):
+    E values >= 0xE0 go through the CT gate; WHICH table is per-KEY (slot flags
+    gp[-0xd6] & RAM[0x8004b9]). CT1'[0xFF]=0x79 (discard), CT2'[0xFF]=0x55
+    (KEY_EQUAL) — so a key on a pristine-FF idx whose slot selects CT2 emits
+    '='. That is the Home/End key. §17's "FF = dropped" was an INFERENCE,
+    wrong for CT2-selected slots (also why Backslash was "dead on FF").
+  - BLANKET FIX: every pristine-FF E idx (except 0x3E = Backslash) gets 0x8B
+    (Home). Only physically present keys respond; among live keys only
+    Home/End sits on an FF idx. If any OTHER key unexpectedly emits Home after
+    flashing, revert that specific idx to FF (it was a second FF-idx key).
 
-Full patch set (13 real changes; restores marked):
+Full explicit patch set (restores marked; plus the FF blanket above):
   E[0x0A]=0x4C  ';'      E[0x0B]=0x86  RCtrl     E[0x0C]=0x8D  Del
   E[0x0D]=0xC2  RESTORE <-             E[0x12]=E[0x13]=0x11  LAlt(+RAlt)
-  E[0x20]=0x8B  Home (Home/End key)    E[0x28]=0xE7  RESTORE digit 8 (KP8)
+  E[0x20]=0x96  RESTORE Fn             E[0x28]=0xE7  RESTORE digit 8 (KP8)
   E[0x36]=0x2E  RESTORE '5'            E[0x37]=0xD8  RESTORE F6
   E[0x3C]=0x55  RESTORE '=' (EQ key)  E[0x3E]=0x5D  Backslash (single)
   E[0x50]=0xFF  RESTORE (no live key) E[0x74]=0xB6  Menu
@@ -34,9 +38,9 @@ from fix_crc_sum import fix_crc_and_sum
 from build_ecupdate2 import ecu_crc, obfuscate, find_data_entries
 
 BASE = sz5env.w('ec_image_pristine.bin')
-OUT_IMG = sz5env.w('ec_firmware_final6.img')
-OUT_CAP = sz5env.w('ec_capsule_final6.bin')
-OUT_EXE = sz5env.w('EcUpdate_final6.exe')
+OUT_IMG = sz5env.w('ec_firmware_final7.img')
+OUT_CAP = sz5env.w('ec_capsule_final7.bin')
+OUT_EXE = sz5env.w('EcUpdate_final7.exe')
 PRISTINE_EXE = sz5env.UPDATER
 RSRC_RAW = 0x46000
 RSRC_RVA = 0xE1000
@@ -52,7 +56,7 @@ PATCHES = {
     0x0D: 0xC2,   # RESTORE: sibling of Del pair is the <- arrow
     0x12: 0x11,   # LAlt   (user choice; wire 0x11 direct)
     0x13: 0x11,   # LAlt sib (JIS-only position, no live English key)
-    0x20: 0x8B,   # Home   (Home/End key; pristine 0x96 -> gp[-0xd8]=0x55 -> KEY_EQUAL)
+    0x20: 0x96,   # RESTORE: Fn key (v6's 0x8B made Fn emit Home -> raw 0x20 = Fn)
     0x28: 0xE7,   # RESTORE: digit 8 key = KP8 (v3 put Home here -> digit 8 became Home)
     0x36: 0x2E,   # RESTORE: '5' key (v1 wrongly Home)
     0x37: 0xD8,   # RESTORE: F6 key (v1 wrongly Home)
@@ -83,13 +87,24 @@ def main():
         bs = (a,)
         print('Backslash: diag idx 0x%02X -> patch E[0x%02X] = 0x5D ONLY (sibling 0x%02X stays LShift)' % (k, a, b))
     img = bytearray(p)
-    for idx, val in PATCHES.items():
+    # blanket: every pristine-FF idx without an explicit patch (and not the
+    # backslash slot) gets the Home wire 0x8B. Only physically present keys
+    # respond; among live keys only Home/End sits on an FF idx (its slot picks
+    # CT2'[0xFF]=0x55, which is why it emitted '=').
+    patches = dict(PATCHES)
+    blanket = [i for i in range(128)
+               if p[E_OFF + i] == 0xFF and i not in patches and i != 0x3E]
+    for i in blanket:
+        patches[i] = 0x8B
+    print('FF blanket: %d idxs -> 0x8B (Home): %s'
+          % (len(blanket), ' '.join('%02X' % i for i in blanket)))
+    for idx, val in patches.items():
         img[E_OFF + idx] = val
     if bs:
         img[E_OFF + bs[0]] = 0x5D
     fix_crc_and_sum(img, 'final')
     # verify: diffs vs pristine = E patches + 0x218 + fine-adjust region only
-    allowed = set(E_OFF + i for i in PATCHES)
+    allowed = set(E_OFF + i for i in patches)
     if bs:
         allowed.add(E_OFF + bs[0])
     allowed.update(range(0x218, 0x21A))
