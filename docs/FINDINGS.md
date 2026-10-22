@@ -125,7 +125,7 @@ CRC（init 0x00FFFF，跳过 0x200-0x27F，每字节 8 次 `<<=1; if bit24 ^= 0x
 
 ## 10. 最终补丁清单（详见 keymap-cf-sz5-en.md）
 
-E 表 12 处真实改动（含显式恢复 stock 值）+ 37 个空位统一接 Home 线 +
+E 表 15 字节与 pristine 不同（补丁集另含 11 项显式恢复、恰为 stock 原值）+ 37 个空位统一接 Home 线 +
 T7128 表 5 字节（Home/End 对 + F8/F11/F12 的 Fn 项=自身）+
 代码 1 字节（0x10EA0，关 CAD latch）。补丁后 CRC/字节和自动修复于填充区，
 头区 0x200-0x217 与 pristine 逐字节一致。构建、哈希、验证记录见

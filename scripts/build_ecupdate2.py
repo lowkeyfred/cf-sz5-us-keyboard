@@ -87,16 +87,24 @@ def find_data_entries(exe, wanted):
     return found
 
 
-def pe_checksum(data, skip_off):
+def pe_checksum(data, checksum_off):
+    """Canonical PE/COFF checksum. NB: the whole 4-byte CheckSum field is
+    skipped (the field content must not affect the result - verified against
+    the original Panasonic updater, whose stored checksum this reproduces
+    exactly). Fold carries to 16 bits after every word; add file length."""
     total = 0
-    for i in range(0, len(data), 2):
-        if i == skip_off:
+    i = 0
+    n = len(data)
+    while i < n:
+        if i == checksum_off:
+            i += 4
             continue
-        w = struct.unpack_from('<H', data, i)[0] if i + 2 <= len(data) else data[i]
+        w = struct.unpack_from('<H', data, i)[0] if i + 2 <= n else data[i]
         total = (total + w) & 0xFFFFFFFF
         total = (total & 0xFFFF) + (total >> 16)
+        i += 2
     total = (total & 0xFFFF) + (total >> 16)
-    return (total + len(data)) & 0xFFFFFFFF
+    return (total + n) & 0xFFFFFFFF
 
 
 def main():

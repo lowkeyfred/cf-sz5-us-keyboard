@@ -7,7 +7,7 @@ Panasonic Let's Note **CF-SZ5**（仅在日本销售，EC 固件只带 JIS 键�
 > **状态（最终）**：**v9.2 已实机全键验证通过**——所有键与键帽一致，
 > NumLock 小键盘层正确（`;`→KP+、`0`→KP*、`P`→KP-），Fn 无多余效果
 > （Fn+Home/End=End、Fn+Backspace 不再是 Ctrl+Alt+Del、F8/F11/F12 的 Fn
-> 怪键已删）。最终补丁 = E 表 12 处 + T7128 表 5 处 + 代码 1 字节
+> 怪键已删）。最终补丁 = E 表 15 字节 + T7128 表 5 字节 + 代码 1 字节
 > （CAD latch），详见 [docs/keymap-cf-sz5-en.md](docs/keymap-cf-sz5-en.md)。
 > 交付物在 `analysis/`：`EcUpdate_SZ5_EN_final.exe`（最终）+
 > `EcUpdate_restore_L19.exe`（原厂恢复）。

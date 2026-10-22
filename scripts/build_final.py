@@ -32,7 +32,7 @@ import sz5env  # sets up sys.path, WORK, UPDATER
 import ec_patch
 from build_diag_crc import crc24, deficit
 from fix_crc_sum import fix_crc_and_sum
-from build_ecupdate2 import ecu_crc, obfuscate, find_data_entries
+from build_ecupdate2 import ecu_crc, obfuscate, find_data_entries, pe_checksum
 
 BASE = sz5env.w('ec_image_pristine.bin')
 OUT_IMG = sz5env.w('ec_firmware_SZ5_EN_final.img')
@@ -191,17 +191,6 @@ def main():
     struct.pack_into('<II', exe, opt + 96 + 4 * 8, 0, 0)
     del exe[CERT_CUTOFF:]
     exe = bytearray(exe)
-
-    def pe_checksum(data, skip_off):
-        total = 0
-        for i in range(0, len(data) - 1, 2):
-            if i == skip_off:
-                continue
-            total = (total + struct.unpack_from('<H', data, i)[0]) & 0xFFFFFFFF
-            total = (total + (total >> 16)) & 0xFFFFFFFF
-        if len(data) % 2:
-            total = (total + data[-1]) & 0xFFFFFFFF
-        return (total + len(data)) & 0xFFFFFFFF
 
     cs = pe_checksum(bytes(exe), opt + 64)
     struct.pack_into('<I', exe, opt + 64, cs)

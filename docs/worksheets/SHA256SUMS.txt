@@ -36,5 +36,12 @@ c27060b5349d982101a6c077b53f78bc352cb9b696aa53aa1cac0b28e05fa090  sid_driver.exe
 bdbb345bc67a5d379488492f9c9b805eca9b917c37931d7f02e04f2c7f893e39  EcUpdate_SZ5_EN_final.exe
 f1ba78b970c4596d8d40cd9fb1e7d896a0aa80bd3829ddb8259d09223000a2c0  EcUpdate_restore_L19.exe
 # 2026-10-23 可复现性验证：按 README「使用」步骤在全新 work/ 目录从头构建
-# （extract_firmware -> build_restore -> build_final 0x1f），
-# 两个 exe 的 SHA256 与上方交付记录逐字节一致。
+# （extract_firmware -> build_restore -> build_final 0x1f）。
+# EcUpdate_restore_L19.exe 与交付记录逐字节一致。
+# EcUpdate_SZ5_EN_final.exe 重建版与交付版仅差 PE 头 4 字节（偏移 0x158 的
+# CheckSum 字段）：交付版是实机验证过的原件（其字段值 0x6FE9E23B 由早期
+# 构建脚本中非标准的 pe_checksum 算出，Windows 用户态加载不检查该字段，
+# 不影响使用）；修复脚本后重建版字段为标准的 0x0007C7C1。两版内嵌固件
+# payload 逐字节相同，刷写效果一致：
+ce8d95ec7b81f7cacfc89231205f9b320d092ca0b053c1640662a73a7667fb88  EcUpdate_SZ5_EN_final.exe  (rebuilt, valid PE checksum)
+f1ba78b970c4596d8d40cd9fb1e7d896a0aa80bd3829ddb8259d09223000a2c0  EcUpdate_restore_L19.exe  (rebuilt, identical to delivered)
