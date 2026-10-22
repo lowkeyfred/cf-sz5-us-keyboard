@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
-"""Build the FINAL v3 patched EC firmware (stock L19 code + E-table fixes only).
+"""Build the FINAL v4 patched EC firmware (stock L19 code + E-table fixes only).
 
-v3 (after v2 user report): E[0x0B]=0x4C ';' (cap between L and ' confirmed by
-user; stock/v2 emitted RCtrl there) and E[0x28]=0x8B Home — the true Home/End
-key: pristine 0xE7 -> CT1' -> kpequal (types '=' in terminals, which is why
-v1/v2 "Home/End still ="). E[0x51] reverted to pristine FF (v2's Home there
-was a misdiagnosis; the position is empty).
+v4 (after v3 flash report: ';' still RCtrl, Home/End still '=', digit 8 became
+Home, RCtrl became ';'):
+  - 0x0A/0x3B were SWAPPED in v3: ';' key raw = 0x0A, RCtrl raw = 0x0B.
+    Fix: E[0x0A]=0x4C (';'), E[0x0B]=0x86 (RCtrl). Both wires proven by v3:
+    0x86 emitted RCtrl on both parities, 0x4C emitted ';' on 0x0B.
+  - E[0x28] restored to 0xE7 (KP8): it is the DIGIT 8 key, not Home/End.
+    0xE7 = KP8 — under NumLock it types '8' (why v2 looked "fine"), else Home.
+  - Home/End key = raw 0x3C: pristine E[0x3C]=0x55 -> 8042 set-2->set-1 -> 0x0D
+    '=' (the ONLY '='-producing entry in the whole E table — matches the
+    "Home/End types '=' in every version" report). Sibling 0x3D is FF (empty,
+    single-parity safe). E[0x3C]=0x8B (Home, slot13).
 
 Full patch set (17 positions, 5 of which are explicit restores = pristine):
-  E[0x0A]=0x86  RCtrl     E[0x0B]=0x4C  ';'      E[0x0C]=0x8D  Del
-  E[0x0D]=0xC2  RESTORE <-               E[0x12]=E[0x13]=0x11  LAlt(+RAlt)
-  E[0x28]=0x8B  Home (Home/End key)      E[0x36]=0x2E  RESTORE '5'
-  E[0x37]=0xD8  RESTORE F6              E[0x3E]=0x5D  Backslash (single)
-  E[0x50]=0x55  = (EQ)    E[0x74]=0xB6  Menu     E[0x75]=0x1B  RESTORE 's'
-  E[0x78]=0x8A  Ins       E[0x7C]=0x88  PrtSc    E[0x7D]=0xC5  RESTORE ->
-  E[0x7E]=E[0x7F]=0x89  Pause
+  E[0x0A]=0x4C  ';'      E[0x0B]=0x86  RCtrl     E[0x0C]=0x8D  Del
+  E[0x0D]=0xC2  RESTORE <-             E[0x12]=E[0x13]=0x11  LAlt(+RAlt)
+  E[0x28]=0xE7  RESTORE digit 8 (KP8)  E[0x36]=0x2E  RESTORE '5'
+  E[0x37]=0xD8  RESTORE F6             E[0x3C]=0x8B  Home (Home/End key)
+  E[0x3E]=0x5D  Backslash (single)     E[0x50]=0x55  = (EQ)
+  E[0x74]=0xB6  Menu     E[0x75]=0x1B  RESTORE 's'  E[0x78]=0x8A  Ins
+  E[0x7C]=0x88  PrtSc    E[0x7D]=0xC5  RESTORE ->   E[0x7E]=E[0x7F]=0x89  Pause
 
 Usage: build_final.py 0x1f   (diag idx for backslash, verified single-parity)
 NEVER flash without explicit user confirmation.
@@ -29,9 +35,9 @@ from fix_crc_sum import fix_crc_and_sum
 from build_ecupdate2 import ecu_crc, obfuscate, find_data_entries
 
 BASE = sz5env.w('ec_image_pristine.bin')
-OUT_IMG = sz5env.w('ec_firmware_final3.img')
-OUT_CAP = sz5env.w('ec_capsule_final3.bin')
-OUT_EXE = sz5env.w('EcUpdate_final3.exe')
+OUT_IMG = sz5env.w('ec_firmware_final4.img')
+OUT_CAP = sz5env.w('ec_capsule_final4.bin')
+OUT_EXE = sz5env.w('EcUpdate_final4.exe')
 PRISTINE_EXE = sz5env.UPDATER
 RSRC_RAW = 0x46000
 RSRC_RVA = 0xE1000
@@ -41,15 +47,16 @@ CERT_CUTOFF = 0x73A00
 E_OFF = 0x2969C
 
 PATCHES = {
-    0x0A: 0x86,   # RCtrl  (slot4 -> E0 14 -> E0 1D)
-    0x0B: 0x4C,   # ';'    (user-confirmed cap; stock/v2 emitted RCtrl here)
+    0x0A: 0x4C,   # ';'    (v3 flash PROVED raw 0x0A = ';' key: 0x86 there emitted RCtrl)
+    0x0B: 0x86,   # RCtrl  (v3 flash PROVED raw 0x0B = RCtrl: 0x4C there emitted ';')
     0x0C: 0x8D,   # Del    (slot15 nav 0x71)
     0x0D: 0xC2,   # RESTORE: sibling of Del pair is the <- arrow
     0x12: 0x11,   # LAlt   (user choice; wire 0x11 direct)
     0x13: 0x11,   # LAlt sib (JIS-only position, no live English key)
-    0x28: 0x8B,   # Home   (Home/End cap key; pristine 0xE7 -> CT1' -> kpequal)
+    0x28: 0xE7,   # RESTORE: digit 8 key = KP8 (v3 put Home here -> digit 8 became Home)
     0x36: 0x2E,   # RESTORE: '5' key (v1 wrongly Home)
     0x37: 0xD8,   # RESTORE: F6 key (v1 wrongly Home)
+    0x3C: 0x8B,   # Home   (Home/End key; pristine 0x55 -> 8042 -> '='; sib 0x3D=FF empty)
     0x50: 0x55,   # =      (EQ key, wire 0x55)
     0x74: 0xB6,   # Menu   (slot24 nav 0x2F)
     0x75: 0x1B,   # RESTORE: 's' key (v1 wrongly Menu)

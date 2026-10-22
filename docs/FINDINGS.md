@@ -608,3 +608,32 @@ E diff 全图受限、CRC 0x405A ✓、sum 0xA88D ✓、capsule/INI 与已验证
   （run-headless.ps1）；早期交接笔记移入 docs/archive/ 并加"有已知错误"声明。
 - 版权红线入 .gitignore：任何 *.bin/*.img/*.exe/*.rom 等不入 git；
   analysis/ 整个目录留在本地。git 树里只有脚本、文档、文本产物、键盘照片。
+
+## §22 v3 实机结果 + v4（2026-10-22 晚）
+
+### v3 刷后用户报告
+';' 仍出 RCtrl；Home/End 仍出 '='；**新增**：数字 8 出 Home、RCtrl 出 ';'。
+
+### 定位（v3 本身是完美的诊断探针）
+- **0x0A/0x0B 补反了**：v3 把 E[0x0A]=0x86、E[0x0B]=0x4C，结果 RCtrl 出 ';'、
+  ';' 键还出 RCtrl → raw 0x0A = ';' 键、raw 0x0B = RCtrl。
+  v2 里 RCtrl"正常"是因为 stock E[0x0B] 本来就是 0x86——歪打正着。
+- **0x28 是数字 8 键**：pristine 0xE7 = KP8。NumLock 开 → '8'（v2"正常"的假象），
+  v3 改成 Home 后裸按出 Home。0xE7 唯一的 kpequal 输出是 NumLock 关时的 KP8，
+  不是 '='。
+- **Home/End 键 = raw 0x3C**：pristine E[0x3C]=0x55 → 8042 set-2→set-1 →
+  **0x0D '='**——全 E 表唯一出 '=' 的项，与"stock 到现在一直出 '='"吻合。
+  兄弟位 0x3D=FF（空，单奇偶安全）。
+
+### v4 补丁（12 处真实改动 + 7 处显式恢复）
+E[0x0A]=0x4C ';'；E[0x0B]=0x86 RCtrl（恢复 stock）；E[0x28]=0xE7（恢复 KP8）；
+E[0x3C]=0x8B Home；其余同 v3。
+
+### v4 验证
+E diff == 意图、限定区域、header pristine、CRC=0xE228、sum=0xA88D、
+exe 胶囊往返 == 镜像、INI blob 69B、0x3D=FF / 0x3F=LShift 完好。ALL CHECKS PASS。
+基线 SHA256：exe ddf847a2…3c94 / img bfab92c4…d52b / cap fdf2b5ea…52c4。
+
+### 待实机确认
+';'、Home/End→Home、数字 8→'8'（NumLock 开）、RCtrl；Fn+Home/End（Fn 层未动，
+可能白送 End）；全键复扫。
