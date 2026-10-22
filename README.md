@@ -72,9 +72,10 @@ python scripts/build_final.py 0x1f
 
 ### 刷写
 
-**环境：完整 Windows（实机多轮验证可行）；WinPE 反而刷不了，VM/Wine 也不行。**
+**环境：完整 Windows（实机多轮验证可行）；VM/Wine 不行。**
 
-1. 先跑 `EcUpdate_restore_L19.exe` 确认回滚链路正常（它会提示无需更新，属正常）。
+1. 先跑 `EcUpdate_restore_L19.exe` 确认刷写链路正常——policy 已改为同版本可刷，
+   它会**真的把原厂固件刷回去**，刷完重启、确认键盘正常，再继续下一步。
 2. 跑 `EcUpdate_SZ5_EN_final.exe`，刷完重启。
 3. 进系统后用 `keyd monitor`（或 xev）全键扫一遍，对照
    [docs/keymap-cf-sz5-en.md](docs/keymap-cf-sz5-en.md)。

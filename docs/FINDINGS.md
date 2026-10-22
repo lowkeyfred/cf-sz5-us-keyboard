@@ -117,9 +117,9 @@ CRC（init 0x00FFFF，跳过 0x200-0x27F，每字节 8 次 `<<=1; if bit24 ^= 0x
   把 `SameVersionPolicy` 改成 0 才能同版本反复刷写。
 - 重打包（build_ecupdate2.py）：替换两个资源、清空证书表、裁剪 overlay、
   重算 PE checksum。胶囊压缩用 RtlCompressBuffer（LZNT1），往返解压逐字节校验。
-- 刷写环境：**完整 Windows 实测多轮成功；WinPE 反而失败；VM/Wine 被拒**
-  （更新程序内嵌字符串声称"必须在 Windows PE 执行"，与实测相反，以实测为准）。
-  刷完重启。
+- 刷写环境：**完整 Windows 实测多轮成功；VM/Wine 被拒**。更新程序内嵌的
+  "must be executed on Windows PE" 字符串指的是 PE 映像格式检查，并非要求
+  WinPE 预安装环境。刷完重启。
 - 应急：刷后键盘异常时，EC 由电池供电——拔 AC、长按电源 30 秒复位，
   再刷原厂恢复包（build_restore.py）。
 

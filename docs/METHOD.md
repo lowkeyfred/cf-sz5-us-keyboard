@@ -50,7 +50,7 @@
   MSB-first）的解压后镜像。
 - 版本门：INI 资源（CF-SZ5 为 resource 10/3000/1033，自定义混淆格式）里
   `SameVersionPolicy` 默认拒绝同版本刷写；重打包时改成 0。
-- CF-SZ5 实测：完整 Windows 直接刷写成功（多轮验证）；WinPE 反而失败；VM/Wine 被拒。刷完重启。
+- CF-SZ5 实测：完整 Windows 直接刷写成功（多轮验证）；VM/Wine 被拒。刷完重启。
 - PE 数字签名在修改后必然失效：清空证书表、裁剪 overlay、重算 PE checksum
   （`build_ecupdate2.py` 的 `pe_checksum`）。
 
