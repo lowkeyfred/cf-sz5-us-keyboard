@@ -20,7 +20,7 @@ public class ecu_analyze9 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze9.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze9.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         long[] fns = { 0x405950, 0x404620, 0x4045f0, 0x404c40, 0x404ba0, 0x404d10, 0x404b00, 0x412a40, 0x404fd0, 0x406430, 0x405470, 0x404120 };
         for (long fn : fns) decomp(fn);

@@ -12,7 +12,7 @@ public class decomp_7128b extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        File outDir = new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
+        File outDir = new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "f7128.txt"));
         FunctionManager fm = currentProgram.getFunctionManager();
         ghidra.program.disassemble.Disassembler dis =

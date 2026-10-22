@@ -20,7 +20,7 @@ public class ecu_analyze14 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze14.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze14.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         decomp(0x4051f0);   // type-2 image header parse (fills 0x4488a0 version / machine fields)
         decomp(0x404b00);   // branch selector before header parse

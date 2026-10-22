@@ -20,7 +20,7 @@ public class ecu_analyze17 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze17.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze17.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         decomp(0x406540);   // THE FLASH function
         decomp(0x411590);   // message lookup by code

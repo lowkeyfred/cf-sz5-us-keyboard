@@ -26,7 +26,7 @@ public class ecu_analyze4 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze4.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze4.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         Memory mem = currentProgram.getMemory();
         long[] strVa = { 5118096, 5118684, 5118152, 5118740, 5117960, 5118032, 5119104, 5122040, 5122724 };

@@ -11,7 +11,7 @@ public class decomp_30000 extends GhidraScript {
 
     @Override
     public void run() throws Exception {
-        File outDir = new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
+        File outDir = new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "ec_30000.txt"));
         FunctionManager fm = currentProgram.getFunctionManager();
         long[] sites = { 0x35a6, 0x780a, 0xdc26, 0x106d6, 0x10794, 0x10858, 0x10970,

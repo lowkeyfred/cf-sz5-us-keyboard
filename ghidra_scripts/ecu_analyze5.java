@@ -14,7 +14,7 @@ public class ecu_analyze5 extends GhidraScript {
     DecompInterface dec;
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze5.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze5.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         long[] consts = { 3003, 3000, 0xBBB, 0xBB8, 134786, 0x20E82, 198656, 0x30800, 0x4E3058, 0xE3058 };
         Map<Long, List<Long>> hits = new LinkedHashMap<>();

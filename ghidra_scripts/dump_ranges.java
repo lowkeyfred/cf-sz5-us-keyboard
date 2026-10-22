@@ -46,7 +46,7 @@ public class dump_ranges extends GhidraScript {
 
     @Override
     public void run() throws Exception {
-        File outDir = new File("C://Users//frederich//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
+        File outDir = new File("C://Users//<user>//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "ranges.txt"));
 
         dumpDisasm(w, 0x10F40, 0x11010);   // handler table dispatch

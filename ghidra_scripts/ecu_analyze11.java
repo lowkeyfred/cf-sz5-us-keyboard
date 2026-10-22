@@ -20,7 +20,7 @@ public class ecu_analyze11 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze11.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze11.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         decomp(0x408d80);
         w.close();

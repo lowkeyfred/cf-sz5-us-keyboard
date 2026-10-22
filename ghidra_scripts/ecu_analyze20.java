@@ -14,7 +14,7 @@ public class ecu_analyze20 extends GhidraScript {
     DecompInterface dec;
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze20.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze20.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         // disassemble the validator region then create functions at every ret-followed boundary
         AddressSet set = new AddressSet(addr(0x9900), addr(0x9E00));

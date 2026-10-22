@@ -20,7 +20,7 @@ public class force_disasm extends GhidraScript {
 
     @Override
     public void run() throws Exception {
-        File outDir = new File("C://Users//frederich//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
+        File outDir = new File("C://Users//<user>//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "forced.txt"));
 
         Disassembler dis = Disassembler.getDisassembler(currentProgram, monitor, null);

@@ -2,7 +2,7 @@
 """Targeted needle search across the handoff binaries."""
 import sys, re, os
 
-ROOT = r'C:\Users\frederich\workspaces\CF-SZ5-handoff'
+ROOT = r'C:\Users\<user>\workspaces\CF-SZ5-handoff'
 FILES = ['EC\\ec_firmware_encrypted.bin', 'EC\\EcUpdate_SZ5M123_V100L19.exe',
          'EC\\ec_sz5_123_m195072.exe', 'BIOS\\bios.rom', 'BIOS\\bios_image_10_3003.bin',
          'BIOS\\BIOS_SZ5_V300L25.exe']

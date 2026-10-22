@@ -11,7 +11,7 @@ public class asm_gen3 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        File outDir = new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
+        File outDir = new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "asm_gen3.txt"));
         Assembler asm = Assemblers.getAssembler(currentProgram);
         String[] tests = {

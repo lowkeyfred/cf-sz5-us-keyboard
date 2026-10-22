@@ -12,7 +12,7 @@ public class decomp_ecval extends GhidraScript {
 
     @Override
     public void run() throws Exception {
-        File outDir = new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
+        File outDir = new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "ec_validate.txt"));
         FunctionManager fm = currentProgram.getFunctionManager();
         long[] sites = { 0x18383, 0x377f, 0xdc55, 0xfe07, 0x16b77, 0x185a5, 0x1c27b, 0x254f1, 0x64ef };

@@ -9,7 +9,7 @@ from ghidra.program.model.listing import CodeUnit
 from ghidra.program.flatapi import FlatProgramAPI
 from ghidra.app.decompiler import DecompInterface, DecompileOptions
 
-OUT = r"C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_out"
+OUT = r"C:\Users\<user>\workspaces\CF-SZ5-handoff\analysis\ghidra_out"
 if not os.path.isdir(OUT):
     os.makedirs(OUT)
 
@@ -34,7 +34,7 @@ from ghidra.app.util.disassembler import Disassembler
 from ghidra.program.model.address import AddressSet
 from ghidra.util.task import ConsoleTaskMonitor
 dis = Disassembler.getDisassembler(currentProgram, monitor, ConsoleTaskMonitor())
-FUNC_LIST = r"C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ec_functions.txt"
+FUNC_LIST = r"C:\Users\<user>\workspaces\CF-SZ5-handoff\analysis\ec_functions.txt"
 seeded = 0
 try:
     for line in open(FUNC_LIST):

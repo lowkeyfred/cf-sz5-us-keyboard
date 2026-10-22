@@ -14,7 +14,7 @@ public class ecu_analyze15 extends GhidraScript {
     void out(String s) throws Exception { w.write(s + (char)10); }
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze15.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze15.txt"));
         Address tgt = addr(0x411750L);   // FUN_00411750 error display
         ReferenceManager rm = currentProgram.getReferenceManager();
         Set<Function> callers = new HashSet<Function>();

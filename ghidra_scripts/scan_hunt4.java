@@ -14,7 +14,7 @@ public class scan_hunt4 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        File outDir = new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
+        File outDir = new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "scan_hunt4.txt"));
         // 1) references to key RAM addresses
         ReferenceManager rm = currentProgram.getReferenceManager();

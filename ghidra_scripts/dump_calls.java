@@ -30,7 +30,7 @@ public class dump_calls extends GhidraScript {
 
     @Override
     public void run() throws Exception {
-        File outDir = new File("C://Users//frederich//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
+        File outDir = new File("C://Users//<user>//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "calls.txt"));
 
         dumpDisasm(w, 0x79A0, 0x7B00);     // selector helper + cmp 0x80 function

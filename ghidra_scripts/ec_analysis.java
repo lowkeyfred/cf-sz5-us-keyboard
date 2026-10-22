@@ -24,7 +24,7 @@ public class ec_analysis extends GhidraScript {
 
     @Override
     public void run() throws Exception {
-        File outDir = new File("C://Users//frederich//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
+        File outDir = new File("C://Users//<user>//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
         outDir.mkdirs();
         FileWriter log = new FileWriter(new File(outDir, "report.txt"));
 

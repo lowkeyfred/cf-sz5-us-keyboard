@@ -24,7 +24,7 @@ public class ecu_analyze extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        w = new FileWriter(new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze.txt"));
+        w = new FileWriter(new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out/ecu_analyze.txt"));
         dec = new DecompInterface(); dec.openProgram(currentProgram);
         Memory mem = currentProgram.getMemory();
         // 1. find interesting strings

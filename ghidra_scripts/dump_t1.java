@@ -10,7 +10,7 @@ public class dump_t1 extends GhidraScript {
     }
     @Override
     public void run() throws Exception {
-        File outDir = new File("C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
+        File outDir = new File("C:/Users/<user>/workspaces/CF-SZ5-handoff/analysis/ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "t1.txt"));
         ghidra.program.disassemble.Disassembler dis =
             ghidra.program.disassemble.Disassembler.getDisassembler(currentProgram, monitor, null);

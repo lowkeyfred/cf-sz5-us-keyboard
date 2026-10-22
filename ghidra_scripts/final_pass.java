@@ -19,13 +19,13 @@ public class final_pass extends GhidraScript {
 
     @Override
     public void run() throws Exception {
-        File outDir = new File("C://Users//frederich//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
+        File outDir = new File("C://Users//<user>//workspaces//CF-SZ5-handoff//analysis//ghidra_out");
         FileWriter w = new FileWriter(new File(outDir, "final.txt"));
         Listing listing = currentProgram.getListing();
 
         // read prologue seeds
         java.util.List<Long> seeds = new ArrayList<>();
-        Scanner sc = new Scanner(new File("C://Users//frederich//workspaces//CF-SZ5-handoff//analysis//ghidra_scripts//prologues.txt"));
+        Scanner sc = new Scanner(new File("C://Users//<user>//workspaces//CF-SZ5-handoff//analysis//ghidra_scripts//prologues.txt"));
         while (sc.hasNextLine()) seeds.add(Long.parseLong(sc.nextLine().trim(), 16));
         sc.close();
         seeds.add(0x79A2L); seeds.add(0x79A4L); seeds.add(0x79A6L);
