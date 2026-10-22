@@ -4,9 +4,11 @@ Panasonic Let's Note **CF-SZ5**（仅在日本销售，EC 固件只带 JIS 键�
 机器换了英文键盘后，部分按键的输出与键帽不符。本项目逆向了 EC 的键盘处理流水线，
 通过修补固件里的 128 字节映射表（E 表），让这些键输出键帽上印的字符。
 
-> **状态**：v5 固件已构建并通过全部完整性校验。v3/v4 实机反馈后全部键位
-> 已定位并经实机双向验证（`;`@0x0A、RCtrl@0x0B、Home/End@0x50、`=`@0x3C、
-> 数字 8@0x28=KP8），实机刷写验证进行中。刷写方法见下文「使用」。
+> **状态**：v6 固件已构建并通过全部完整性校验。全部错位键经实机双向验证定位
+> （`;`@0x0A、RCtrl@0x0B、Home/End@0x20、DEL@0x0C、INS@0x78、Menu@0x74、
+> PrtSc@0x7C、Pause@0x7E、Backslash@0x3E、RAlt→LAlt@0x12），`=`@0x3C 与
+> 数字 8@0x28=KP8 为 stock 即正确的恢复。实机刷写验证进行中。
+> 刷写方法见下文「使用」。
 
 ## ⚠️ 免责声明
 
@@ -60,14 +62,14 @@ python scripts/build_restore.py        # 产出 work/EcUpdate_restore_L19.exe
 
 # 4. 构建补丁固件（CF-SZ5 英文键盘的最终补丁集）
 python scripts/build_final.py 0x1f
-#    产出 work/ec_firmware_final5.img / ec_capsule_final5.bin / EcUpdate_final5.exe
+#    产出 work/ec_firmware_final6.img / ec_capsule_final6.bin / EcUpdate_final6.exe
 ```
 
 ### 刷写
 
 1. 进 WinPE（官方更新程序拒绝在普通 Windows / VM / Wine 里刷 EC）。
 2. 先跑 `EcUpdate_restore_L19.exe` 确认回滚链路正常（它会提示无需更新，属正常）。
-3. 跑 `EcUpdate_final5.exe`，刷完**手动重启**（WinPE 里没有 wpeutil，
+3. 跑 `EcUpdate_final6.exe`，刷完**手动重启**（WinPE 里没有 wpeutil，
    更新程序的重启调用会静默失败）。
 4. 进系统后用 `keyd monitor`（或 xev）全键扫一遍，对照
    [docs/keymap-cf-sz5-en.md](docs/keymap-cf-sz5-en.md)。

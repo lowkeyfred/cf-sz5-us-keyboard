@@ -666,3 +666,33 @@ exe 胶囊往返 == 镜像、0x3D/0x51=FF、0x3F=LShift 完好。ALL CHECKS PASS
 ### 待实机确认
 Home/End 键 → Home；`=` 键 → '='；Fn+Home/End=KP+（JIS 默认，接受或挂起）；
 全键复扫。
+
+## §24 v5 实机结果 + v6——0x96 特殊路径现形（2026-10-23 凌晨）
+
+### v5 刷后用户报告
+"现在 = 对了，但是 home 还是 ="。用户 mid-turn 用 keyd monitor 澄清：Home/End 出的是
+**KEY_EQUAL（set-1 0x0D），不是 kpequal**。
+
+### 定位
+v5 的 E 表里已无任何 0x55（唯一在 0x3C，='=' 键），但 Home/End 仍出 KEY_EQUAL →
+必走特殊路径。§16 早记录过：**E=0x96 → fn_123A4 读 gp[-0xd8]（=0x55）→ set-2 0x55
+→ 8042 → set-1 0x0D '='**。pristine E[0x20]=0x96，正是 Home/End 键（raw 0x20，
+兄弟 0x21=FF 空）。v1..v5 从未碰 0x20 → 每版都出 '='。§16 stock 时代记录的两个
+'=' 位 p∈{32(0x20,0x96路径), 60(0x3C,直发0x55)} 在此全部对上：英文键盘 0x3C=EQ 键
+（好），0x20=Home/End 键（坏）。
+
+### 附带确认
+0x50/0x51 无任何活键：v4 放 0x55（无多出 '='）、v5 放 0x8B（无多出 Home）——
+两次实机隐形证明。E[0x50] 回退 pristine FF。
+
+### v6 补丁（11 处真实改动）
+E[0x20]=0x8B (Home)；E[0x50]=0xFF（恢复）；其余同 v5。
+
+### v6 验证
+E diff == 意图、限定区域、header pristine、CRC=0x928C、sum=0xA88D、exe 胶囊
+往返 == 镜像、兄弟位 0x21/0x3D/0x51=FF、0x3F=LShift 完好。ALL CHECKS PASS。
+基线 SHA256：exe 588dcc88…a2c / img 336d526a…a104 / cap bccff338…9a30。
+
+### 待实机确认
+Home/End 键 → Home（最后一个未验证键位）；全键复扫；Fn 层（Fn+Home/End=KP+ 为
+JIS 默认；想要 End 需 Hook fn_100AC，挂起）。
