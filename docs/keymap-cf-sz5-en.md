@@ -8,7 +8,7 @@
 
 | E 索引 | stock | final | 按键 | 说明 |
 |---|---|---|---|---|
-| 0x0A | 0xEC | 0xEC | `;` | stock 即 CT 键（v7 曾错改直连 0x4C 导致 NumLock 失效，v9 恢复） |
+| 0x0A | 0xEC | 0xEC | `;` | stock 即 CT 键（曾走直连 0x4C 的弯路（NumLock 失效），已恢复） |
 | 0x0B | 0x86 | 0x86 | RCtrl | 恢复（stock 即对） |
 | 0x0C | 0x51 | 0x8D | Delete | 0x8D → slot15 → Del |
 | 0x0D | 0xC2 | 0xC2 | ← | 恢复（stock 即对） |
@@ -18,17 +18,17 @@
 | 0x20 | 0x96 | 0x96 | Fn | 恢复（0x96 = Fn 特殊码） |
 | 0x28 | 0xE7 | 0xE7 | 数字 8 | 恢复（= KP8：NumLock 开 '8' / 关 Home，stock 行为） |
 | 0x2A | 0xF6 | 0x4E | `-` | **直连**：stock 的 Fn+- = kpminus 随之消失 |
-| 0x36 | 0x2E | 0x2E | `5` | 恢复（v1 误伤） |
-| 0x37 | 0xD8 | 0xD8 | F6 | 恢复（v1 误伤） |
+| 0x36 | 0x2E | 0x2E | `5` | 恢复（stock 即正确） |
+| 0x37 | 0xD8 | 0xD8 | F6 | 恢复（stock 即正确） |
 | 0x3A | 0x45 | 0xEE | `0` | **CT**：NumLock 开 → KP*，关 → '0' |
 | 0x3C | 0x55 | 0x55 | `=` | 恢复（stock 即对） |
 | 0x3E | 0xFF | 0x5D | `\` | Backslash（单奇偶：兄弟 0x3F=LShift 不动） |
 | 0x4A | 0x4D | 0xF0 | `P` | **CT**：NumLock 开 → KP-，关 → 'P' |
 | 0x4C | 0xFB | 0x54 | `[` | **直连**：stock 的 Fn+[ = kpenter 随之消失 |
 | 0x4E | 0xFF | 0xCA | **Home/End 键** | 指到 T7128 死对（见下）：普通按=Home，Fn+=End |
-| 0x50 | 0xFF | 0xFF | （无活键） | 恢复（v4/v5 实验证明空位） |
+| 0x50 | 0xFF | 0xFF | （无活键） | 恢复（探针实验证明无活键） |
 | 0x74 | 0x13 | 0xB6 | Menu | 0xB6 → slot24 → Menu |
-| 0x75 | 0x1B | 0x1B | `s` | 恢复（v1 误伤） |
+| 0x75 | 0x1B | 0x1B | `s` | 恢复（stock 即正确） |
 | 0x78 | 0xB6 | 0x8A | Insert | 0x8A → slot12 → Ins |
 | 0x7C | 0xD2 | 0x88 | PrtSc | 0x88 → slot9 → E0 7C |
 | 0x7D | 0xC5 | 0xC5 | → | 恢复（stock 即对） |
@@ -65,21 +65,7 @@ Fn+BS 恢复为普通 Backspace。
 
 - **保留的 stock Fn（有用）**：Fn+← = Home、Fn+→ = End、Fn+↑/↓ = 翻页类导航；
   F1–F7/F9/F10 的 Fn 组合（JIS 亮度/音量类）未动。
-- **关闭的 stock Fn（v9.x 干掉的）**：Fn+BS = Ctrl+Alt+Del（代码字节）、
+- **关闭的 stock Fn**：Fn+BS = Ctrl+Alt+Del（代码字节，原厂实测证实）、
   Fn+F8/F11/F12 = scroll/SysRq 类（T7128 三项）、Fn+-/'/[ 的 kp 组合（直连线绕过 CT 门）。
 - Home/End 键本身：普通按 = Home（CT2'[0xFF]=0x55 '=' 的路径已被毯覆覆盖），
   Fn+按 = End。
-
-## 版本史（v7 → v9.2）
-
-- **v7**：E 表核心补丁 + 38 个 FF 空位毯覆 Home 线定位 Home/End 键 → 实机确认
-  全键位正确（除 NumLock KP 层三键、Fn 多余组合）。
-- **v8/v8probe**：验证 NumLock 三键修复有效；发现 Home/End 键 = idx 0x4E；
-  v8 引入 fn 层补丁 → Fn+Home/End 无输出、Fn+↑ 死机。
-- **v8.1**：fn 层"flags"区其实是 **T1 处理函数指针表**（0x29778 起），
-  写入损坏 P[9]/P[14]/P[22] → 重启后**整个键盘失效**；刷回 v7 恢复。
-  教训：**写任何表前先验证其范围；0x29764+idx 对 idx≥0x14 永不写入**。
-- **v9**：改为 T7128 死对实现 Fn+Home/End=End（普通=Home），+'/−/[ 改直连线
-  杀掉 kp 组合，恢复 ';' 的 CT 码。实机全对。
-- **v9.1**：+ CAD 字节（stock 实测证实后启用）。
-- **v9.2**：+ T7128 三项杀掉 F8/F11/F12 的 Fn 怪键。**实机最终验证：全部正确。**
