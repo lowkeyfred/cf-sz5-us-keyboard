@@ -1,0 +1,35 @@
+# ---- 版权/机器专属材料：绝不入 git ----
+# 固件镜像、胶囊、更新程序、BIOS 转储、EFI 模块
+*.bin
+*.img
+*.exe
+*.cab
+*.efi
+*.rom
+*.log
+
+# 本地工作目录（脚本产物输出到这里；分析文件留在本地）
+work/
+analysis/
+BIOS/
+EC/
+ghidra_proj/
+pfw_extract/
+
+# 逆向工具与环境
+ghidra_*/
+radare2*/
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+
+# 系统垃圾
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# assets 里的图片是唯一被明确允许的二进制
+!assets/*.jpg
+!assets/*.png

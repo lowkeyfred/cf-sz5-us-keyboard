@@ -1,0 +1,192 @@
+ sudo keyd monitor
+device added: 046d:b025:0bf0793c Logitech MX Anywhere 3 (/dev/input/event14)
+device added: 0002:0007:933252de SynPS/2 Synaptics TouchPad (/dev/input/event13)
+device added: 05ac:024f:e352662d Keychron Keychron K3 (/dev/input/event8)
+device added: 05ac:024f:41338e31 Keychron Keychron K3 (/dev/input/event7)
+device added: 0001:0001:d0fa5dde Panasonic Laptop Support (/dev/input/event5)
+device added: 0000:0006:bdb72f48 Video Bus (/dev/input/event4)
+device added: 0001:0001:09b4e68d AT Translated Set 2 keyboard (/dev/input/event3)
+device added: 0000:0001:48a093aa Power Button (/dev/input/event2)
+device added: 0000:0001:48a093aa Power Button (/dev/input/event1)
+Keychron Keychron K3	05ac:024f:41338e31	enter up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	esc down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	esc up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	` down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	` up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f1 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f1 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f2 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f2 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f3 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f3 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f4 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f4 up
+Keychron Keychron K3	05ac:024f:41338e31	esc down
+Keychron Keychron K3	05ac:024f:41338e31	esc up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f5 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f5 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	home down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	home up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f7 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f7 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f8 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f8 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f9 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f9 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f10 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f10 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f11 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f11 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f12 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f12 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	numlock down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	numlock up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	numlock down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	numlock up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	sysrq down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	sysrq up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	pause down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	pause up
+Keychron Keychron K3	05ac:024f:41338e31	esc down
+Keychron Keychron K3	05ac:024f:41338e31	esc up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	1 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	1 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	2 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	2 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	3 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	3 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	4 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	4 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	home down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	home up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	6 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	6 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	7 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	7 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	8 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	8 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	9 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	9 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	0 down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	0 up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	- down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	- up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	= down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	= up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	backspace down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	backspace up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	tab down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	tab up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	q down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	q up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	w down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	w up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	e down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	e up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	r down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	r up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	t down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	t up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	y down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	y up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	u down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	u up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	i down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	i up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	o down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	o up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	p down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	p up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	[ down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	[ up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	] down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	] up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	\ down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	\ up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	capslock down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	capslock up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	a down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	a up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	compose down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	compose up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	d down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	d up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	f up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	g down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	g up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	h down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	h up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	j down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	j up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	k down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	k up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	l down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	l up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	rightcontrol down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	rightcontrol up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	' down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	' up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	enter down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	enter up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftshift down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftshift up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	z down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	z up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	x down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	x up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	c down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	c up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	v down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	v up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	b down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	b up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	n down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	n up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	m down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	m up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	, down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	, up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	insert down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	insert up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	/ down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	/ up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	rightshift down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	rightshift up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	= down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	= up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftcontrol down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftcontrol up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftmeta down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftmeta up
+Keychron Keychron K3	05ac:024f:41338e31	esc down
+Keychron Keychron K3	05ac:024f:41338e31	esc up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftalt down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftalt up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	space down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	space up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftalt down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	leftalt up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	compose down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	compose up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	insert down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	insert up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	delete down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	delete up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	rightcontrol down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	rightcontrol up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	up down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	up up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	delete down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	delete up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	down down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	down up
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	sysrq down
+AT Translated Set 2 keyboard	0001:0001:09b4e68d	sysrq up
+Keychron Keychron K3	05ac:024f:41338e31	esc down
+Keychron Keychron K3	05ac:024f:41338e31	esc up
+Keychron Keychron K3	05ac:024f:41338e31	leftcontrol down
+Keychron Keychron K3	05ac:024f:41338e31	c down
+
+~ 59s
+❯
