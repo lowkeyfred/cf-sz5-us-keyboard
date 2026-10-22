@@ -16,7 +16,7 @@
 | 0x13 | 0x64 | 0x11 | （JIS 专属位） | 英文键盘无此物理键 |
 | 0x1C | 0xED | 0x52 | `'` | **直连**：stock 的 Fn+' = kpasterisk 随之消失 |
 | 0x20 | 0x96 | 0x96 | Fn | 恢复（0x96 = Fn 特殊码） |
-| 0x28 | 0xE7 | 0xE7 | 数字 8 | 恢复（= KP8：NumLock 开 '8' / 关 Home，stock 行为） |
+| 0x28 | 0xE7 | 0xE7 | 数字 8 | 恢复（= KP8：NumLock 开 '8' / 关 '8'，stock 行为） |
 | 0x2A | 0xF6 | 0x4E | `-` | **直连**：stock 的 Fn+- = kpminus 随之消失 |
 | 0x36 | 0x2E | 0x2E | `5` | 恢复（stock 即正确） |
 | 0x37 | 0xD8 | 0xD8 | F6 | 恢复（stock 即正确） |
@@ -59,7 +59,7 @@ Fn+BS 恢复为普通 Backspace。
 | `;` | KP+ | `;` |
 | `0` | KP* | `0` |
 | `P` | KP- | `P` |
-| 数字 8（0x28=KP8） | `8` | Home |
+| 数字 8（0x28=KP8） | `8` | `8` |
 
 ## Fn 层最终行为
 
