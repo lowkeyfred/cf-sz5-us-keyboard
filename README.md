@@ -4,12 +4,13 @@ Panasonic Let's Note **CF-SZ5**（仅在日本销售，EC 固件只带 JIS 键�
 机器换了英文键盘后，部分按键的输出与键帽不符。本项目逆向了 EC 的键盘处理流水线，
 通过修补固件里的 128 字节映射表（E 表），让这些键输出键帽上印的字符。
 
-> **状态**：v7 固件已构建并通过全部完整性校验。核心错位键全部实机双向验证
-> （`;`@0x0A、RCtrl@0x0B、DEL@0x0C、INS@0x78、Menu@0x74、PrtSc@0x7C、
-> Pause@0x7E、Backslash@0x3E、RAlt→LAlt@0x12）；Home/End 键在 pristine-FF 位
-> 上（其 slot 选 CT2 表出 0x55='='），v7 将全部 38 个空 FF 位接 Home 线一次
-> 覆盖定位；Fn 键（raw 0x20, 0x96）已恢复。`=`@0x3C 与数字 8@0x28=KP8 为
-> stock 即正确的恢复。实机刷写验证进行中。刷写方法见下文「使用」。
+> **状态（最终）**：**v9.2 已实机全键验证通过**——所有键与键帽一致，
+> NumLock 小键盘层正确（`;`→KP+、`0`→KP*、`P`→KP-），Fn 无多余效果
+> （Fn+Home/End=End、Fn+Backspace 不再是 Ctrl+Alt+Del、F8/F11/F12 的 Fn
+> 怪键已删）。最终补丁 = E 表 12 处 + T7128 表 5 处 + 代码 1 字节
+> （CAD latch），详见 [docs/keymap-cf-sz5-en.md](docs/keymap-cf-sz5-en.md)。
+> 交付物在 `analysis/`：`EcUpdate_SZ5_EN_final.exe`（最终）+
+> `EcUpdate_restore_L19.exe`（原厂恢复）。
 
 ## ⚠️ 免责声明
 
@@ -23,8 +24,10 @@ Panasonic Let's Note **CF-SZ5**（仅在日本销售，EC 固件只带 JIS 键�
 
 EC 扫描键盘矩阵得到 raw 扫描码 → 查 128 字节的 E 表翻译成 set-2 码 →
 经过若干处理函数 → 8042 转成 set-1 发给系统。日版固件的 E 表只按 JIS 排布；
-换英文键盘后，只要把少数几个矩阵位置改指到正确的 set-2 码即可，
-**不需要动任何代码逻辑**。
+换英文键盘后，把少数几个矩阵位置改指到正确的 set-2 码即可。
+**最终版几乎全部是表改动**（E 表 + T7128 成对表），唯一例外是 1 个代码字节：
+Fn+Backspace 触发的 Ctrl+Alt+Del 是原厂代码里的 latch（非表项），
+只能改代码关闭。完整机制见 [docs/FINDINGS.md](docs/FINDINGS.md)。
 
 完整逆向过程见 [docs/FINDINGS.md](docs/FINDINGS.md)；
 想把这套方法搬到别的机型，看 [docs/METHOD.md](docs/METHOD.md)。
@@ -63,17 +66,21 @@ python scripts/build_restore.py        # 产出 work/EcUpdate_restore_L19.exe
 
 # 4. 构建补丁固件（CF-SZ5 英文键盘的最终补丁集）
 python scripts/build_final.py 0x1f
-#    产出 work/ec_firmware_final7.img / ec_capsule_final7.bin / EcUpdate_final7.exe
+#    产出 work/ec_firmware_SZ5_EN_final.img / ec_capsule_SZ5_EN_final.bin
+#    / EcUpdate_SZ5_EN_final.exe（交付物的 SHA256 见 docs/worksheets/SHA256SUMS.txt）
 ```
 
 ### 刷写
 
-1. 进 WinPE（官方更新程序拒绝在普通 Windows / VM / Wine 里刷 EC）。
-2. 先跑 `EcUpdate_restore_L19.exe` 确认回滚链路正常（它会提示无需更新，属正常）。
-3. 跑 `EcUpdate_final7.exe`，刷完**手动重启**（WinPE 里没有 wpeutil，
-   更新程序的重启调用会静默失败）。
-4. 进系统后用 `keyd monitor`（或 xev）全键扫一遍，对照
+**环境：完整 Windows（实机多轮验证可行）；WinPE 反而刷不了，VM/Wine 也不行。**
+
+1. 先跑 `EcUpdate_restore_L19.exe` 确认回滚链路正常（它会提示无需更新，属正常）。
+2. 跑 `EcUpdate_SZ5_EN_final.exe`，刷完重启。
+3. 进系统后用 `keyd monitor`（或 xev）全键扫一遍，对照
    [docs/keymap-cf-sz5-en.md](docs/keymap-cf-sz5-en.md)。
+
+> 若刷后键盘异常：EC 由电池供电，彻底断电可复位——拔 AC、长按电源 30 秒，
+> 再进 Windows 刷 `EcUpdate_restore_L19.exe` 回滚。
 
 ### 如果某些键还是不对
 
@@ -94,7 +101,6 @@ python scripts/build_final.py 0x1f
 | `build_final.py` | **主交付**：CF-SZ5 英文键盘最终补丁固件 |
 | `build_restore.py` | 回滚更新程序（原始固件 + SameVersionPolicy=0） |
 | `build_diag2.py` | 探针固件构建器（错位键定位） |
-| `build_probe.py` / `build_spy.py` | 实验性：只换胶囊的探测更新程序 / SMM 响应包嗅探 |
 
 ## 安全红线（本项目自始至终遵守）
 

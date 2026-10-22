@@ -1,0 +1,43 @@
+--- 0x10E2A - 0x10F00 ---
+00010E2A  ldb_s r1,[sp,0x4]            21c1
+00010E2C  and r0,r1,0x2                44218000
+00010E30  brne r0,0x2,0x00010e62       33089100
+00010E34  add r1,sp,0x3                4024c130
+00010E38  bl.d 0x000084fc              c60eaffb
+00010E3C  _mov_s r0,r14                c970
+00010E3E  ldb r1,[sp, 0x3]             03148130
+00010E42  cmp_s r1,0x0                 80e1
+00010E44  beq_s 0x00011006             e1f2
+00010E46  add r3,sp,0x2                40248330
+00010E4A  mov_s r0,r1                  2870
+00010E4C  bl.d 0x00008580              360faffb
+00010E50  _mov_s r1,r3                 6871
+00010E52  ldb r0,[sp, 0x2]             02148030
+00010E56  cmp r0,0xff                  8c20c38f
+00010E5A  bne_s 0x00010eac             2af4
+00010E5C  ldb_s r1,[sp,0x4]            21c1
+00010E5E  and r0,r1,0x2                44218000
+00010E62  brne_s r0,0,0x00010e70       88e8
+00010E64  and r3,r1,0x10               44210304
+00010E68  breq_s r3,0,0x00010e8e       13eb
+00010E6A  bic r1,r1,-0x5               8621ff0e
+00010E6E  breq_s r1,0,0x00010e8e       11e9
+00010E70  ldb r0,[sp, 0x3]             03148030
+00010E74  add r3,sp,0x2                40248330
+00010E78  bl.d 0x00008528              b20eaffb
+00010E7C  _mov_s r1,r3                 6871
+00010E7E  ldb r0,[sp, 0x2]             02148030
+00010E82  cmp r0,0xff                  8c20c38f
+00010E86  bne_s 0x00010eb8             1af4
+00010E88  ldb_s r1,[sp,0x4]            21c1
+00010E8A  and r0,r1,0x2                44218000
+00010E8E  brne_s r0,0,0x00010e9c       88e8
+00010E90  ldb r1,[gp, -0xe4]           1c1281b0
+00010E94  bic r1,r1,-0x21              8621ff07
+00010E98  breq r1,0x0,0x00010f20       89091000
+00010E9C  ldb r1,[sp, 0x3]             03148130
+00010EA0  cmp_s r1,0x66                e6e1
+00010EA2  bne_s 0x00010f20             40f4
+00010EA4  brne_s r14,0,0x00010f16      b9ee
+00010EA6  b.d 0x00010f18               75002000
+00010EAA  _mov_s r0,0x1                01d8

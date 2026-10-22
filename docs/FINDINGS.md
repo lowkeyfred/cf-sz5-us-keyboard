@@ -726,3 +726,87 @@ CRC=0x1843、sum=0xA88D、exe 胶囊往返 == 镜像、Fn=0x96、LShift 完好�
 
 ### 待实机确认
 Fn 恢复；Home/End → Home；全键复扫（特别注意有没有第二个键出 Home）。
+
+## §26 v7 实机结果 + v8probe：Home/End 定位与 NumLock KP 层（2026-10-22）
+
+### v7 刷后用户报告
+全键位正确（"刷回v7了，没问题"语境下的正向确认）；NumLock 开时 kp 层有缺：
+kp+ 正常（stock E[0x0A]=0xEC 本就是 CT 键），但 '0'/'P' 无 KP*/KP-，
+且 v8test 时 'P' 在 NumLock 关时变成 '0'。
+
+### v8probe（毯覆改标记探针）
+- **Home/End 键 = idx 0x4E**（按出 '1' 标记）——不是 v6 时代推测的 0x20
+  （0x20 是 Fn 键，0x96=Fn 特殊码）。
+- NumLock ON 侧 kpplus/kpasterisk(0xEE)/kpminus(0xF0)/kpslash 全部正确；
+  **P-OFF 变 '0' 是我的取值错误**：CT2'[0xF3]=0x45='0'，正确值 0xF0
+  （CT2'[0xF0]=0x4D='P'）。以镜像字节为准，教训再次应验。
+- 用户同时报告 stock Fn 六怪：Fn+- = kpminus、Fn+BS = Ctrl+Alt+Del、
+  Fn+[ = kpenter、Fn+' = kpasterisk、Fn+← = Home、Fn+→ = End。
+
+## §27 v8 死机与 v8.1 灾难：fn 区 = 函数指针表（2026-10-22）
+
+### v8（fn 层路线尝试）
+E 表 + fn char/flags 补丁（0x294B6=0xE9、0x297B2=0x17 等，想让 fn_100AC
+发 End）→ 实机：Fn+Home/End **无输出**（fn 发送路径被内部堵住，未再查），
+且 Fn+↑ **死机**、Fn+F11/F12 = SysRq（后者是 stock T7128 奇数项，暴露出来）。
+
+### v8.1（毯杀全部 Fn 线）→ 整机键盘死
+奇数项:=偶数项 blanket + fn flags 多处清零。刷后死机，重启后**整个键盘失效**。
+
+### 解剖（对照 pristine 镜像字节，ghidra_out/dump_cad.txt、scan_hunt3/4.txt）
+- **fw[0x29764+idx] 的"flags 表"只对 idx<0x14 真实存在；0x29778 起是
+  T1 处理函数指针表 P[slot]**（4 字节 LE）：P[9]=0x17FEC、P[12..24]=0xFCC8…
+- v8 写入的 0x297B0=P[14] 字节（自 v8 起已坏 → Fn+↑ 走 wire 0x8C 调
+  P[14] 崩溃死机——**v8 死机与 v8.1 键盘死是同源**：指针表损坏）。
+- v8.1 再加 0x2979C=P[9]（PrtSc）、0x297CC=P[22]（=0 → 调用地址 0 →
+  EC 崩溃 → 全键盘死）。
+- wire→slot 映射 fw[0x2931C+wire]：0x88→9、0x8C→14、0xA3→22、
+  0x8B→0x0D(Home)、0x8E→0x10(End)。
+
+### 教训（红线）
+1. **写任何 fw 表前，先验证该表的真实范围**（看紧邻代码引用/指针结构）。
+2. **永不写 fw[0x29764+idx]（idx≥0x14）**——那里是指针表。
+3. 已证实可写的区域只有：E 表（0x2969C）、T7128 表体（0x2971C-0x2975B）、
+   逐字节核实的单个代码字节。
+4. 恢复方法：刷回 v7（EC 电池供电，刷机中崩溃需拔 AC 长按电源 30s 复位）。
+
+## §28 机制重核（h3_123a4/h3_10d7c 逐行反汇编）→ v9（2026-10-22/23）
+
+### T7128 选择逻辑定案
+E∈[0xC0,0xDF)：`idx = E*2 - 0x180`（偶，普通）或 `E*2 - 0x17F`（奇，Fn 类），
+选奇条件 = **(键状态字节 RAM[0x800b7a+idx] & 2) == 2 || (gp[-0xe4]&0x20)
+（Fn 按住全局标志）**。非修饰键状态字节 bit1=0（方向机实机证明：普通按走
+偶数项），所以：**给键指定一个 T7128 区间的 E 码 + 改对应一对表项，
+即可独立设定普通按和 Fn+按的落点**——这就是 v9 实现 Fn+Home/End=End 的路线。
+E=0xCA 在 stock E 表中零使用者（死对），改它的 [20]/[21] 两项无任何副作用。
+
+### v9 补丁（v7 + 9 字节）
+E[0x0A] 0x4C→0xEC（恢复 CT 层，v7 直连导致 kp+ 缺失——用户指正的事实）、
+E[0x3A]→0xEE、E[0x4A]→0xF0、E[0x1C]→0x52、E[0x2A]→0x4E、E[0x4C]→0x54
+（三个直连杀掉 kp 组合）、E[0x4E]→0xCA + T7128[20]=0x8B/[21]=0x8E。
+实机：**全部正确**（NumLock 层、Home/End、Fn 组合全部符合预期）。
+
+### v9.1：CAD 字节
+用户在 **stock 恢复包（restore L19）上实测**：Fn+Backspace = Ctrl+Alt+Del
+**确为原厂行为**（JIS 矩阵配英文键盘；h3_10d7c 0x10EA0 处
+`cmp_s wire,0x66` latch gp[-0x95]）。补丁：`fw[0x10EA0] 0xE6→0xFF`
+（cmp 0x66→0xFF，永不命中；流水线不会产生 0xFF 线）。单字节、前后文
+pristine 核实。实机确认 Fn+BS 恢复正常。
+
+### v9.2：F8/F11/F12 的 Fn 怪键
+Fn+F8=scroll(0xAD)、Fn+F11=SysRq(0x84)、Fn+F12(0x88) 同属 stock T7128
+奇数项。odd:=equal 三字：T7128[33]=0x78、[35]=0x07、[53]=0x0A。
+**实机最终验证：所有键与键帽一致，Fn 无多余效果。项目完成。**
+
+## §29 最终交付清单（2026-10-23）
+
+- 补丁总量：E 表 12 处（含显式恢复）+ 毯覆 37 空位、T7128 表 5 字节、
+  代码 1 字节（0x10EA0）。其余区域与 pristine 逐字节一致
+  （CRC=0x3122、sum=0xA88D 修复于填充区）。
+- 交付物（analysis/ 仅此两个）：`EcUpdate_SZ5_EN_final.exe`（v9.2）、
+  `EcUpdate_restore_L19.exe`（原厂恢复）。SHA256 见
+  docs/worksheets/SHA256SUMS.txt。
+- **刷写环境更正**：完整 Windows 实机多轮刷写成功；**WinPE 刷不了**
+  （§11-§12 对更新程序行为的静态分析没问题，但"必须 WinPE"的结论错误——
+  它拒绝的是 VM/Wine 类环境）。刷完重启即可。
+- 应急：键盘异常时拔 AC、长按电源 30 秒复位 EC，再刷恢复包。

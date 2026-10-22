@@ -1,46 +1,85 @@
-# CF-SZ5 英文键盘最终 E 表补丁（v6）
+# CF-SZ5 英文键盘最终键位表（v9.2，2026-10-23 实机全键验证通过）
 
-固件偏移 **E_OFF = 0x2969C**（128 字节 set-2 码表），`stock` 为日版原始值，
-`v6` 为补丁值。共 **11 处实际改动**；另有 9 处显式恢复原始值（标「恢复」）。
+固件偏移 **E_OFF = 0x2969C**（128 字节 set-2 码表），`stock` 为日版原始值。
+最终固件 = pristine + 下方补丁（E 表 12 处 + T7128 表 5 处 + 代码 1 字节），
+全部实机验证：**所有键与键帽一致，Fn 无多余效果**。
 
-| E 索引 | 矩阵 raw | stock | v6 | 按键 | 说明 |
-|---|---|---|---|---|---|
-| 0x0A | 0x14/0x15 | 0xEC | 0x4C | `;` | v3 实机证明 raw 0x0A 是此键（0x86 在此出 RCtrl） |
-| 0x0B | 0x16/0x17 | 0x86 | 0x86 | RCtrl | **恢复**：stock 即 RCtrl 线；v3 误改 0x4C 导致 RCtrl 出 ';' |
-| 0x0C | 0x18/0x19 | 0x51 | 0x8D | Delete | 0x8D → slot15 → nav 0x71 (Del) |
-| 0x0D | 0x1A/0x1B | 0xC2 | 0xC2 | ← | **恢复**：stock 本来就是 ← |
-| 0x12 | 0x24/0x25 | 0xFF | 0x11 | LAlt | 原始为空；用户选择直连 LAlt |
-| 0x13 | 0x26/0x27 | 0x64 | 0x11 | （同左） | JIS 专属位置，英文键盘无此物理键 |
-| 0x20 | 0x40/0x41 | 0x96 | 0x8B | **Home/End 键** | **0x96 特殊路径**：fn_123A4 读 gp[-0xd8]=0x55 → 8042 → KEY_EQUAL。这是"home 永远出 ="的真凶，v1-v5 未碰过。兄弟 0x21=FF 空 |
-| 0x28 | 0x50/0x51 | 0xE7 | 0xE7 | 数字 8 | **恢复**：0xE7=KP8。NumLock 开 → '8'，关 → Home |
-| 0x36 | 0x6C/0x6D | 0x2E | 0x2E | `5` | **恢复**：v1 误伤 |
-| 0x37 | 0x6E/0x6F | 0xD8 | 0xD8 | F6 | **恢复**：v1 误伤 |
-| 0x3C | 0x78/0x79 | 0x55 | 0x55 | `=` | **恢复**：EQ 键，stock 即正确。兄弟 0x3D=FF 空 |
-| 0x3E | 0x7C/0x7D | 0xFF | 0x5D | `\` | Backslash。单奇偶：0x3F=LShift（stock 0x12）保持不动 |
-| 0x50 | 0xA0/0xA1 | 0xFF | 0xFF | （无活键） | **恢复**：v4 放 0x55、v5 放 0x8B 均无任何键响应，证明 0x50/0x51 空 |
-| 0x74 | 0xE8/0xE9 | 0x13 | 0xB6 | Menu | 0xB6 → slot24 → nav 0x2F (Menu) |
-| 0x75 | 0xEA/0xEB | 0x1B | 0x1B | `s` | **恢复**：v1 误伤 |
-| 0x78 | 0xF0/0xF1 | 0xB6 | 0x8A | Insert | 0x8A → slot12 → nav 0x70 (Ins) |
-| 0x7C | 0xF8/0xF9 | 0xD2 | 0x88 | PrtSc | 0x88 → slot9 → E0 7C |
-| 0x7D | 0xFA/0xFB | 0xC5 | 0xC5 | → | **恢复**：v1 误伤 |
-| 0x7E | 0xFC/0xFD | 0xC9 | 0x89 | Pause | 0x89 → slot2 → E1 14 77 |
-| 0x7F | 0xFE/0xFF | 0xFF | 0x89 | （同左） | Pause 的奇偶兄弟，原始为空 |
+## E 表改动（相对 pristine；「毯覆」= 37 个 pristine-FF 空位统一接 Home 线 0x8B）
 
-## 版本史要点
+| E 索引 | stock | final | 按键 | 说明 |
+|---|---|---|---|---|
+| 0x0A | 0xEC | 0xEC | `;` | stock 即 CT 键（v7 曾错改直连 0x4C 导致 NumLock 失效，v9 恢复） |
+| 0x0B | 0x86 | 0x86 | RCtrl | 恢复（stock 即对） |
+| 0x0C | 0x51 | 0x8D | Delete | 0x8D → slot15 → Del |
+| 0x0D | 0xC2 | 0xC2 | ← | 恢复（stock 即对） |
+| 0x12 | 0xFF | 0x11 | LAlt | 原始为空；RAlt 物理键同经此位，按用户选择输出 LAlt |
+| 0x13 | 0x64 | 0x11 | （JIS 专属位） | 英文键盘无此物理键 |
+| 0x1C | 0xED | 0x52 | `'` | **直连**：stock 的 Fn+' = kpasterisk 随之消失 |
+| 0x20 | 0x96 | 0x96 | Fn | 恢复（0x96 = Fn 特殊码） |
+| 0x28 | 0xE7 | 0xE7 | 数字 8 | 恢复（= KP8：NumLock 开 '8' / 关 Home，stock 行为） |
+| 0x2A | 0xF6 | 0x4E | `-` | **直连**：stock 的 Fn+- = kpminus 随之消失 |
+| 0x36 | 0x2E | 0x2E | `5` | 恢复（v1 误伤） |
+| 0x37 | 0xD8 | 0xD8 | F6 | 恢复（v1 误伤） |
+| 0x3A | 0x45 | 0xEE | `0` | **CT**：NumLock 开 → KP*，关 → '0' |
+| 0x3C | 0x55 | 0x55 | `=` | 恢复（stock 即对） |
+| 0x3E | 0xFF | 0x5D | `\` | Backslash（单奇偶：兄弟 0x3F=LShift 不动） |
+| 0x4A | 0x4D | 0xF0 | `P` | **CT**：NumLock 开 → KP-，关 → 'P' |
+| 0x4C | 0xFB | 0x54 | `[` | **直连**：stock 的 Fn+[ = kpenter 随之消失 |
+| 0x4E | 0xFF | 0xCA | **Home/End 键** | 指到 T7128 死对（见下）：普通按=Home，Fn+=End |
+| 0x50 | 0xFF | 0xFF | （无活键） | 恢复（v4/v5 实验证明空位） |
+| 0x74 | 0x13 | 0xB6 | Menu | 0xB6 → slot24 → Menu |
+| 0x75 | 0x1B | 0x1B | `s` | 恢复（v1 误伤） |
+| 0x78 | 0xB6 | 0x8A | Insert | 0x8A → slot12 → Ins |
+| 0x7C | 0xD2 | 0x88 | PrtSc | 0x88 → slot9 → E0 7C |
+| 0x7D | 0xC5 | 0xC5 | → | 恢复（stock 即对） |
+| 0x7E | 0xC9 | 0x89 | Pause | 0x89 → slot2 → E1 14 77 |
+| 0x7F | 0xFF | 0x89 | （Pause 兄弟位） | 原始为空 |
 
-- **v1**：按 diag idx 成对补丁 → 误伤 6 个正常键（含把 0x55 放到无活键的 0x50）。
-- **v2**：修复 v1 误伤；Home 误放 0x51（空位）。
-- **v3**：0x0A/0x0B 归属修正（实机双向验证）；Home 误放 0x28（数字 8/KP8）。
-- **v4**：0x3C 实锤为 EQ 键（stock 就对）；Home 误放 0x3C。
-- **v5**：0x3C 恢复、0x50 试放 Home——无效，实机证明 0x50 空。
-- **v6**：Home/End 真身 0x20（0x96 特殊路径 → gp[-0xd8]=0x55 → KEY_EQUAL）。
-  **教训汇总**：① 成对补丁先查兄弟位；② "出 Y"先分清 Y 来自 pristine 还是
-  自己的上一版补丁；③ 出 '=' 的路径有不止一条（直发 0x55、0x96 读变量），
-  keyd 区分 KEY_EQUAL / kpequal；④ 实机"无响应"也是信息（空位判定）。
+## T7128 改动（@0x2971C，[普通， Fn] 成对数据线表，共 5 字节）
 
-## 其他键位行为
+| 偏移 | stock | final | 作用 |
+|---|---|---|---|
+| [20] | 0x88 | 0x8B | E=0xCA（stock 零使用者）普通项 → Home 线 |
+| [21] | 0x84 | 0x8E | 同对 Fn 项 → End 线（**Home/End 键 Fn+=End** 的实现） |
+| [33] | 0x84 | 0x78 | F11 的 Fn 项 → F11（杀掉 SysRq） |
+| [35] | 0x88 | 0x07 | F12 的 Fn 项 → F12（杀掉 SysRq） |
+| [53] | 0xAD | 0x0A | F8 的 Fn 项 → F8（杀掉 scroll） |
 
-- **F5**：单按无反应是 stock 行为（Fn 层门控），未改动。
-- **Fn+Home/End → KP+**：JIS Fn 层该位置的默认映射（fn_100AC 未动）。
-  想要 Fn+Home/End=End 需要 Hook Fn 层，待做。
-- **RAlt**：物理键矩阵位置与 LAlt 共用处理，按用户选择输出 LAlt。
+## 代码区改动（唯一一处，1 字节）
+
+`fw[0x10EA0]`: 0xE6 → 0xFF —— h3_10d7c 的 CAD latch `cmp_s wire, 0x66`
+改为与 0xFF 比较（永不命中）。**用户在 stock 恢复包上实测证明 Fn+Backspace
+= Ctrl+Alt+Del 是原厂行为**（JIS 矩阵配英文键盘所致），此字节将其关闭，
+Fn+BS 恢复为普通 Backspace。
+
+## NumLock 小键盘层（CT1' 表，实机验证）
+
+| 键 | NumLock 开 | NumLock 关 |
+|---|---|---|
+| `;` | KP+ | `;` |
+| `0` | KP* | `0` |
+| `P` | KP- | `P` |
+| 数字 8（0x28=KP8） | `8` | Home |
+
+## Fn 层最终行为
+
+- **保留的 stock Fn（有用）**：Fn+← = Home、Fn+→ = End、Fn+↑/↓ = 翻页类导航；
+  F1–F7/F9/F10 的 Fn 组合（JIS 亮度/音量类）未动。
+- **关闭的 stock Fn（v9.x 干掉的）**：Fn+BS = Ctrl+Alt+Del（代码字节）、
+  Fn+F8/F11/F12 = scroll/SysRq 类（T7128 三项）、Fn+-/'/[ 的 kp 组合（直连线绕过 CT 门）。
+- Home/End 键本身：普通按 = Home（CT2'[0xFF]=0x55 '=' 的路径已被毯覆覆盖），
+  Fn+按 = End。
+
+## 版本史（v7 → v9.2）
+
+- **v7**：E 表核心补丁 + 38 个 FF 空位毯覆 Home 线定位 Home/End 键 → 实机确认
+  全键位正确（除 NumLock KP 层三键、Fn 多余组合）。
+- **v8/v8probe**：验证 NumLock 三键修复有效；发现 Home/End 键 = idx 0x4E；
+  v8 引入 fn 层补丁 → Fn+Home/End 无输出、Fn+↑ 死机。
+- **v8.1**：fn 层"flags"区其实是 **T1 处理函数指针表**（0x29778 起），
+  写入损坏 P[9]/P[14]/P[22] → 重启后**整个键盘失效**；刷回 v7 恢复。
+  教训：**写任何表前先验证其范围；0x29764+idx 对 idx≥0x14 永不写入**。
+- **v9**：改为 T7128 死对实现 Fn+Home/End=End（普通=Home），+'/−/[ 改直连线
+  杀掉 kp 组合，恢复 ';' 的 CT 码。实机全对。
+- **v9.1**：+ CAD 字节（stock 实测证实后启用）。
+- **v9.2**：+ T7128 三项杀掉 F8/F11/F12 的 Fn 怪键。**实机最终验证：全部正确。**

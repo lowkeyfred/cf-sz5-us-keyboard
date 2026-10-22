@@ -1,31 +1,28 @@
 #!/usr/bin/env python3
-"""Build the FINAL v7 patched EC firmware (stock L19 code + E-table fixes only).
+"""Build the FINAL (v9.2) patched EC firmware: v9.1 + kill Fn combos on F8/F11/F12.
 
-v7 (after v6 flash report: Home/End STILL '=', Fn key became Home):
-  - raw 0x20 = the FN key (stock E=0x96 is the Fn special code; v6's 0x8B made
-    Fn emit Home). E[0x20]=0x96 RESTORED — Fn works again.
-  - Home/End key still emits KEY_EQUAL. fn_123A4 disasm (conv2.txt 0x12400+):
-    E values >= 0xE0 go through the CT gate; WHICH table is per-KEY (slot flags
-    gp[-0xd6] & RAM[0x8004b9]). CT1'[0xFF]=0x79 (discard), CT2'[0xFF]=0x55
-    (KEY_EQUAL) — so a key on a pristine-FF idx whose slot selects CT2 emits
-    '='. That is the Home/End key. §17's "FF = dropped" was an INFERENCE,
-    wrong for CT2-selected slots (also why Backslash was "dead on FF").
-  - BLANKET FIX: every pristine-FF E idx (except 0x3E = Backslash) gets 0x8B
-    (Home). Only physically present keys respond; among live keys only
-    Home/End sits on an FF idx. If any OTHER key unexpectedly emits Home after
-    flashing, revert that specific idx to FF (it was a second FF-idx key).
+v9 = v7 + exactly:
+  E[0x0A] 0x4C->0xEC  ';'  NumLock ON -> KP+ (CT1'[0xEC]=0x79), OFF -> ';'
+  E[0x3A] 0x45->0xEE  '0'  NumLock ON -> KP* (CT1'[0xEE]=0x7C), OFF -> '0'
+  E[0x4A] 0x4D->0xF0  'P'  NumLock ON -> KP- (CT1'[0xF0]=0x7B), OFF -> CT2'[0xF0]=0x4D 'P'
+       (v8test used 0xF3 -> CT2'[0xF3]=0x45='0': the P-becomes-0 bug)
+  E[0x1C] 0xED->0x52  QUOTE direct wire: kills stock Fn+' -> kpasterisk
+  E[0x2A] 0xF6->0x4E  '-'  direct wire: kills stock Fn+- -> kpminus
+  E[0x4C] 0xFB->0x54  '['  direct wire: kills stock Fn+[ -> kpenter
+  E[0x4E] 0x8B->0xCA  Home/End key -> T7128 pair (dead stock pair, zero users)
+  T7128[20] 0x88->0x8B  (fw 0x29730) E=0xCA plain entry -> Home wire
+  T7128[21] 0x84->0x8E  (fw 0x29731) E=0xCA Fn entry   -> End wire
+       => plain = Home, Fn+ = End. Selection (h3_123a4, re-verified):
+       (state_byte&2)==2 || Fn-held -> odd entry; plain non-modifier keys have
+       bit1=0 (arrows machine-proven), Fn sets gp[-0xe4]&0x20 -> odd.
 
-Full explicit patch set (restores marked; plus the FF blanket above):
-  E[0x0A]=0x4C  ';'      E[0x0B]=0x86  RCtrl     E[0x0C]=0x8D  Del
-  E[0x0D]=0xC2  RESTORE <-             E[0x12]=E[0x13]=0x11  LAlt(+RAlt)
-  E[0x20]=0x96  RESTORE Fn             E[0x28]=0xE7  RESTORE digit 8 (KP8)
-  E[0x36]=0x2E  RESTORE '5'            E[0x37]=0xD8  RESTORE F6
-  E[0x3C]=0x55  RESTORE '=' (EQ key)  E[0x3E]=0x5D  Backslash (single)
-  E[0x50]=0xFF  RESTORE (no live key) E[0x74]=0xB6  Menu
-  E[0x75]=0x1B  RESTORE 's'            E[0x78]=0x8A  Ins
-  E[0x7C]=0x88  PrtSc    E[0x7D]=0xC5  RESTORE ->   E[0x7E]=E[0x7F]=0x89  Pause
+v9.2 = v9.1 + three T7128 odd:=even bytes (Fn+F8=F8, Fn+F11=F11, Fn+F12=F12).
+v9.1 = v9 + one code byte (v9 = v7 + NumLock KP layer + End + Fn-kp cleanup): fn-layer flags/char patches (that region is the T1 handler
+POINTER table from 0x29778 - v8.1 bricked the keyboard writing P[9]/P[14]/P[22];
+NEVER write 0x29764+idx for idx>=0x14), CAD code patch (stock behavior disputed,
+dropped), T7128 blanket (v8.1 lesson: keep stock Fn layer).
 
-Usage: build_final.py 0x1f   (diag idx for backslash, verified single-parity)
+Usage: build_final.py 0x1f   (diag idx for backslash, single-parity)
 NEVER flash without explicit user confirmation.
 """
 import struct
@@ -38,9 +35,9 @@ from fix_crc_sum import fix_crc_and_sum
 from build_ecupdate2 import ecu_crc, obfuscate, find_data_entries
 
 BASE = sz5env.w('ec_image_pristine.bin')
-OUT_IMG = sz5env.w('ec_firmware_final7.img')
-OUT_CAP = sz5env.w('ec_capsule_final7.bin')
-OUT_EXE = sz5env.w('EcUpdate_final7.exe')
+OUT_IMG = sz5env.w('ec_firmware_SZ5_EN_final.img')
+OUT_CAP = sz5env.w('ec_capsule_SZ5_EN_final.bin')
+OUT_EXE = sz5env.w('EcUpdate_SZ5_EN_final.exe')
 PRISTINE_EXE = sz5env.UPDATER
 RSRC_RAW = 0x46000
 RSRC_RVA = 0xE1000
@@ -50,7 +47,7 @@ CERT_CUTOFF = 0x73A00
 E_OFF = 0x2969C
 
 PATCHES = {
-    0x0A: 0x4C,   # ';'    (v3 flash PROVED raw 0x0A = ';' key: 0x86 there emitted RCtrl)
+    0x0A: 0xEC,   # ';' key -> CT: ON -> CT1'[0xEC]=0x79=KP+, OFF -> CT2'=';'
     0x0B: 0x86,   # RCtrl  (v3 flash PROVED raw 0x0B = RCtrl: 0x4C there emitted ';')
     0x0C: 0x8D,   # Del    (slot15 nav 0x71)
     0x0D: 0xC2,   # RESTORE: sibling of Del pair is the <- arrow
@@ -60,7 +57,13 @@ PATCHES = {
     0x28: 0xE7,   # RESTORE: digit 8 key = KP8 (v3 put Home here -> digit 8 became Home)
     0x36: 0x2E,   # RESTORE: '5' key (v1 wrongly Home)
     0x37: 0xD8,   # RESTORE: F6 key (v1 wrongly Home)
+    0x3A: 0xEE,   # '0' key -> CT: ON -> CT1'[0xEE]=0x7C=KP*, OFF -> CT2'='0'
+    0x1C: 0x52,   # QUOTE key DIRECT (stock 0xED: Fn+ -> kpasterisk via CT flip)
+    0x2A: 0x4E,   # '-' key DIRECT (stock 0xF6: Fn+ -> kpminus)
+    0x4C: 0x54,   # '[' key DIRECT (stock 0xFB: Fn+ -> kpenter)
     0x3C: 0x55,   # RESTORE: '=' key (v4 flash PROVED raw 0x3C = EQ; v4 Home wire made it Home)
+    0x4A: 0xF0,   # 'P' key -> CT: ON -> CT1'[0xF0]=0x7B=KP-, OFF -> CT2'[0xF0]=0x4D='P'
+    0x4E: 0xCA,   # Home/End key -> dead T7128 pair 20/21 (plain=Home, Fn=End)
     0x50: 0xFF,   # RESTORE: no live key at 0x50/0x51 (v4=0x55 & v5=0x8B both invisible)
     0x74: 0xB6,   # Menu   (slot24 nav 0x2F)
     0x75: 0x1B,   # RESTORE: 's' key (v1 wrongly Menu)
@@ -71,10 +74,31 @@ PATCHES = {
     0x7F: 0x89,   # Pause sib (pristine FF, empty)
 }
 
-
+# T7128 body (0x2971C-0x2975B) is a pure [plain,Fn] wire-pair DATA table -
+# the one fw region besides E proven safe to write. fn flags region 0x29764+idx
+# for idx>=0x14 is the T1 handler POINTER table: NEVER write there (v8.1).
+FW_PATCHES = [
+    (0x29730, 0x88, 0x8B, 'T7128[20] E=0xCA plain entry: dead 0x88 -> Home wire'),
+    (0x29731, 0x84, 0x8E, 'T7128[21] E=0xCA Fn entry:   dead 0x84 -> End wire'),
+    (0x2973D, 0x84, 0x78, 'T7128[33] Fn entry of F11 (E=0xD0): SysRq wire 0x84 -> F11'),
+    (0x2973F, 0x88, 0x07, 'T7128[35] Fn entry of F12 (E=0xD1): PrtSc/SysRq 0x88 -> F12'),
+    (0x29751, 0xAD, 0x0A, 'T7128[53] Fn entry of F8  (E=0xDA): scroll wire 0xAD -> F8'),
+]
+CODE_PATCHES = [
+    (0x10EA0, 0xE6, 0xFF, 'h3_10d7c CAD latch: cmp_s wire,0x66 -> 0xFF (never matches;'
+                          ' user PROVED on stock L19 that Fn+BS = Ctrl+Alt+Del is stock'
+                          ' behavior on the English keyboard - kills the reboot hazard)'),
+]
 
 def main():
     p = open(BASE, 'rb').read()
+    probe = len(sys.argv) > 2 and sys.argv[2] == 'probe'
+    if probe:
+        out_img = sz5env.w('ec_firmware_v8probe.img')
+        out_cap = sz5env.w('ec_capsule_v8probe.bin')
+        out_exe = sz5env.w('EcUpdate_v8probe.exe')
+    else:
+        out_img, out_cap, out_exe = OUT_IMG, OUT_CAP, OUT_EXE
     bs = None
     if len(sys.argv) > 1:
         k = int(sys.argv[1], 16)
@@ -91,20 +115,42 @@ def main():
     # backslash slot) gets the Home wire 0x8B. Only physically present keys
     # respond; among live keys only Home/End sits on an FF idx (its slot picks
     # CT2'[0xFF]=0x55, which is why it emitted '=').
+    # probe mode (argv[2] == 'probe'): distinct letter markers instead, to
+    # identify WHICH FF idx the Home/End key sits on.
     patches = dict(PATCHES)
     blanket = [i for i in range(128)
                if p[E_OFF + i] == 0xFF and i not in patches and i != 0x3E]
-    for i in blanket:
-        patches[i] = 0x8B
-    print('FF blanket: %d idxs -> 0x8B (Home): %s'
-          % (len(blanket), ' '.join('%02X' % i for i in blanket)))
+    MARKERS = [0x15,0x1D,0x24,0x2D,0x2C,0x35,0x3C,0x44,0x4D,0x1C,0x1B,0x23,
+               0x2B,0x34,0x33,0x3B,0x42,0x4B,0x1A,0x22,0x21,0x2A,0x32,0x31,
+               0x3A,0x16,0x1E,0x26,0x25,0x2E,0x36,0x3D,0x3E,0x46,0x45,0x4E,
+               0x54,0x5B]
+    CHART = {0x15:'q',0x1D:'w',0x24:'e',0x2D:'r',0x2C:'t',0x35:'y',0x3C:'u',
+             0x44:'o',0x4D:'p',0x1C:'a',0x1B:'s',0x23:'d',0x2B:'f',0x34:'g',
+             0x33:'h',0x3B:'j',0x42:'k',0x4B:'l',0x1A:'z',0x22:'x',0x21:'c',
+             0x2A:'v',0x32:'b',0x31:'n',0x3A:'m',0x16:'1',0x1E:'2',0x26:'3',
+             0x25:'4',0x2E:'5',0x36:'6',0x3D:'7',0x3E:'8',0x46:'9',0x45:'0',
+             0x4E:'-',0x54:'[',0x5B:']'}
+    assert not probe or len(blanket) <= len(MARKERS)
+    for n, i in enumerate(blanket):
+        patches[i] = MARKERS[n] if probe else 0x8B
+    print('FF blanket: %d idxs -> %s' % (len(blanket),
+          'DISTINCT MARKERS (probe)' if probe else '0x8B (Home)'))
+    if probe:
+        print('probe chart:')
+        for n, i in enumerate(blanket):
+            print('  E[0x%02X] = wire 0x%02X -> keyd "%s"' % (i, MARKERS[n], CHART[MARKERS[n]]))
     for idx, val in patches.items():
         img[E_OFF + idx] = val
+    for off, old, new, why in FW_PATCHES + CODE_PATCHES:
+        assert p[off] == old, 'fw[0x%X] expected 0x%02X got 0x%02X (%s)' % (off, old, p[off], why)
+        img[off] = new
+        print('fw[0x%X]: 0x%02X -> 0x%02X  %s' % (off, old, new, why))
     if bs:
         img[E_OFF + bs[0]] = 0x5D
     fix_crc_and_sum(img, 'final')
     # verify: diffs vs pristine = E patches + 0x218 + fine-adjust region only
     allowed = set(E_OFF + i for i in patches)
+    allowed.update(off for off, old, new, why in FW_PATCHES + CODE_PATCHES)
     if bs:
         allowed.add(E_OFF + bs[0])
     allowed.update(range(0x218, 0x21A))
@@ -113,16 +159,16 @@ def main():
     bad = [off for off in range(len(img)) if img[off] != p[off] and off not in allowed]
     assert not bad, 'unexpected diffs at %s' % [hex(x) for x in bad[:20]]
     assert bytes(img[0x200:0x218]) == p[0x200:0x218]
-    open(OUT_IMG, 'wb').write(bytes(img))
-    print('wrote %s CRC=0x%04X sum=0x%04X' % (OUT_IMG, crc24(img), sum(img) & 0xFFFF))
+    open(out_img, 'wb').write(bytes(img))
+    print('wrote %s CRC=0x%04X sum=0x%04X' % (out_img, crc24(img), sum(img) & 0xFFFF))
 
     n = ec_patch.Ntdll()
     payload = n.compress(bytes(img))
     assert n.decompress(payload, len(img)) == bytes(img)
 
     cap = struct.pack('<II', ecu_crc(bytes(img)), len(img)) + payload
-    open(OUT_CAP, 'wb').write(cap)
-    print('wrote %s (%d bytes)' % (OUT_CAP, len(cap)))
+    open(out_cap, 'wb').write(cap)
+    print('wrote %s (%d bytes)' % (out_cap, len(cap)))
 
     exe = bytearray(open(PRISTINE_EXE, 'rb').read())
     clean = (b'[Settings]' + bytes([13, 10]) + b'IniFileVersion=11' + bytes([13, 10])
@@ -159,8 +205,8 @@ def main():
 
     cs = pe_checksum(bytes(exe), opt + 64)
     struct.pack_into('<I', exe, opt + 64, cs)
-    open(OUT_EXE, 'wb').write(bytes(exe))
-    print('wrote %s (%d bytes) checksum 0x%08X' % (OUT_EXE, len(exe), cs))
+    open(out_exe, 'wb').write(bytes(exe))
+    print('wrote %s (%d bytes) checksum 0x%08X' % (out_exe, len(exe), cs))
     if not bs:
         print('WARNING: Backslash NOT patched (no diag idx given)')
 

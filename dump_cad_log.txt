@@ -1,0 +1,82 @@
+﻿INFO  Using log config file: jar:file:/C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ghidra_12.1.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\frederich\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\frederich\AppData\Roaming\ghidra\ghidra_12.1.4_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (922 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (4545 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 177 extension points (88 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_12.1.4_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_proj\ec_image_dumpcad (HeadlessAnalyzer)  
+INFO  Creating project: C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_proj\ec_image_dumpcad (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: C:\Users\frederich\workspaces\CF-SZ5-handoff\analysis\ghidra_proj\ec_image_dumpcad (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ec_image_pristine.bin (HeadlessAnalyzer)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: ARCompact:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\WINDOWS\SysWOW64, C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot\bin, C:\WINDOWS\Sun\Java\bin, C:\WINDOWS\system32, C:\WINDOWS, C:\Users\frederich\AppData\Roaming\SPB_Data\bin, C:\Program Files\Git\mingw64\bin, C:\Program Files\Git\usr\local\bin, C:\Program Files\Git\usr\bin, C:\Program Files (x86)\Common Files\Oracle\Java\java8path, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0, C:\WINDOWS\System32\OpenSSH, C:\Program Files\Java\jdk-17.0.2\bin, D:\platform-tools, C:\Program Files\Git\cmd, C:\Program Files\dotnet, C:\Users\frederich\.cargo\bin, C:\Users\frederich\AppData\Local\Microsoft\WindowsApps, C:\Users\frederich\AppData\Local\Programs\Microsoft VS Code\bin, C:\Users\frederich\.dotnet\tools, D:\gcc-arm\bin, C:\Program Files\OpenSSL-Win64\bin, C:\ProgramData\chocolatey\bin, C:\Program Files\qemu, C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common, C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR, C:\Program Files (x86)\NetSarang\Xshell 8, C:\Program Files (x86)\NetSarang\Xftp 8, C:\Program Fi, C:\Program Files\Apollo, C:\Program Files\Apollo\tools, D:\harmonydev\command-line-tools\bin, C:\Users\frederich\AppData\Roaming\SPB_Data\.local\bin, C:\Program Files\WSL, C:\Program Files\PowerShell\7, C:\Users\frederich\AppData\Local\Programs\DeepSeek Harness\resources\runtime\cli\bin, D:\RosBE\bin, D:\tools, %DevEco Studio%, C:\Users\frederich\AppData\Local\Yarn\bin, C:\Users\frederich\.lmstudio\bin, C:\Users\frederich\go\bin, C:\Users\frederich\AppData\Local\PowerToys\DSCModules, C:\Users\frederich\AppData\Local\Python\bin, C:\Program Files\Git\usr\bin\vendor_perl, C:\Program Files\Git\usr\bin\core_perl] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ec_image_pristine.bin (HeadlessAnalyzer)  
+INFO  Packed database cache: C:\Users\frederich\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.346 secs
+    Apply Data Archives                        0.834 secs
+    Basic Constant Reference Analyzer          0.775 secs
+    Call-Fixup Installer                       0.013 secs
+    Create Address Tables                      0.045 secs
+    Create Address Tables - One Time           0.347 secs
+    Create Function                            0.528 secs
+    Data Reference                             0.148 secs
+    Decompiler Switch Analysis                11.904 secs
+    Demangler GNU                              0.001 secs
+    Disassemble Entry Points                   0.001 secs
+    Embedded Media                             0.016 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.105 secs
+    Non-Returning Functions - Discovered      15.144 secs
+    Reference                                  0.414 secs
+    Shared Return Calls                        0.052 secs
+    Stack                                      0.597 secs
+    Subroutine References                      0.606 secs
+    Subroutine References - One Time           0.000 secs
+-----------------------------------------------------
+     Total Time   31 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ec_image_pristine.bin (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: dump_cad.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: C:\Users\frederich\workspaces\CF-SZ5-handoff\ghidra_scripts\dump_cad.java (HeadlessAnalyzer)  
+INFO  dump_cad.java> DONE dump_cad (GhidraScript)  
+INFO  ANALYZING changes made by post scripts: file:///C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ec_image_pristine.bin (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Users/frederich/workspaces/CF-SZ5-handoff/analysis/ec_image_pristine.bin (HeadlessAnalyzer)  
+INFO  /ec_image_pristine.bin: file created (frederich) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ec_image_pristine.bin (ec_image_dumpcad:/ec_image_pristine.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  
