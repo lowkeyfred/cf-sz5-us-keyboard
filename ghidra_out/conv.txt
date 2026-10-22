@@ -1,0 +1,39 @@
+=== 0x12400 - 0x124A0 ===
+00012438  breq r0,0x2,0x00012448
+0001243C  ldb r1,[gp, -0xe4]
+00012440  bic r1,r1,-0x21
+00012444  brne r1,0x20,0x00012454
+00012448  mov r0,-0x17f
+0001244C  b.d 0x0001245c
+00012450  _add1 r0,r0,r4
+00012464  mov_s r2,0x8006f0
+0001246A  ldb_s r2,[r2,0x2]
+0001246C  bic r2,r2,-0x5
+00012470  brne_s r2,0,0x00012480
+00012472  cmp r4,0x96
+00012476  bne_s 0x00012480
+00012478  mov r3,-0x1
+0001247C  st.as r3,[gp,-0x6c]
+00012480  bl.d 0x000207bc
+00012484  _mov_s r0,r4
+00012486  brne_s r0,0,0x00012490
+00012488  mov r3,-0x1
+0001248C  st.as r3,[gp,-0x6c]
+00012490  mov_s r0,r4
+00012492  mov_s blink,r15
+00012494  pop_s r15
+00012496  pop_s r14
+00012498  pop_s r13
+0001249A  j_s.d blink
+0001249C  _add_s sp,0x4
+000124A0  breq_s r0,0,0x000124b2
+=== 0x1F0A0 - 0x1F200 ===
+0001F0AC  ldb r2,[gp, -0x9e]
+0001F0B0  and r3,r2,0x2
+0001F0B4  breq.d r3,0x0,0x0001f0d2
+0001F0B8  _mov_s r1,r0
+0001F0BA  cmp r1,0x96
+0001F0BE  bne.d 0x0001f0cc
+0001F0C2  _ldb r3,[gp, -0xd8]
+0001F0C6  b.d 0x0001f0d2
+0001F0CA  _mov_s r0,r3

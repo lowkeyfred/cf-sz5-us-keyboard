@@ -1,0 +1,16 @@
+--- 0x10DA0 - 0x10DC0 ---
+00010DA0  stb r0,[r15, 0x27]       271f0210
+00010DA4  add_s r13,r15,r1         3d67
+00010DA6  ldb_s r0,[r13,0x10]      108d
+00010DA8  mov r16,blink            0a20c027
+00010DAC  bl 0x000286ac            0209c00b
+00010DB0  nop_s                    e078
+00010DB2  stb_s r1,[sp,0x4]        61c1
+00010DB4  bl.d 0x000123a4          f20da000
+00010DB8  _add r2,sp,0x1           40244230
+00010DBC  cmp r0,0x96              8c208285
+00010DC0  bne.d 0x00010e2a         6a002200
+--- 0x286AC - 0x286C0 ---
+000286AC  lsr r0,r0,1              2f200200
+000286B0  ldb_s r1,[r13,0x1a]      3a8d
+000286B2  j_s blink                e07e

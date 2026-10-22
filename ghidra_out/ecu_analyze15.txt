@@ -1,0 +1,105 @@
+callers of FUN_00411750: 2
+===== CALLER FUN_00408f00 @0x00408f00 =====
+        ppppWVar7 = local_450;
+        if (7 < local_43c) {
+          ppppWVar7 = (LPCWSTR ***)local_450[0];
+        }
+        DVar5 = FUN_00413f00(local_420,(LPCWSTR)ppppWVar7);
+        if (DVar5 != 0) {
+          FUN_00411750(1000);
+          FUN_004076f0(local_450);
+          goto LAB_00409ca2;
+  ---
+        local_484 = 1;
+        HVar8 = CoInitializeSecurity
+                          ((PSECURITY_DESCRIPTOR)0x0,-1,(SOLE_AUTHENTICATION_SERVICE *)0x0,(void *)0x0
+                           ,0,3,(void *)0x0,0,(void *)0x0);
+        if ((HVar8 != 0) && (HVar8 != -0x7ffefee7)) {
+          FUN_00413750(&DAT_00449900,1,L"Failed to initialize security.");
+          FUN_00411750(9999);
+          FUN_004076f0(local_468);
+          FUN_004076f0(local_480);
+  ---
+        }
+        AVar3 = FUN_00408cd0();
+        if (CONCAT22(extraout_var,AVar3) == 0) {
+  LAB_00409c8e:
+          iVar12 = 0x3eb;
+  LAB_00409413:
+          FUN_00411750(iVar12);
+          FUN_004076f0(local_468);
+          FUN_004076f0(local_480);
+  ---
+             (iVar12 = FUN_004164a0(&DAT_00448930), iVar12 != 0)))) ||
+           ((puVar2 = DAT_004496a0, iVar12 = FUN_004149c0(DAT_004496a0), iVar12 != 0 ||
+            (((1 < (uint)puVar2[0x358] ||
+              ((puVar2[0x358] != 0 &&
+               (((puVar2[0x359] != 0 || (8 < (uint)puVar2[0x35a])) || (7 < (uint)puVar2[0x35a]))))))
+             && (iVar12 = FUN_004164a0(puVar2), iVar12 != 0)))))) {
+          FUN_00411750(100);
+          if ((LPCWSTR **)0x7 < local_454) {
+            FID_conflict__free(local_468[0]);
+  ---
+              if ((undefined4 *****)0x7 < local_46c) {
+                ppppppuVar10 = (undefined4 ******)local_480[0];
+              }
+              iVar12 = FUN_004145d0((LPCWSTR)ppppppuVar10,&local_48c,&local_490);
+              _Memory = local_48c;
+              if (iVar12 != 0) goto LAB_00409920;
+              FUN_00411750(0x100);
+              FUN_004076f0(local_468);
+              FUN_004076f0(local_480);
+  ---
+          }
+        }
+        goto LAB_00409bb3;
+      }
+    }
+  LAB_00409c98:
+    FUN_00411750(0x65);
+  LAB_00409ca2:
+    if (DAT_004487e8 != 0) {
+  ---
+
+===== CALLER FUN_00408930 @0x00408930 =====
+    iVar3 = FUN_00407ac0(uVar2);
+    if (iVar3 == 0) {
+      FUN_004137e0(&DAT_00449900,
+                   L"BIOS I/F version = %u.%u  Flags = 0x%X  BIOS Size = 0x%X  ROM Size = 0x%X  Upload Size = 0x%X"
+                  );
+      if (DAT_00448828 != 0) {
+        FUN_00411750(0x118);
+        goto LAB_00408c9a;
+      }
+  ---
+      local_1c = 0;
+      local_2c[0] = (void *)((uint)local_2c[0] & 0xffff0000);
+      if (7 < local_30) {
+        FID_conflict__free(local_44[0]);
+      }
+      if (iVar3 == 0) {
+        FUN_00411750(0xc9);
+        goto LAB_00408c9a;
+      }
+  ---
+        iVar3 = 0;
+      }
+      FUN_004076f0(local_44);
+      local_8 = local_8 & 0xffffff00;
+      FUN_004076f0(local_2c);
+      if (iVar3 != 0) {
+        FUN_00411750(iVar3);
+        goto LAB_00408c9a;
+      }
+  ---
+          iVar3 = FUN_00407ac0(uVar9);
+          if (iVar3 == 0) goto LAB_00408c9a;
+        }
+      }
+    }
+  LAB_00408c8a:
+    FUN_00411750(iVar3);
+  LAB_00408c9a:
+    if (local_50 != (void *)0x0) {
+  ---
+

@@ -16,9 +16,8 @@ EC/
 ghidra_proj/
 pfw_extract/
 
-# 逆向工具与环境
-ghidra_*/
-radare2*/
+# 逆向工具与环境（都装在 analysis/ 里，已被上面忽略；这里不另列，
+# 注意 ghidra_*/ 这类通配会把 ghidra_scripts/、ghidra_out/ 一起误伤)
 .claude/
 
 # Python

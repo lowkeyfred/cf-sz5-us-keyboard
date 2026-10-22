@@ -1,0 +1,185 @@
+=== disasm 0x10F40 - 0x11010 ===
+00010FA0  ldw_s r0,[r3,0x28]
+00010FA2  ldb_s r3,[r3,0x8]
+00010FA4  mov_s r2,0x29b14
+00010FAA  add2_s r2,r2,r3
+00010FAC  ld.as r2,[r2,-0x338]
+00010FB0  mov_s r0,r1
+00010FB2  jl_s.d r2
+00010FB4  _mov_s r1,r14
+00010FB6  breq_s r0,0,0x00011006
+00010FB8  brne_s r14,0,0x00010fc6
+00010FBA  asr_s r0,r0,0x4
+00010FBC  bl.d 0x0000656c
+00010FC0  _extb_s r0,r0
+00010FC2  brne_s r0,0,0x00010fd0
+00010FC4  b_s 0x00011006
+00010FC6  bmsk_s r0,r0,0x3
+00010FC8  bl.d 0x0000656c
+00010FCC  _extb_s r0,r0
+00010FCE  breq_s r0,0,0x00011006
+00010FD0  ldb r1,[sp, 0x3]
+00010FD4  mov_s r2,0x29b14
+00010FDA  cmp_s r1,0x7f
+00010FDC  ble_s 0x00010ff4
+00010FDE  add r3,r1,0x29314
+00010FE6  ldb_s r3,[r3,0x8]
+00010FE8  add2_s r2,r2,r3
+00010FEA  ld.as r3,[r2,-0x39c]
+00010FEE  jl_s.d r3
+00010FF0  _mov_s r0,r14
+00010FF2  b_s 0x00010ffc
+00010FF4  ld.as r2,[r2,-0x39c]
+00010FF8  jl_s.d r2
+00010FFA  _mov_s r0,r14
+00010FFC  ldb r3,[r15, 0x3d]
+00011000  bclr_s r3,r3,0x1
+00011002  stb r3,[r15, 0x3d]
+00011006  mov blink,r16
+0001100A  add_s sp,0x8
+0001100C  ld.ab r16,[sp,0x4]
+00011010  pop_s r15
+
+=== disasm 0x7980 - 0x7A20 ===
+00007980  b_s 0x00007992
+00007982  ldb r0,[sp, 0xb]
+00007986  bic r0,r0,-0x3
+0000798A  brne_s r0,0,0x0000798e
+0000798C  brne_s r3,0,0x00007992
+0000798E  mov r4,0x1
+00007992  mov_s r0,r4
+00007994  j_s.d blink
+00007996  _add_s sp,0xc
+00007A1C  cmp r0,0x80
+00007A20  bne.d 0x00007a34
+
+=== disasm 0x12360 - 0x12440 ===
+00012384  mov_s r1,0x29314
+0001238A  add_s r0,r0,r1
+0001238C  ldb_s r0,[r0]
+0001238E  asl_s r1,r0,0x5
+00012390  asr_s r0,r0,0x3
+00012392  extb_s r0,r0
+00012394  extb_s r1,r1
+00012396  or_s r0,r0,r1
+00012398  extb_s r0,r0
+0001239A  xor r0,r0,0xff
+0001239E  j_s.d blink
+000123A0  _extb_s r0,r0
+
+=== disasm 0xFCB0 - 0xFDD0 ===
+0000FCB0  extb_s r3,r3
+0000FCB2  breq_s r3,0,0x0000fcb8
+0000FCB4  brne r3,0x3,0x0000fcbc
+0000FCB8  j_s.d blink
+0000FCBA  _mov_s r0,0x23
+0000FCBC  brne r3,0x2,0x0000fcc4
+0000FCC0  j_s.d blink
+0000FCC2  _mov_s r0,0x55
+0000FCC4  mov_s r0,0x46
+0000FCC6  j_s blink
+0000FCC8  push_s r13
+0000FCCA  push_s r14
+0000FCCC  push_s r15
+0000FCCE  st.a r16,[sp,-0x4]
+0000FCD2  st.a r17,[sp,-0x4]
+0000FCD6  mov_s r14,r0
+0000FCD8  mov_s r2,0x29314
+0000FCDE  add_s r1,r1,r2
+0000FCE0  ldb_s r0,[r1,0x8]
+0000FCE2  mov r17,blink
+0000FCE6  add_s r0,r0,r2
+0000FCE8  ldb r2,[gp, -0xd6]
+0000FCEC  ldb r15,[r0, 0xbc]
+0000FCF0  bic r2,r2,-0x3
+0000FCF4  breq.d r2,0x0,0x0000fcfc
+0000FCF8  _mov_s r13,0x0
+0000FCFA  mov_s r13,0x1
+0000FCFC  ldb r3,[gp, -0xe5]
+0000FD00  mov r16,0x80
+0000FD04  and r0,r3,r16
+0000FD08  brne_s r0,0,0x0000fd10
+0000FD0A  bic r3,r3,-0x41
+0000FD0E  breq_s r3,0,0x0000fd14
+0000FD10  bset_s r13,r13,0x1
+0000FD12  extb_s r13,r13
+0000FD14  breq_s r13,0,0x0000fd1a
+0000FD16  brne r13,0x3,0x0000fd2a
+0000FD1A  brne.d r14,0x0,0x0000fd26
+0000FD1E  _mov_s r0,r15
+0000FD20  bl 0x00016148
+0000FD24  b_s 0x0000fd2a
+0000FD26  bl 0x000055d4
+0000FD2A  brne r13,0x1,0x0000fd4a
+0000FD2E  brne_s r14,0,0x0000fd3e
+0000FD30  bl.d 0x00016148
+0000FD34  _mov_s r0,0x12
+0000FD36  bl.d 0x00016148
+0000FD3A  _mov_s r0,r15
+0000FD3C  b_s 0x0000fd4a
+0000FD3E  bl.d 0x000055d4
+0000FD42  _mov_s r0,r15
+0000FD44  bl.d 0x000055d4
+0000FD48  _mov_s r0,0x12
+0000FD4A  brne r13,0x2,0x0000fd88
+0000FD4E  brne_s r14,0,0x0000fd6c
+0000FD50  ldb r3,[gp, -0xe5]
+0000FD54  and r0,r3,r16
+0000FD58  breq_s r0,0,0x0000fd60
+0000FD5A  b.d 0x0000fd62
+0000FD5E  _mov_s r0,0x59
+0000FD60  mov_s r0,0x12
+0000FD62  bl 0x000055d4
+0000FD66  b.d 0x0000fd84
+0000FD6A  _mov_s r0,r15
+0000FD6C  bl.d 0x000055d4
+0000FD70  _mov_s r0,r15
+0000FD72  ldb r3,[gp, -0xe5]
+0000FD76  and r0,r3,r16
+0000FD7A  breq_s r0,0,0x0000fd82
+0000FD7C  b.d 0x0000fd84
+0000FD80  _mov_s r0,0x59
+0000FD82  mov_s r0,0x12
+0000FD84  bl 0x00016148
+0000FD88  mov blink,r17
+0000FD8C  ld.ab r17,[sp,0x4]
+0000FD90  ld.ab r16,[sp,0x4]
+0000FD94  pop_s r15
+0000FD96  pop_s r14
+0000FD98  j_s.d blink
+0000FD9A  _pop_s r13
+
+=== data idx_table @0x29314 len 136 ===
+00029314  00 E5 F5 06 16 26 1E 3D DC DD ED FD 0E 87 B6 35  .....&.=.......5
+00029324  D4 3E AE 7C 17 7F EF 2D CC 74 9E 07 0F 77 E7 25  .>.|...-.t...w.%
+00029334  C4 8E 96 FE 6F D7 DF 1D BC 36 86 F6 5F 67 CF 15  ....o....6.._g..
+00029344  B4 76 7E E6 EE 57 C7 0D AC 6C 6E DE 4F BF B7 05  .v~..W...ln.O...
+00029354  A4 66 D6 47 3F A7 AF FC 9C 5E 56 CE C6 37 9F F4  .f.G?....^V..7..
+00029364  94 64 BE 5C 2F 97 EC 8C 2E 4E 1F 27 54 A6 E4 4C  .d.\/....N.'T..L
+00029374  55 4D 44 3C 34 2C 8F 24 1C 85 14 A5 C5 0C 04 84  UMD<4,.$........
+00029384  6D 65 7D 9D 95 BD F7 D5 45 8D 75 AD 46 B5 CD 5D  me}.....E.u.F..]
+00029394  FB F3 EB F5 5D 00 00 00                          ....]...
+
+=== data handlers_make @0x29778 len 104 ===
+00029778  B8 65 01 00 D8 65 01 00 9C 79 01 00 80 80 01 00  .e...e...y......
+00029788  38 81 01 00 9C 55 00 00 58 E4 00 00 C0 E4 00 00  8....U..X.......
+00029798  28 E5 00 00 EC 7F 01 00 24 52 01 00 74 52 01 00  (.......$R..tR..
+000297A8  C8 FC 00 00 C8 FC 00 00 C8 FC 00 00 C8 FC 00 00  ................
+000297B8  C8 FC 00 00 C8 FC 00 00 C8 FC 00 00 C8 FC 00 00  ................
+000297C8  C8 FC 00 00 C8 FC 00 00 C8 FC 00 00 C8 FC 00 00  ................
+000297D8  C8 FC 00 00 B4 65 01 00                          .....e..
+
+=== data handlers_break @0x297DC len 104 ===
+000297DC  B4 65 01 00 D4 65 01 00 6C 79 01 00 7C 80 01 00  .e...e..ly..|...
+000297EC  34 81 01 00 80 55 00 00 38 E4 00 00 A0 E4 00 00  4....U..8.......
+000297FC  08 E5 00 00 B0 7F 01 00 04 52 01 00 70 52 01 00  .........R..pR..
+0002980C  8C FC 00 00 8C FC 00 00 8C FC 00 00 8C FC 00 00  ................
+0002981C  8C FC 00 00 8C FC 00 00 8C FC 00 00 8C FC 00 00  ................
+0002982C  8C FC 00 00 8C FC 00 00 8C FC 00 00 8C FC 00 00  ................
+0002983C  8C FC 00 00 4D 41 54 52                          ....MATR
+
+=== data nav_table @0x293D1 len 48 ===
+000293D1  08 18 00 00 00 00 00 00 00 00 00 70 6C 7D 71 69  ...........pl}qi
+000293E1  7A 75 6B 72 74 1F 27 2F 00 00 00 A6 A7 A8 A9 AA  zukrt.'/........
+000293F1  AB AC AD AE AF B0 B1 10 18 20 28 30 38 40 00 69  ......... (08@.i
+

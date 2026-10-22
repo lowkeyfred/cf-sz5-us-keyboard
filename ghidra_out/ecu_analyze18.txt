@@ -1,0 +1,44 @@
+### FN FUN_00411bc0 @0x411bc0
+
+int * __thiscall FUN_00411bc0(void *this,UINT param_1)
+
+{
+  uint uVar1;
+  HMODULE hInstance;
+  short *psVar2;
+  undefined4 extraout_ECX;
+  LPWSTR lpBuffer;
+  int iVar3;
+  int local_8;
+  
+  iVar3 = 0;
+  lpBuffer = (LPWSTR)&local_8;
+  local_8 = 0;
+  *(undefined4 *)this = 0;
+  hInstance = GetModuleHandleW((LPCWSTR)0x0);
+  iVar3 = LoadStringW(hInstance,param_1,lpBuffer,iVar3);
+  if (iVar3 == 0) {
+    return this;
+  }
+  uVar1 = iVar3 + 1;
+  psVar2 = (short *)FUN_0041968e(-(uint)((int)((ulonglong)uVar1 * 2 >> 0x20) != 0) |
+                                 (uint)((ulonglong)uVar1 * 2));
+  *(short **)this = psVar2;
+  if (psVar2 != (short *)0x0) {
+    if (uVar1 != 0) {
+      if (uVar1 < 0x80000000) {
+        FUN_00411b70(psVar2,uVar1,extraout_ECX,local_8);
+        *(undefined2 *)(*(int *)this + iVar3 * 2) = 0;
+        return this;
+      }
+      if (uVar1 != 0) {
+        *psVar2 = 0;
+      }
+    }
+    *(undefined2 *)(*(int *)this + iVar3 * 2) = 0;
+  }
+  return this;
+}
+
+
+

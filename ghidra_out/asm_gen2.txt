@@ -1,0 +1,22 @@
+mov_s r3,0xbc                OK  bcdb  (len 2) @ scratch 0x286aa
+cmp r0,r3                    OK  0c20c080  (len 4) @ scratch 0x286b2
+cmp_s r0,r3                  OK  7070  (len 2) @ scratch 0x286ba
+breq r0,0xbc,0x286e0         FAIL: Solution is incomplete (failed backfill):
+  ARCompact.slaspec:322[ARCompact.slaspec:366[AR
+breq_s r0,0xbc,0x286c0       FAIL: Syntax Error: Expected [ , al, cc, cs, e, eq, ge, gt, hi, le, ...]. Got req_s r0,0xbc,0x28
+beq 0x286c0                  FAIL: Solution is incomplete (failed backfill):
+  ARCompact.slaspec:322[ARCompact.slaspec:340[AR
+beq_s 0x286c0                OK  00f2  (len 2) @ scratch 0x286c2
+bne 0x286c0                  FAIL: Solution is incomplete (failed backfill):
+  ARCompact.slaspec:322[ARCompact.slaspec:340[AR
+bne_s 0x286c0                OK  fcf5  (len 2) @ scratch 0x286ca
+b 0x00010db2                 FAIL: Solution is incomplete (failed backfill):
+  ARCompact.slaspec:322[ARCompact.slaspec:348[AR
+b_s 0x286c0                  OK  f8f1  (len 2) @ scratch 0x286d2
+bl 0x00286aa                 FAIL: Solution is incomplete (failed backfill):
+  ARCompact.slaspec:322[ARCompact.slaspec:478[AR
+bl_s 0x286aa                 FAIL: Cannot invert left shift where ones appear on the right (Solution to target : 270 in 286aa
+sub_s r0,r0,r3               OK  6278  (len 2) @ scratch 0x286da
+sub.f r0,r0,r3               OK  0220c080  (len 4) @ scratch 0x286e2
+tst r0,r3                    OK  0b20c080  (len 4) @ scratch 0x286ea
+tst_s r0,r3                  OK  6b78  (len 2) @ scratch 0x286f2

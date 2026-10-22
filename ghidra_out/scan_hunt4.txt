@@ -1,0 +1,23 @@
+=== refs to 0x800B60 ===
+  (0 refs)
+=== refs to 0x800B70 ===
+  (0 refs)
+=== refs to 0x800B7A ===
+  (0 refs)
+=== refs to 0x800B88 ===
+  READ  from ram:00017976
+  READ  from ram:0000558a
+  (2 refs)
+=== refs to 0x800C78 ===
+  (0 refs)
+=== refs to 0x800C80 ===
+  (0 refs)
+=== refs to 0x800C84 ===
+  (0 refs)
+=== cave safety ===
+  cave 0x2868B-0x286A8: 0 flow targets inside
+  cave 0x286AA-0x28782: 0 flow targets inside
+  cave 0x2891D-0x28960: 0 flow targets inside
+  total flow targets collected: 3253
+=== fn_10D7C asm 0x10D7C-0x10E50 ===
+=== decomp of ref'd functions ===

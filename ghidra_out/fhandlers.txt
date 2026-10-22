@@ -1,0 +1,120 @@
+##### fn fn_1796c @ 0x1796C #####
+
+undefined4 fn_1796c(uint param_1,int param_2)
+
+{
+  int unaff_gp;
+  
+  if ((param_2 == 2) || (param_1 == bRam00800b88)) {
+    return 0;
+  }
+  if (((*(byte *)(unaff_gp + -0xe5) & 4) == 0) && ((*(byte *)(unaff_gp + -0xe5) & 8) == 0)) {
+    return 0x80;
+  }
+  return 0x50;
+}
+
+
+
+##### fn fn_17fb0 @ 0x17FB0 #####
+
+undefined4 fn_17fb0(void)
+
+{
+  byte bVar1;
+  int unaff_gp;
+  
+  bVar1 = *(byte *)(unaff_gp + -0xe5);
+  if (((bVar1 & 0x10) != 0) || ((bVar1 & 0x20) != 0)) {
+    return 0x12;
+  }
+  if (((bVar1 & 0x40) == 0) && ((((bVar1 & 0x80) == 0 && ((bVar1 & 4) == 0)) && ((bVar1 & 8) == 0)))
+     ) {
+    return 0x24;
+  }
+  return 0x46;
+}
+
+
+
+##### fn fn_17fb0 @ 0x17FB0 #####
+
+undefined4 fn_17fb0(void)
+
+{
+  byte bVar1;
+  int unaff_gp;
+  
+  bVar1 = *(byte *)(unaff_gp + -0xe5);
+  if (((bVar1 & 0x10) != 0) || ((bVar1 & 0x20) != 0)) {
+    return 0x12;
+  }
+  if (((bVar1 & 0x40) == 0) && ((((bVar1 & 0x80) == 0 && ((bVar1 & 4) == 0)) && ((bVar1 & 8) == 0)))
+     ) {
+    return 0x24;
+  }
+  return 0x46;
+}
+
+
+
+##### fn fn_18134 @ 0x18134 #####
+
+undefined4 fn_18134(void)
+
+{
+  return 0x23;
+}
+
+
+
+##### fn fn_5580 @ 0x5580 #####
+
+undefined4 fn_5580(uint param_1,int param_2)
+
+{
+  undefined4 uVar1;
+  
+  if ((param_2 == 2) || (param_1 == bRam00800b88)) {
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = 0x80;
+  }
+  return uVar1;
+}
+
+
+
+##### fn fn_16148 @ 0x16148 #####
+
+void fn_16148(undefined4 param_1)
+
+{
+  func_0x0001809c(0xe0);
+  func_0x0001809c(param_1);
+  return;
+}
+
+
+
+### create failed 0x1613C: Unable to create function at ram:0001613c due to overlap with another namespace
+
+##### fn fn_1796c @ 0x1796C #####
+
+undefined4 fn_1796c(uint param_1,int param_2)
+
+{
+  int unaff_gp;
+  
+  if ((param_2 == 2) || (param_1 == bRam00800b88)) {
+    return 0;
+  }
+  if (((*(byte *)(unaff_gp + -0xe5) & 4) == 0) && ((*(byte *)(unaff_gp + -0xe5) & 8) == 0)) {
+    return 0x80;
+  }
+  return 0x50;
+}
+
+
+

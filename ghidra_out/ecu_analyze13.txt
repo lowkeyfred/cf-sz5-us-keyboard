@@ -1,0 +1,77 @@
+### FN FUN_004042b0 @0x4042b0
+
+int * FUN_004042b0(int *param_1)
+
+{
+  FUN_00404220(param_1,DAT_004488ab);
+  return param_1;
+}
+
+
+
+### FN FUN_00404280 @0x404280
+
+int * FUN_00404280(int *param_1)
+
+{
+  FUN_00404220(param_1,DAT_004488a5);
+  return param_1;
+}
+
+
+
+### FN FUN_004041c0 @0x4041c0
+
+int * FUN_004041c0(int *param_1)
+
+{
+  FUN_00404080(param_1,0x4488a0);
+  return param_1;
+}
+
+
+
+### FN FUN_004041f0 @0x4041f0
+
+int * FUN_004041f0(int *param_1)
+
+{
+  FUN_00404080(param_1,0x4488a6);
+  return param_1;
+}
+
+
+
+### FN FUN_00403310 @0x403310
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00403310(void)
+
+{
+  _DAT_0044886a = 0;
+  _DAT_0044886e = 0;
+  DAT_00448870 = 0;
+  DAT_00448872 = 0;
+  _DAT_00448874 = 0;
+  _DAT_00448878 = 0;
+  DAT_0044887a = 0;
+  _DAT_004488a6 = 0;
+  _DAT_004488aa = 0;
+  DAT_004488c2 = 0xffff;
+  _DAT_004488ba = 0;
+  _DAT_004488d4 = 0xffffffff;
+  _DAT_004488d8 = 0xffffffff;
+  _DAT_004488dc = 0xffffffff;
+  _DAT_004488e0 = 0xffffffff;
+  _DAT_004488ee = 0;
+  _DAT_004488f2 = 0;
+  _DAT_004488fa = 0;
+  _DAT_004488fe = 0;
+  DAT_00448902 = 0;
+  DAT_004488e4 = 0;
+  return;
+}
+
+
+

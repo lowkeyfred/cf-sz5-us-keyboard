@@ -1,0 +1,137 @@
+=== forced disasm 0x79A0 - 0x7A1C ===
+000079A0  b 0x000479f0
+00007A1C  cmp r0,0x80
+
+=== forced disasm 0x10C00 - 0x10FA0 ===
+00010C00  mov_s r1,0x5
+00010C02  bl.d 0x000197e0
+00010C06  _mov_s r2,0x0
+00010C08  bl.d 0x000282fc
+00010C0C  _mov_s r0,0x64
+00010C0E  mov_s r0,0x15
+00010C10  mov_s r1,0x5
+00010C12  bl.d 0x000197e0
+00010C16  _mov_s r2,0x1
+00010C18  bl 0x000261b8
+00010C1C  pop_s blink
+00010C1E  j_s blink
+00010FA0  ldw_s r0,[r3,0x28]
+
+=== forced disasm 0x10000 - 0x10200 ===
+00010000  stw_s r2,[r12,0x10]
+00010002  st.a r18,[sp,-0x4]
+00010006  mov r18,blink
+0001000A  mov_s r15,r2
+0001000C  add r2,r0,0x29514
+00010014  ldb r13,[r2, -0xc0]
+00010018  mov_s r14,r0
+0001001A  and r0,r13,0x80
+00010022  mov r16,0x800b60
+0001002A  breq.d r0,0x0,0x0001003a
+0001002E  _mov r17,0x0
+00010032  b.d 0x00010092
+00010036  _stb r17,[r16, 0x2a]
+00010144  ldb r2,[gp, -0x93]
+00010148  breq.d r2,0x0,0x00010154
+0001014C  _mov_s r13,0x2
+0001014E  mov_s r15,0x17
+00010150  mov r16,0x4d
+00010154  brne_s r14,0,0x0001016a
+00010156  brne r4,0x0,0x00010162
+0001015A  bmsk r1,r15,0x0
+0001015E  brne_s r1,0,0x0001016a
+00010160  b_s 0x0001023a
+00010162  and r0,r15,0x4
+00010166  breq r0,0x0,0x0001023a
+0001016A  brne r14,0x2,0x00010176
+0001016E  and r3,r15,0x2
+00010172  breq r3,0x0,0x0001023a
+00010176  ldw.as r3,[gp,0x5e]
+0001017A  and r0,r3,0x91
+00010182  cmp r0,0x91
+00010186  beq_s 0x00010192
+00010188  mov_s r0,0x11
+0001018A  bset_s r0,r0,0xf
+0001018C  and_s r3,r3,r0
+0001018E  brne r3,r0,0x000101a4
+00010192  cmp r16,0xa1
+00010196  beq_s 0x0001023a
+00010198  cmp r16,0xa3
+0001019C  beq_s 0x0001023a
+0001019E  cmp r16,0xb2
+000101A2  beq_s 0x0001023a
+000101A4  cmp r16,0x4d
+000101A8  bne_s 0x000101cc
+000101AA  brne_s r14,0,0x000101cc
+000101AC  ldb r1,[gp, -0xb6]
+000101B0  bic r1,r1,-0x3
+000101B4  brne_s r1,0,0x000101cc
+000101B6  bl.d 0x00016148
+000101BA  _mov_s r0,0x1f
+000101BC  add r0,gp,0xffffff4a
+000101C4  mov_s r1,0x2
+000101C6  bl.d 0x0001964c
+000101CA  _mov_s r2,0x1
+000101CC  cmp r16,0xa1
+000101D0  beq_s 0x000101d8
+000101D2  cmp r16,0xb2
+000101D6  bne_s 0x000101e0
+000101D8  ldb r2,[gp, -0xb2]
+000101DC  bmsk_s r2,r2,0x0
+000101DE  breq_s r2,0,0x000101f8
+000101E0  and r1,r15,0x10
+000101E4  breq_s r1,0,0x000101f8
+000101E6  stb r16,[sp]
+000101EA  stb r14,[sp, 0x1]
+000101EE  mov_s r0,sp
+000101F0  mov_s r1,0x1
+000101F2  bl.d 0x00015d84
+000101F6  _mov_s r2,0x0
+000101F8  bic r15,r15,-0x21
+000101FC  breq_s r15,0,0x00010212
+000101FE  mov_s r2,0x800400
+
+=== forced full sweep 0x1000-0x29000, calls only ===
+CALLER 0x000055A4  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x000055C2  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x000055C8  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x000055DA  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x000055E0  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x000055E6  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x00009070  bl.d 0x00027f30                          -> 0x00027F30
+CALLER 0x00009C9C  bl.d 0x00007a1c                          -> 0x00007A1C
+CALLER 0x00009CCA  bl.d 0x00007a1c                          -> 0x00007A1C
+CALLER 0x0000EB84  bl.d 0x00007a1c                          -> 0x00007A1C
+CALLER 0x0000EB9C  bl.d 0x00007a1c                          -> 0x00007A1C
+CALLER 0x0000FD20  bl 0x00016148                            -> 0x00016148
+CALLER 0x0000FD30  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x0000FD36  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x0000FD84  bl 0x00016148                            -> 0x00016148
+CALLER 0x0000FFE6  bl.d 0x00007a1c                          -> 0x00007A1C
+CALLER 0x000101B6  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x000101F2  bl.d 0x00015d84                          -> 0x00015D84
+CALLER 0x00010FBC  bl.d 0x0000656c                          -> 0x0000656C
+CALLER 0x00010FC8  bl.d 0x0000656c                          -> 0x0000656C
+CALLER 0x0001523C  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x00015280  bl 0x00016148                            -> 0x00016148
+CALLER 0x00015D50  bl 0x0001809c                            -> 0x0001809C
+CALLER 0x00015D68  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x00015D7A  bl 0x0001809c                            -> 0x0001809C
+CALLER 0x00015DC0  bl.d 0x0000656c                          -> 0x0000656C
+CALLER 0x00015DD4  bl.d 0x00015d34                          -> 0x00015D34
+CALLER 0x0001613E  bl 0x0001809c                            -> 0x0001809C
+CALLER 0x0001614E  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x00016154  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x0001616E  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x0001618A  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x000179B2  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x000179C0  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x000179C6  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x000179CC  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x000179D2  bl.d 0x0001809c                          -> 0x0001809C
+CALLER 0x00017D7E  bl.d 0x00007a1c                          -> 0x00007A1C
+CALLER 0x00018036  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x0001804A  bl.d 0x00016148                          -> 0x00016148
+CALLER 0x0001808C  bl 0x00016148                            -> 0x00016148
+CALLER 0x00018144  bl 0x00016148                            -> 0x00016148
+calls total 1609, matched 42

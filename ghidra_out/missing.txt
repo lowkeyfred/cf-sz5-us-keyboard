@@ -1,0 +1,727 @@
+### create failed at 0x3C30: Unable to create function at ram:00003c30 due to overlap with another namespace
+
+##### fn fn_10d7c @ 0x10D7C #####
+
+void fn_10d7c(int param_1,int param_2)
+
+{
+  byte bVar1;
+  int iVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  uint uVar5;
+  int unaff_gp;
+  char cStack_18;
+  undefined1 uStack_17;
+  char cStack_16;
+  byte bStack_15;
+  byte abStack_14 [4];
+  
+  bRam00800b9d = bRam00800b9d | 2;
+  DAT_ram_00800b87 = DAT_ram_00800b87 | 0x40;
+  abStack_14[0] = *(byte *)(param_2 + 0x800b7a);
+  iVar2 = func_0x000123a4(*(byte *)(param_2 + 0x800b70) & 0x7f,abStack_14[0],&uStack_17);
+  bStack_15 = (byte)iVar2;
+  if (iVar2 == 0x96) {
+    if ((param_1 == 2) && ((*(byte *)(unaff_gp + -0xb6) & 2) == 2)) {
+      FUN_ram_000055d4(0x1f);
+      FUN_ram_00008880(unaff_gp + -0xb6,2,1);
+    }
+    func_0x00017b54(param_1,abStack_14);
+    bVar1 = bRam008006f2;
+    *(byte *)(param_2 + 0x800b7a) = abStack_14[0];
+    if ((bVar1 & 4) != 0) {
+      return;
+    }
+    if (param_1 == 0) {
+      FUN_ram_00007a1c(uRam008004d7,0xa2);
+      return;
+    }
+    FUN_ram_00007a1c(uRam008004d7,0xa3);
+    return;
+  }
+  bVar1 = abStack_14[0] & 2;
+  if (bVar1 == 2) {
+    func_0x000084fc(param_1,&bStack_15);
+    if (bStack_15 == 0) {
+      return;
+    }
+    func_0x00008580(bStack_15,&cStack_16);
+    if (cStack_16 != -1) {
+      func_0x0000fff4(cStack_16,uStack_17,param_1);
+      return;
+    }
+    bVar1 = abStack_14[0] & 2;
+  }
+  if ((bVar1 != 0) || ((bVar1 = 0, (abStack_14[0] & 0x10) != 0 && ((abStack_14[0] & 4) != 0)))) {
+    func_0x00008528(bStack_15,&cStack_16);
+    if (cStack_16 != -1) {
+      iVar2 = FUN_ram_00027f30();
+      *(int *)(unaff_gp + 0xc) = iVar2;
+      if ((param_1 == 0) && ((bRam00800b9d & 4) == 0)) {
+        func_0x00010ba4(cStack_16,0);
+        return;
+      }
+      if (param_1 == 2) {
+        func_0x00010ba4(cStack_16,2);
+        *(undefined4 *)(unaff_gp + 0x10) = 0;
+        return;
+      }
+      if ((uint)(iVar2 - *(int *)(unaff_gp + 0x10)) < 0xc9) {
+        return;
+      }
+      func_0x00010ba4(cStack_16,param_1);
+      uVar3 = FUN_ram_00027f30();
+      *(undefined4 *)(unaff_gp + 0x10) = uVar3;
+      return;
+    }
+    bVar1 = abStack_14[0] & 2;
+  }
+  if (((bVar1 == 0) && ((*(byte *)(unaff_gp + -0xe4) & 0x20) == 0)) || (bStack_15 != 0x66)) {
+    if ((((bRam008006f2 & 4) != 0) && ((*(byte *)(unaff_gp + -0xb6) & 2) == 2)) &&
+       ((param_1 == 0 && ((bRam008006f2 & 1) == 0)))) {
+      FUN_ram_000055d4(0x1f);
+      FUN_ram_00008880(unaff_gp + -0xb6,2,1);
+    }
+    uVar5 = (uint)bStack_15;
+    if (((uVar5 == 0x12) || (uVar5 == 0x59)) ||
+       ((uVar5 == 0x14 || (((uVar5 == 0x86 || (uVar5 == 0x11)) || (uVar5 == 0x87)))))) {
+      func_0x000083f4(&bStack_15,abStack_14,param_1,&cStack_18);
+      if (cStack_18 != '\0') {
+        *(byte *)(param_2 + 0x800b7a) = abStack_14[0];
+      }
+      uVar5 = (uint)bStack_15;
+    }
+    uVar4 = 0x12;
+    if ((uVar5 < 0x80) ||
+       (uVar4 = (*(code *)(&PTR_LAB_ram_000165b4_ram_000297dc)[(byte)(&DAT_ram_0002931c)[uVar5]])
+                          (uVar5,param_1), uVar4 != 0)) {
+      if (param_1 == 0) {
+        iVar2 = FUN_ram_0000656c((int)uVar4 >> 4 & 0xff);
+      }
+      else {
+        iVar2 = FUN_ram_0000656c(uVar4 & 0xf);
+      }
+      if (iVar2 != 0) {
+        if (bStack_15 < 0x80) {
+          (*(code *)PTR_FUN_ram_000165b8_ram_00029778)(param_1);
+        }
+        else {
+          (*(code *)(&PTR_FUN_ram_000165b8_ram_00029778)[(byte)(&DAT_ram_0002931c)[bStack_15]])
+                    (param_1);
+        }
+        bRam00800b9d = bRam00800b9d & 0xfd;
+      }
+    }
+  }
+  else {
+    *(bool *)(unaff_gp + -0x95) = param_1 == 0;
+  }
+  return;
+}
+
+
+### create failed at 0x165B4: Unable to create function at ram:000165b4 due to overlap with another namespace
+
+##### fn fn_83f4 @ 0x83F4 #####
+
+void fn_83f4(byte *param_1,byte *param_2,int param_3,undefined1 *param_4)
+
+{
+  byte bVar1;
+  int unaff_gp;
+  
+  *param_4 = 1;
+  bVar1 = *param_1;
+  if (bVar1 == 0x87) {
+    if (param_3 == 0) {
+      *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) | 0x20;
+      *param_2 = *param_2 | 0x20;
+      return;
+    }
+    *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) & 0xdf;
+    *param_2 = *param_2 & 0xdf;
+    return;
+  }
+  if (bVar1 == 0x14) {
+    if (param_3 == 0) {
+      *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) | 4;
+      *param_2 = *param_2 | 4;
+      return;
+    }
+    *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) & 0xfb;
+    *param_2 = *param_2 & 0xfb;
+    return;
+  }
+  if (bVar1 < 0x15) {
+    if (bVar1 == 0x11) {
+      if (param_3 == 0) {
+        *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) | 0x10;
+        *param_2 = *param_2 | 0x10;
+        return;
+      }
+      *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) & 0xef;
+      *param_2 = *param_2 & 0xef;
+      return;
+    }
+    if (bVar1 == 0x12) {
+      if (param_3 == 0) {
+        *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) | 0x40;
+        *param_2 = *param_2 | 0x40;
+        return;
+      }
+      *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) & 0xbf;
+      *param_2 = *param_2 & 0xbf;
+      return;
+    }
+  }
+  else {
+    if (bVar1 == 0x59) {
+      if (param_3 == 0) {
+        *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) | 0x80;
+        *param_2 = *param_2 | 0x80;
+        return;
+      }
+      *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) & 0x7f;
+      *param_2 = *param_2 & 0x7f;
+      return;
+    }
+    if (bVar1 == 0x86) {
+      if (param_3 == 0) {
+        *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) | 8;
+        *param_2 = *param_2 | 8;
+        return;
+      }
+      *(byte *)(unaff_gp + -0xe5) = *(byte *)(unaff_gp + -0xe5) & 0xf7;
+      *param_2 = *param_2 & 0xf7;
+      return;
+    }
+  }
+  *param_4 = 0;
+  return;
+}
+
+
+##### fn fn_e4fa @ 0xE4FA #####
+
+void fn_e4fa(void)
+
+{
+  FUN_ram_0001613c(0x55);
+  return;
+}
+
+
+### create failed at 0x18992: Unable to create function at ram:00018992 due to overlap with another namespace
+
+##### fn fn_1def8 @ 0x1DEF8 #####
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+uint fn_1def8(undefined4 param_1,ushort param_2)
+
+{
+  ushort uVar1;
+  int iVar2;
+  byte bVar3;
+  uint uVar4;
+  undefined1 uVar5;
+  int unaff_r17;
+  uint in_r24;
+  uint uVar6;
+  uint uVar7;
+  int unaff_gp;
+  undefined1 in_stack_00000000;
+  undefined1 uStack00000004;
+  undefined1 uStack00000005;
+  short sStack00000006;
+  
+  *(ushort *)(unaff_r17 + 0xb2) = param_2 & 0xfffb;
+  FUN_ram_00004e84(0x5c,param_2 & 0xfffb,*(undefined1 *)(unaff_r17 + 0x86));
+  uVar4 = in_r24;
+  uVar6 = in_r24;
+  do {
+    DAT_ram_00800bc8 = 8;
+    DAT_ram_00800bcb = 4;
+    DAT_ram_00800bc9 = 0xb4;
+    DAT_ram_00800bca = 9;
+    _DAT_ram_00800bcc = uRam0002a434;
+    uRam00800bd0 = uRam0002a438;
+    uRam00800bdc = 8;
+    _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+    DAT_ram_00800bec = 0xff;
+    uVar5 = (undefined1)in_r24;
+    DAT_ram_00800be5 = uVar5;
+    iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+    if (iVar2 != 0) break;
+    uVar4 = uVar4 + 1 & 0xff;
+  } while (uVar4 < 3);
+  if (uVar4 != 3) {
+    bVar3 = 0;
+    do {
+      DAT_ram_00800bc8 = 4;
+      DAT_ram_00800bcb = 4;
+      DAT_ram_00800bc9 = 0x16;
+      DAT_ram_00800bca = 0x71;
+      _DAT_ram_00800bcc = CONCAT22(DAT_ram_00800bcc_2,&AY1);
+      _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+      DAT_ram_00800bec = 0xff;
+      DAT_ram_00800be5 = uVar5;
+      iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+      if (iVar2 != 0) break;
+      bVar3 = bVar3 + 1;
+    } while (bVar3 < 3);
+    if (bVar3 != 3) {
+      bVar3 = 0;
+      do {
+        DAT_ram_00800bc8 = 3;
+        DAT_ram_00800bcb = 4;
+        DAT_ram_00800bc9 = 0x16;
+        DAT_ram_00800bca = 0x73;
+        _DAT_ram_00800be0 = (undefined4 *)&stack0x00000004;
+        _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+        DAT_ram_00800bec = 0xff;
+        DAT_ram_00800be5 = uVar5;
+        iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+        if (iVar2 != 0) break;
+        bVar3 = bVar3 + 1;
+      } while (bVar3 < 3);
+      if (bVar3 != 3) {
+        bVar3 = 0;
+        do {
+          DAT_ram_00800bc8 = 4;
+          DAT_ram_00800bcb = 4;
+          DAT_ram_00800bc9 = 0x16;
+          DAT_ram_00800bca = 0x71;
+          _DAT_ram_00800bcc =
+               CONCAT22(DAT_ram_00800bcc_2,~CONCAT11(uStack00000005,uStack00000004) + 1);
+          _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+          DAT_ram_00800bec = 0xff;
+          DAT_ram_00800be5 = uVar5;
+          iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+          if (iVar2 != 0) break;
+          bVar3 = bVar3 + 1;
+        } while (bVar3 < 3);
+        if (*(char *)(unaff_gp + -0x8d) == '\x01') {
+          bVar3 = 3;
+        }
+        if (bVar3 != 3) {
+          bVar3 = 0;
+          do {
+            DAT_ram_00800bc8 = 3;
+            DAT_ram_00800bcb = 4;
+            DAT_ram_00800bc9 = 0x16;
+            DAT_ram_00800bca = 0x74;
+            _DAT_ram_00800be0 = (undefined4 *)((int)&stack0x00000004 + 2);
+            _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+            DAT_ram_00800bec = 0xff;
+            DAT_ram_00800be5 = uVar5;
+            iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+            if (iVar2 != 0) break;
+            bVar3 = bVar3 + 1;
+          } while (bVar3 < 3);
+          if (bVar3 != 3) {
+            uVar4 = 0;
+            do {
+              if (sStack00000006 == *(short *)(uVar4 * 6 + 0x2a3f8)) {
+                uVar6 = (uint)*(ushort *)(uVar4 * 6 + 0x2a3fa);
+                break;
+              }
+              uVar4 = uVar4 + 1 & 0xff;
+            } while (uVar4 < 10);
+            bVar3 = 0;
+            uVar7 = uVar6;
+            if (uVar4 == 10) {
+              do {
+                iVar2 = func_0x00005a28();
+                if (iVar2 == 1) {
+                  if ((*(uint *)(unaff_r17 + 0xa8) & 0x100) != 0) {
+                    return in_r24;
+                  }
+                  uVar1 = *(ushort *)(unaff_r17 + 0xb2);
+                  *(ushort *)(unaff_r17 + 0xb2) = uVar1 | 4;
+                  FUN_ram_00004e84(0x5c,uVar1 | 4,*(undefined1 *)(unaff_r17 + 0x86));
+                  return in_r24;
+                }
+                bVar3 = bVar3 + 1;
+              } while (bVar3 < 3);
+            }
+            else {
+              do {
+                DAT_ram_00800bc8 = 4;
+                DAT_ram_00800bcb = 4;
+                DAT_ram_00800bc9 = 0x16;
+                DAT_ram_00800bca = 0x40;
+                _DAT_ram_00800bcc = CONCAT11((char)(uVar6 >> 8),(char)uVar7);
+                _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+                DAT_ram_00800bec = 0xff;
+                DAT_ram_00800be5 = uVar5;
+                iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+                if (iVar2 != 0) break;
+                bVar3 = bVar3 + 1;
+              } while (bVar3 < 3);
+              if (bVar3 != 3) {
+                bVar3 = 0;
+                do {
+                  DAT_ram_00800bc8 = 4;
+                  DAT_ram_00800bcb = 4;
+                  DAT_ram_00800bc9 = 0x16;
+                  DAT_ram_00800bca = 0x41;
+                  _DAT_ram_00800bcc = CONCAT11(uVar5,in_stack_00000000);
+                  _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+                  DAT_ram_00800bec = 0xff;
+                  DAT_ram_00800be5 = uVar5;
+                  iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+                  if (iVar2 != 0) break;
+                  bVar3 = bVar3 + 1;
+                } while (bVar3 < 3);
+                if (bVar3 != 3) {
+                  bVar3 = 0;
+                  do {
+                    iVar2 = func_0x00005a28();
+                    if (iVar2 == 1) {
+                      if ((*(uint *)(unaff_r17 + 0xa8) & 0x100) == 0) {
+                        uVar1 = *(ushort *)(unaff_r17 + 0xb2);
+                        *(ushort *)(unaff_r17 + 0xb2) = uVar1 | 4;
+                        FUN_ram_00004e84(0x5c,uVar1 | 4,*(undefined1 *)(unaff_r17 + 0x86));
+                      }
+                      break;
+                    }
+                    bVar3 = bVar3 + 1;
+                  } while (bVar3 < 3);
+                  if (bVar3 != 3) {
+                    in_r24 = 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return in_r24;
+}
+
+
+##### fn fn_1def8 @ 0x1DEF8 #####
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+uint fn_1def8(undefined4 param_1,ushort param_2)
+
+{
+  ushort uVar1;
+  int iVar2;
+  byte bVar3;
+  uint uVar4;
+  undefined1 uVar5;
+  int unaff_r17;
+  uint in_r24;
+  uint uVar6;
+  uint uVar7;
+  int unaff_gp;
+  undefined1 in_stack_00000000;
+  undefined1 uStack00000004;
+  undefined1 uStack00000005;
+  short sStack00000006;
+  
+  *(ushort *)(unaff_r17 + 0xb2) = param_2 & 0xfffb;
+  FUN_ram_00004e84(0x5c,param_2 & 0xfffb,*(undefined1 *)(unaff_r17 + 0x86));
+  uVar4 = in_r24;
+  uVar6 = in_r24;
+  do {
+    DAT_ram_00800bc8 = 8;
+    DAT_ram_00800bcb = 4;
+    DAT_ram_00800bc9 = 0xb4;
+    DAT_ram_00800bca = 9;
+    _DAT_ram_00800bcc = uRam0002a434;
+    uRam00800bd0 = uRam0002a438;
+    uRam00800bdc = 8;
+    _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+    DAT_ram_00800bec = 0xff;
+    uVar5 = (undefined1)in_r24;
+    DAT_ram_00800be5 = uVar5;
+    iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+    if (iVar2 != 0) break;
+    uVar4 = uVar4 + 1 & 0xff;
+  } while (uVar4 < 3);
+  if (uVar4 != 3) {
+    bVar3 = 0;
+    do {
+      DAT_ram_00800bc8 = 4;
+      DAT_ram_00800bcb = 4;
+      DAT_ram_00800bc9 = 0x16;
+      DAT_ram_00800bca = 0x71;
+      _DAT_ram_00800bcc = CONCAT22(DAT_ram_00800bcc_2,&AY1);
+      _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+      DAT_ram_00800bec = 0xff;
+      DAT_ram_00800be5 = uVar5;
+      iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+      if (iVar2 != 0) break;
+      bVar3 = bVar3 + 1;
+    } while (bVar3 < 3);
+    if (bVar3 != 3) {
+      bVar3 = 0;
+      do {
+        DAT_ram_00800bc8 = 3;
+        DAT_ram_00800bcb = 4;
+        DAT_ram_00800bc9 = 0x16;
+        DAT_ram_00800bca = 0x73;
+        _DAT_ram_00800be0 = (undefined4 *)&stack0x00000004;
+        _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+        DAT_ram_00800bec = 0xff;
+        DAT_ram_00800be5 = uVar5;
+        iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+        if (iVar2 != 0) break;
+        bVar3 = bVar3 + 1;
+      } while (bVar3 < 3);
+      if (bVar3 != 3) {
+        bVar3 = 0;
+        do {
+          DAT_ram_00800bc8 = 4;
+          DAT_ram_00800bcb = 4;
+          DAT_ram_00800bc9 = 0x16;
+          DAT_ram_00800bca = 0x71;
+          _DAT_ram_00800bcc =
+               CONCAT22(DAT_ram_00800bcc_2,~CONCAT11(uStack00000005,uStack00000004) + 1);
+          _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+          DAT_ram_00800bec = 0xff;
+          DAT_ram_00800be5 = uVar5;
+          iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+          if (iVar2 != 0) break;
+          bVar3 = bVar3 + 1;
+        } while (bVar3 < 3);
+        if (*(char *)(unaff_gp + -0x8d) == '\x01') {
+          bVar3 = 3;
+        }
+        if (bVar3 != 3) {
+          bVar3 = 0;
+          do {
+            DAT_ram_00800bc8 = 3;
+            DAT_ram_00800bcb = 4;
+            DAT_ram_00800bc9 = 0x16;
+            DAT_ram_00800bca = 0x74;
+            _DAT_ram_00800be0 = (undefined4 *)((int)&stack0x00000004 + 2);
+            _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+            DAT_ram_00800bec = 0xff;
+            DAT_ram_00800be5 = uVar5;
+            iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+            if (iVar2 != 0) break;
+            bVar3 = bVar3 + 1;
+          } while (bVar3 < 3);
+          if (bVar3 != 3) {
+            uVar4 = 0;
+            do {
+              if (sStack00000006 == *(short *)(uVar4 * 6 + 0x2a3f8)) {
+                uVar6 = (uint)*(ushort *)(uVar4 * 6 + 0x2a3fa);
+                break;
+              }
+              uVar4 = uVar4 + 1 & 0xff;
+            } while (uVar4 < 10);
+            bVar3 = 0;
+            uVar7 = uVar6;
+            if (uVar4 == 10) {
+              do {
+                iVar2 = func_0x00005a28();
+                if (iVar2 == 1) {
+                  if ((*(uint *)(unaff_r17 + 0xa8) & 0x100) != 0) {
+                    return in_r24;
+                  }
+                  uVar1 = *(ushort *)(unaff_r17 + 0xb2);
+                  *(ushort *)(unaff_r17 + 0xb2) = uVar1 | 4;
+                  FUN_ram_00004e84(0x5c,uVar1 | 4,*(undefined1 *)(unaff_r17 + 0x86));
+                  return in_r24;
+                }
+                bVar3 = bVar3 + 1;
+              } while (bVar3 < 3);
+            }
+            else {
+              do {
+                DAT_ram_00800bc8 = 4;
+                DAT_ram_00800bcb = 4;
+                DAT_ram_00800bc9 = 0x16;
+                DAT_ram_00800bca = 0x40;
+                _DAT_ram_00800bcc = CONCAT11((char)(uVar6 >> 8),(char)uVar7);
+                _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+                DAT_ram_00800bec = 0xff;
+                DAT_ram_00800be5 = uVar5;
+                iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+                if (iVar2 != 0) break;
+                bVar3 = bVar3 + 1;
+              } while (bVar3 < 3);
+              if (bVar3 != 3) {
+                bVar3 = 0;
+                do {
+                  DAT_ram_00800bc8 = 4;
+                  DAT_ram_00800bcb = 4;
+                  DAT_ram_00800bc9 = 0x16;
+                  DAT_ram_00800bca = 0x41;
+                  _DAT_ram_00800bcc = CONCAT11(uVar5,in_stack_00000000);
+                  _DAT_ram_00800be8 = *(undefined4 *)(unaff_gp + 0x58);
+                  DAT_ram_00800bec = 0xff;
+                  DAT_ram_00800be5 = uVar5;
+                  iVar2 = FUN_ram_0001daf8(&DAT_ram_00800bc8);
+                  if (iVar2 != 0) break;
+                  bVar3 = bVar3 + 1;
+                } while (bVar3 < 3);
+                if (bVar3 != 3) {
+                  bVar3 = 0;
+                  do {
+                    iVar2 = func_0x00005a28();
+                    if (iVar2 == 1) {
+                      if ((*(uint *)(unaff_r17 + 0xa8) & 0x100) == 0) {
+                        uVar1 = *(ushort *)(unaff_r17 + 0xb2);
+                        *(ushort *)(unaff_r17 + 0xb2) = uVar1 | 4;
+                        FUN_ram_00004e84(0x5c,uVar1 | 4,*(undefined1 *)(unaff_r17 + 0x86));
+                      }
+                      break;
+                    }
+                    bVar3 = bVar3 + 1;
+                  } while (bVar3 < 3);
+                  if (bVar3 != 3) {
+                    in_r24 = 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return in_r24;
+}
+
+
+##### fn fn_14eb8 @ 0x14EB8 #####
+
+void fn_14eb8(void)
+
+{
+  int unaff_gp;
+  
+  *(undefined1 *)(unaff_gp + -0xe8) = 0x91;
+  return;
+}
+
+
+##### fn fn_14eb8 @ 0x14EB8 #####
+
+void fn_14eb8(void)
+
+{
+  int unaff_gp;
+  
+  *(undefined1 *)(unaff_gp + -0xe8) = 0x91;
+  return;
+}
+
+
+### create failed at 0x8B72: Unable to create function at ram:00008b72 due to overlap with another namespace
+
+##### fn fn_10182 @ 0x10182 #####
+
+void fn_10182(int param_1,undefined4 param_2,undefined4 param_3,uint param_4)
+
+{
+  int unaff_r14;
+  uint unaff_r15;
+  int unaff_r16;
+  int unaff_gp;
+  
+  if (((param_1 != 0x91) && ((param_4 & 0x8011) != 0x8011)) ||
+     ((unaff_r16 != 0xa1 && ((unaff_r16 != 0xa3 && (unaff_r16 != 0xb2)))))) {
+    if ((unaff_r16 == 0x4d) && ((unaff_r14 == 0 && ((*(byte *)(unaff_gp + -0xb6) & 2) == 0)))) {
+      FUN_ram_00016148(0x1f);
+      FUN_ram_0001964c(unaff_gp + -0xb6,2,1);
+    }
+    if ((((unaff_r16 != 0xa1) && (unaff_r16 != 0xb2)) || ((*(byte *)(unaff_gp + -0xb2) & 1) != 0))
+       && ((unaff_r15 & 0x10) != 0)) {
+      FUN_ram_00015d84();
+    }
+    if ((unaff_r15 & 0x20) != 0) {
+      FUN_ram_0000ff9c(0,DAT_ram_008004cf);
+    }
+    if ((unaff_r16 != 0x4d) && ((*(byte *)(unaff_gp + -0xb6) & 2) == 2)) {
+      FUN_ram_000055d4(0x1f);
+      FUN_ram_00008880(unaff_gp + -0xb6,2,1);
+    }
+  }
+  return;
+}
+
+
+### create failed at 0x20434: Unable to create function at ram:00020434 due to overlap with another namespace
+
+##### fn FUN_ram_00011618 @ 0x11618 #####
+
+void FUN_ram_00011618(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  int unaff_gp;
+  undefined1 *local_24;
+  undefined1 *puStack_20;
+  undefined1 uStack_1c;
+  undefined1 local_1b;
+  undefined1 local_1a;
+  undefined1 local_19;
+  undefined1 uStack_18;
+  undefined1 uStack_14;
+  undefined1 local_13;
+  undefined1 local_12;
+  undefined1 local_11;
+  undefined1 auStack_10 [12];
+  
+  local_24 = &uStack_14;
+  puStack_20 = auStack_10;
+  uStack_14 = 0x30;
+  local_13 = 1;
+  local_12 = 8;
+  local_11 = 0xf7;
+  uStack_1c = 4;
+  local_1b = 8;
+  local_1a = 0;
+  uStack_18 = 0;
+  local_19 = 0;
+  iVar2 = FUN_ram_000233ec(&local_24);
+  if (iVar2 == 0) {
+    bVar1 = puStack_20[1];
+    *(char *)(unaff_gp + -0x7c) = (char)((int)(bVar1 & 0xf0) >> 4);
+    *(byte *)(unaff_gp + -0x78) = bVar1 & 0xf;
+    *(byte *)(unaff_gp + -0xcf) = *(byte *)(unaff_gp + -0xcf) & 0xfd;
+  }
+  else {
+    *(byte *)(unaff_gp + -0xcf) = *(byte *)(unaff_gp + -0xcf) | 2;
+    FUN_ram_000203a0(0xd2,puStack_20[2]);
+  }
+  return;
+}
+
+
+##### fn FUN_ram_000130fc @ 0x130FC #####
+
+undefined4 FUN_ram_000130fc(uint param_1,undefined4 param_2,undefined1 *param_3)
+
+{
+  bool bVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((int)param_1 < 0x70) {
+    bVar1 = 0x5f < (int)param_1;
+    if (bVar1) {
+      param_1 = param_1 - 0x60 & 0xff;
+    }
+    if ((int)param_1 < (int)(&DAT_ram_0002a72c)[bVar1]) {
+      *(bool *)param_2 = bVar1;
+      *param_3 = (char)param_1;
+      uVar2 = 1;
+    }
+  }
+  return uVar2;
+}
+
+

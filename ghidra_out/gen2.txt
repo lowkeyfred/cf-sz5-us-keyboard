@@ -1,0 +1,53 @@
+=== 0x123A0 - 0x124C0 ===
+000123A0  _extb_s r0,r0
+000123A2  nop_s
+000123A4  sub_s sp,0x4
+000123A6  push_s r13
+000123A8  push_s r14
+000123AA  push_s r15
+000123AC  mov_s r15,blink
+000123AE  mov_s r13,r1
+000123B0  mov_s r14,r2
+000123B2  bmsk_s r0,r0,0x6
+000123B4  bl.d 0x00007998
+000123B8  _extb_s r0,r0
+000123BA  bl 0x0001f0ac
+000123BE  cmp r0,0xc0
+000123C2  mov_s r4,r0
+000123C4  blt.d 0x00012464
+000123C8  _stb_s r0,[r14]
+000123CA  cmp r4,0xe0
+000123CE  blt.d 0x00012438
+000123D2  _and r0,r13,0x2
+000123D6  breq r0,0x2,0x000123e6
+000123DA  ldb r1,[gp, -0xe4]
+000123DE  bic r1,r1,-0x21
+000123E2  brne r1,0x20,0x00012400
+000123E6  ldb r3,[gp, -0xd6]
+000123EA  bic r3,r3,-0x3
+000123EE  breq_s r3,0,0x00012418
+000123F0  mov_s r1,0x800400
+000123F6  ldb r1,[r1, 0xb9]
+000123FA  bmsk_s r1,r1,0x0
+000123FC  brne_s r1,0,0x00012418
+000123FE  b_s 0x00012428
+000124A0  breq_s r0,0,0x000124b2
+000124A2  breq r0,0x1,0x000124b8
+000124A6  mov_s r1,0x800700
+000124AC  b.d 0x000124c2
+000124B0  _ldb_s r0,[r1,0x8]
+000124B2  b.d 0x000124ba
+000124B6  _mov_s r0,0x0
+000124B8  mov_s r0,0x1
+000124BA  mov_s r1,0x800700
+000124C0  stb_s r0,[r1,0x8]
+=== 0x7990 - 0x7A1C ===
+00007992  mov_s r0,r4
+00007994  j_s.d blink
+00007996  _add_s sp,0xc
+000079A2  add r1,r0,0x29714
+000079AA  j_s.d blink
+000079AC  _ldb r0,[r1, -0x78]
+00007A1C  cmp r0,0x80
+containing 0x123A4: null (0x0-0x0)
+containing 0x79A0: null (0x0-0x0)

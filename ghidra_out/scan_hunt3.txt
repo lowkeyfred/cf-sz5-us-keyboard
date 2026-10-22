@@ -1,0 +1,314 @@
+=== ASM ===
+--- 0x123A4 - 0x124C4 ---
+000123A4  sub_s sp,0x4
+000123A6  push_s r13
+000123A8  push_s r14
+000123AA  push_s r15
+000123AC  mov_s r15,blink
+000123AE  mov_s r13,r1
+000123B0  mov_s r14,r2
+000123B2  bmsk_s r0,r0,0x6
+000123B4  bl.d 0x00007998
+000123B8  _extb_s r0,r0
+000123BA  bl 0x0001f0ac
+000123BE  cmp r0,0xc0
+000123C2  mov_s r4,r0
+000123C4  blt.d 0x00012464
+000123C8  _stb_s r0,[r14]
+000123CA  cmp r4,0xe0
+000123CE  blt.d 0x00012438
+000123D2  _and r0,r13,0x2
+000123D6  breq r0,0x2,0x000123e6
+000123DA  ldb r1,[gp, -0xe4]
+000123DE  bic r1,r1,-0x21
+000123E2  brne r1,0x20,0x00012400
+000123E6  ldb r3,[gp, -0xd6]
+000123EA  bic r3,r3,-0x3
+000123EE  breq_s r3,0,0x00012418
+000123F0  mov_s r1,0x800400
+000123F6  ldb r1,[r1, 0xb9]
+000123FA  bmsk_s r1,r1,0x0
+000123FC  brne_s r1,0,0x00012418
+000123FE  b_s 0x00012428
+--- 0x1F0AC - 0x1F240 ---
+0001F0AC  ldb r2,[gp, -0x9e]
+0001F0B0  and r3,r2,0x2
+0001F0B4  breq.d r3,0x0,0x0001f0d2
+0001F0B8  _mov_s r1,r0
+0001F0BA  cmp r1,0x96
+0001F0BE  bne.d 0x0001f0cc
+0001F0C2  _ldb r3,[gp, -0xd8]
+0001F0C6  b.d 0x0001f0d2
+0001F0CA  _mov_s r0,r3
+--- 0x10D7C - 0x10DC4 ---
+00010D7C  push_s r13
+00010D7E  push_s r14
+00010D80  push_s r15
+00010D82  st.a r16,[sp,-0x4]
+00010D86  sub_s sp,0x8
+00010D88  mov_s r15,0x800b60
+00010D8E  ldb r3,[r15, 0x3d]
+00010D92  mov_s r14,r0
+00010D94  bset_s r3,r3,0x1
+00010D96  ldb r0,[r15, 0x27]
+00010D9A  stb r3,[r15, 0x3d]
+00010D9E  bset_s r0,r0,0x6
+00010DA0  stb r0,[r15, 0x27]
+00010DA4  add_s r13,r15,r1
+00010DA6  ldb_s r0,[r13,0x10]
+00010DA8  mov r16,blink
+00010DAC  bmsk_s r0,r0,0x6
+00010DAE  ldb_s r1,[r13,0x1a]
+00010DB0  extb_s r0,r0
+00010DB2  stb_s r1,[sp,0x4]
+00010DB4  bl.d 0x000123a4
+00010DB8  _add r2,sp,0x1
+00010DBC  cmp r0,0x96
+00010DC0  bne.d 0x00010e2a
+00010DC4  _stb r0,[sp, 0x3]
+--- 0x3C30 - 0x3CA0 ---
+00003C30  ldb r2,[r13, 0x3d]
+00003C34  ldb r3,[gp, -0xa1]
+00003C38  bset_s r2,r2,0x2
+00003C3A  bmsk_s r3,r3,0x4
+00003C3C  mov_s r0,0x29514
+00003C42  add_s r3,r3,r0
+00003C44  ldb r3,[r3, -0x98]
+00003C48  stb r2,[r13, 0x3d]
+00003C4C  add2_s r3,r3,r3
+00003C4E  st.as r3,[gp,-0x6c]
+00003C52  sub_s r1,r1,0x1
+00003C54  extb_s r1,r1
+00003C56  bl.d 0x00010d7c
+00003C5A  _mov_s r0,0x0
+00003C5C  ldb r2,[r13, 0x27]
+00003C60  bclr_s r2,r2,0x6
+00003C62  bl.d 0x00027f30
+00003C66  _stb r2,[r13, 0x27]
+00003C6A  st.as r0,[gp,0x30]
+00003C6E  mov_s blink,r14
+00003C70  pop_s r14
+00003C72  j_s.d blink
+00003C74  _pop_s r13
+--- 0x7990 - 0x7A20 ---
+00007990  bvc 0x000e89d0
+00007994  j_s.d blink
+00007996  _add_s sp,0xc
+=== DECOMP ===
+##### h3_123a4 @ 0x123A4 #####
+
+uint h3_123a4(uint param_1,uint param_2,undefined1 *param_3)
+
+{
+  uint uVar1;
+  int iVar2;
+  int unaff_gp;
+  
+  func_0x00007998(param_1 & 0x7f);
+  uVar1 = func_0x0001f0ac();
+  *param_3 = (char)uVar1;
+  if ((int)uVar1 < 0xc0) goto LAB_ram_00012464;
+  if ((int)uVar1 < 0xe0) {
+    if (((param_2 & 2) == 2) || ((*(byte *)(unaff_gp + -0xe4) & 0x20) == 0x20)) {
+      uVar1 = uVar1 * 2 - 0x17f;
+    }
+    else {
+      uVar1 = uVar1 * 2 - 0x180;
+    }
+    uVar1 = func_0x00007128(uVar1 & 0xff);
+    goto LAB_ram_00012464;
+  }
+  if (((param_2 & 2) == 2) || ((*(byte *)(unaff_gp + -0xe4) & 0x20) == 0x20)) {
+    if (((*(byte *)(unaff_gp + -0xd6) & 2) == 0) || ((bRam008004b9 & 1) != 0))
+    goto LAB_ram_00012418;
+  }
+  else if (((*(byte *)(unaff_gp + -0xd6) & 2) != 0) && ((bRam008004b9 & 1) == 0)) {
+LAB_ram_00012418:
+    uVar1 = (uint)*(byte *)(uVar1 + 0x29320);
+    goto LAB_ram_00012464;
+  }
+  uVar1 = (uint)*(byte *)(uVar1 + 0x29340);
+LAB_ram_00012464:
+  if (((bRam008006f2 & 4) == 0) && (uVar1 == 0x96)) {
+    *(undefined4 *)(unaff_gp + -0x6c) = 0xffffffff;
+  }
+  iVar2 = func_0x000207bc(uVar1);
+  if (iVar2 == 0) {
+    *(undefined4 *)(unaff_gp + -0x6c) = 0xffffffff;
+  }
+  return uVar1;
+}
+
+
+
+##### h3_1f0ac @ 0x1F0AC #####
+
+uint h3_1f0ac(uint param_1)
+
+{
+  bool bVar1;
+  uint uVar2;
+  int unaff_gp;
+  
+  uVar2 = param_1;
+  if ((((*(byte *)(unaff_gp + -0x9e) & 2) != 0) &&
+      (uVar2 = (uint)*(byte *)(unaff_gp + -0xd8), param_1 != 0x96)) &&
+     (bVar1 = param_1 == uVar2, uVar2 = param_1, bVar1)) {
+    uVar2 = 0x96;
+  }
+  if ((*(byte *)(unaff_gp + -0x9e) & 4) != 0) {
+    if (param_1 == *(byte *)(unaff_gp + -0xb9)) {
+      return 0x97;
+    }
+    if (param_1 == 0x97) {
+      return (uint)*(byte *)(unaff_gp + -0xb9);
+    }
+  }
+  return uVar2;
+}
+
+
+
+##### h3_10d7c @ 0x10D7C #####
+
+void h3_10d7c(int param_1,int param_2)
+
+{
+  byte bVar1;
+  int iVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  uint uVar5;
+  int unaff_gp;
+  char cStack_18;
+  undefined1 uStack_17;
+  char cStack_16;
+  byte bStack_15;
+  byte abStack_14 [4];
+  
+  bRam00800b9d = bRam00800b9d | 2;
+  bRam00800b87 = bRam00800b87 | 0x40;
+  abStack_14[0] = *(byte *)(param_2 + 0x800b7a);
+  iVar2 = h3_123a4(*(byte *)(param_2 + 0x800b70) & 0x7f,abStack_14[0],&uStack_17);
+  bStack_15 = (byte)iVar2;
+  if (iVar2 == 0x96) {
+    if ((param_1 == 2) && ((*(byte *)(unaff_gp + -0xb6) & 2) == 2)) {
+      func_0x000055d4(0x1f);
+      func_0x00008880(unaff_gp + -0xb6,2,1);
+    }
+    func_0x00017b54(param_1,abStack_14);
+    bVar1 = bRam008006f2;
+    *(byte *)(param_2 + 0x800b7a) = abStack_14[0];
+    if ((bVar1 & 4) != 0) {
+      return;
+    }
+    if (param_1 == 0) {
+      func_0x00007a1c(uRam008004d7,0xa2);
+      return;
+    }
+    func_0x00007a1c(uRam008004d7,0xa3);
+    return;
+  }
+  bVar1 = abStack_14[0] & 2;
+  if (bVar1 == 2) {
+    func_0x000084fc(param_1,&bStack_15);
+    if (bStack_15 == 0) {
+      return;
+    }
+    func_0x00008580(bStack_15,&cStack_16);
+    if (cStack_16 != -1) {
+      func_0x0000fff4(cStack_16,uStack_17,param_1);
+      return;
+    }
+    bVar1 = abStack_14[0] & 2;
+  }
+  if ((bVar1 != 0) || ((bVar1 = 0, (abStack_14[0] & 0x10) != 0 && ((abStack_14[0] & 4) != 0)))) {
+    func_0x00008528(bStack_15,&cStack_16);
+    if (cStack_16 != -1) {
+      iVar2 = func_0x00027f30();
+      *(int *)(unaff_gp + 0xc) = iVar2;
+      if ((param_1 == 0) && ((bRam00800b9d & 4) == 0)) {
+        func_0x00010ba4(cStack_16,0);
+        return;
+      }
+      if (param_1 == 2) {
+        func_0x00010ba4(cStack_16,2);
+        *(undefined4 *)(unaff_gp + 0x10) = 0;
+        return;
+      }
+      if ((uint)(iVar2 - *(int *)(unaff_gp + 0x10)) < 0xc9) {
+        return;
+      }
+      func_0x00010ba4(cStack_16,param_1);
+      uVar3 = func_0x00027f30();
+      *(undefined4 *)(unaff_gp + 0x10) = uVar3;
+      return;
+    }
+    bVar1 = abStack_14[0] & 2;
+  }
+  if (((bVar1 == 0) && ((*(byte *)(unaff_gp + -0xe4) & 0x20) == 0)) || (bStack_15 != 0x66)) {
+    if ((((bRam008006f2 & 4) != 0) && ((*(byte *)(unaff_gp + -0xb6) & 2) == 2)) &&
+       ((param_1 == 0 && ((bRam008006f2 & 1) == 0)))) {
+      func_0x000055d4(0x1f);
+      func_0x00008880(unaff_gp + -0xb6,2,1);
+    }
+    uVar5 = (uint)bStack_15;
+    if (((uVar5 == 0x12) || (uVar5 == 0x59)) ||
+       ((uVar5 == 0x14 || (((uVar5 == 0x86 || (uVar5 == 0x11)) || (uVar5 == 0x87)))))) {
+      func_0x000083f4(&bStack_15,abStack_14,param_1,&cStack_18);
+      if (cStack_18 != '\0') {
+        *(byte *)(param_2 + 0x800b7a) = abStack_14[0];
+      }
+      uVar5 = (uint)bStack_15;
+    }
+    uVar4 = 0x12;
+    if ((uVar5 < 0x80) ||
+       (uVar4 = (**(code **)((uint)*(byte *)(uVar5 + 0x2931c) * 4 + 0x297dc))(uVar5,param_1),
+       uVar4 != 0)) {
+      if (param_1 == 0) {
+        iVar2 = func_0x0000656c((int)uVar4 >> 4 & 0xff);
+      }
+      else {
+        iVar2 = func_0x0000656c(uVar4 & 0xf);
+      }
+      if (iVar2 != 0) {
+        if (bStack_15 < 0x80) {
+          (*pcRam00029778)(param_1);
+        }
+        else {
+          (**(code **)((uint)*(byte *)(bStack_15 + 0x2931c) * 4 + 0x29778))(param_1);
+        }
+        bRam00800b9d = bRam00800b9d & 0xfd;
+      }
+    }
+  }
+  else {
+    *(bool *)(unaff_gp + -0x95) = param_1 == 0;
+  }
+  return;
+}
+
+
+
+##### h3_3c30 @ 0x3C30 #####
+
+void h3_3c30(undefined4 param_1,char param_2)
+
+{
+  byte bVar1;
+  undefined4 uVar2;
+  int unaff_r13;
+  int unaff_gp;
+  
+  bVar1 = *(byte *)((*(byte *)(unaff_gp + -0xa1) & 0x1f) + 0x2947c);
+  *(byte *)(unaff_r13 + 0x3d) = *(byte *)(unaff_r13 + 0x3d) | 4;
+  *(uint *)(unaff_gp + -0x6c) = (uint)bVar1 * 5;
+  h3_10d7c(0,param_2 + -1);
+  *(byte *)(unaff_r13 + 0x27) = *(byte *)(unaff_r13 + 0x27) & 0xbf;
+  uVar2 = func_0x00027f30();
+  *(undefined4 *)(unaff_gp + 0x30) = uVar2;
+  return;
+}
+
+
+

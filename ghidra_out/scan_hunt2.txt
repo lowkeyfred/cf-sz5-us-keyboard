@@ -1,0 +1,4 @@
+disasm pass done
+instruction scan done, 2440 ins, 0 sites
+
+===== FUNCTIONS =====

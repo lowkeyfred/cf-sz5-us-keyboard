@@ -1,0 +1,346 @@
+HIT base imm 0xca0b8000 @ 0x014a6
+HIT base imm 0xae0b8000 @ 0x014c2
+HIT base imm 0x0e0b8000 @ 0x03fe8
+HIT base imm 0x760b8000 @ 0x03ffe
+HIT base imm 0x270b8000 @ 0x07f42
+HIT base imm 0x650b8000 @ 0x1e29a
+
+=== total hits: 6 ===
+
+
+----- window around 0x014a6 -----
+  ram:000014a6  bl 0x0000286c
+  ram:000014aa  mov_s r15,r0
+  ram:000014ac  mov_s r13,r1
+  ram:000014ae  mov_s r14,r3
+  ram:000014b0  mov_s r0,r2
+  ram:000014b2  mov_s r1,r15
+  ram:000014b4  bl.d 0x000023b0
+  ram:000014b8  _mov_s r2,r13
+  ram:000014ba  b.d 0x000028d8
+  ram:000014be  _st_s r13,[r14]
+
+----- window around 0x014c2 -----
+  ram:000014b8  _mov_s r2,r13
+  ram:000014ba  b.d 0x000028d8
+  ram:000014be  _st_s r13,[r14]
+  ram:000014c2  bl 0x0000286c
+  ram:000014c6  ld_s r0,[pcl,0x80]
+  ram:000014c8  sub_s sp,0x4
+  ram:000014ca  brne_s r0,0,0x000014d0
+  ram:000014cc  mov_s r0,0x0
+  ram:000014ce  b_s 0x000014f4
+
+----- window around 0x03fe8 -----
+  ram:000014ca  brne_s r0,0,0x000014d0
+  ram:000014cc  mov_s r0,0x0
+  ram:000014ce  b_s 0x000014f4
+  ram:00003fe8  bl 0x000052f4
+  ram:00003fec  stb r13,[r14, 0x28]
+  ram:00003ff0  mov_s blink,r15
+  ram:00003ff2  pop_s r15
+  ram:00003ff4  pop_s r14
+  ram:00003ff6  j_s.d blink
+  ram:00003ff8  _pop_s r13
+
+----- window around 0x03ffe -----
+  ram:00003ff4  pop_s r14
+  ram:00003ff6  j_s.d blink
+  ram:00003ff8  _pop_s r13
+  ram:00003ffe  bl 0x00005370
+  ram:00004002  stb r13,[r14, 0x28]
+  ram:00004006  mov_s blink,r15
+  ram:00004008  pop_s r15
+  ram:0000400a  pop_s r14
+  ram:0000400c  j_s.d blink
+  ram:0000400e  _pop_s r13
+
+----- window around 0x07f42 -----
+  ram:0000400a  pop_s r14
+  ram:0000400c  j_s.d blink
+  ram:0000400e  _pop_s r13
+  ram:00007f42  breq r3,r2,0x00007f66
+  ram:00007f46  breq_s r1,0,0x00007f52
+  ram:00007f48  mov_s r0,r13
+  ram:00007f4a  bl.d 0x00007dac
+  ram:00007f4e  _mov_s r1,r14
+  ram:00007f50  b_s 0x00007f6e
+
+----- window around 0x1e29a -----
+  ram:00007f4a  bl.d 0x00007dac
+  ram:00007f4e  _mov_s r1,r14
+  ram:00007f50  b_s 0x00007f6e
+  ram:0001e29a  breq r3,r2,0x0001e2fc
+  ram:0001e29e  bl 0x00025284
+  ram:0001e2a2  ldb r5,[sp]
+  ram:0001e2a6  mov r6,0x800c78
+  ram:0001e2ae  add2 r3,r6,r5
+  ram:0001e2b2  ldb r4,[sp, 0x1]
+  ram:0001e2b6  ld_s r2,[r3]
+  ram:0001e2b8  lsr r3,r4,0x3
+  ram:0001e2bc  ldb.a r1,[r2,r3]
+
+
+===== FUNCTION DECOMPILATIONS =====
+
+##### fn scfn_14a6 @ 0x14A6 (body 0x13A6-0x17A6) #####
+
+void scfn_14a6(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 *param_4)
+
+{
+  undefined4 uVar1;
+  undefined8 uVar2;
+  
+  uVar2 = func_0x0000286c();
+  uVar1 = (undefined4)((ulonglong)uVar2 >> 0x20);
+  func_0x000023b0(param_3,(int)uVar2,uVar1);
+  *param_4 = uVar1;
+  return;
+}
+
+
+
+##### fn scfn_3fe8 @ 0x3FE8 (body 0x3EE8-0x42E8) #####
+
+void scfn_3fe8(void)
+
+{
+  undefined1 unaff_r13;
+  int unaff_r14;
+  
+  func_0x000052f4();
+  *(undefined1 *)(unaff_r14 + 0x28) = unaff_r13;
+  return;
+}
+
+
+
+##### fn scfn_7f42 @ 0x7F42 (body 0x7E42-0x8242) #####
+
+void scfn_7f42(undefined4 param_1,int param_2,int param_3,int param_4,int param_5)
+
+{
+  int iVar1;
+  int unaff_r13;
+  
+  if ((param_4 == param_3) ||
+     ((param_2 == 0 &&
+      ((*(char *)(*(int *)(unaff_r13 + 0xb4) + 1) == '\0' ||
+       ((*(char *)(param_5 + 0xe) != '\x02' && (*(char *)(param_5 + 0xe) != '\x04')))))))) {
+    func_0x00007d70();
+  }
+  else {
+    func_0x00007dac();
+  }
+  iVar1 = func_0x0001c450();
+  if (iVar1 == 0) {
+    *(short *)(unaff_r13 + 0x96) = *(short *)(unaff_r13 + 0x96) + 1;
+    if (*(short *)(unaff_r13 + 0x9c) < *(short *)(unaff_r13 + 0x12)) {
+      *(short *)(unaff_r13 + 0x9c) = *(short *)(unaff_r13 + 0x12);
+    }
+    if (*(ushort *)(unaff_r13 + 0xa0) < *(ushort *)(unaff_r13 + 2)) {
+      *(ushort *)(unaff_r13 + 0xa0) = *(ushort *)(unaff_r13 + 2);
+    }
+  }
+  else {
+    *(short *)(unaff_r13 + 0x98) = *(short *)(unaff_r13 + 0x98) + 1;
+    if (*(short *)(unaff_r13 + 0x9e) < *(short *)(unaff_r13 + 0x12)) {
+      *(short *)(unaff_r13 + 0x9e) = *(short *)(unaff_r13 + 0x12);
+    }
+    if (*(ushort *)(unaff_r13 + 0xa2) < *(ushort *)(unaff_r13 + 2)) {
+      *(ushort *)(unaff_r13 + 0xa2) = *(ushort *)(unaff_r13 + 2);
+    }
+  }
+  return;
+}
+
+
+
+##### fn scsite_fbbc @ 0xFBBC (body 0xFB7C-0xFF3C) #####
+
+undefined4 scsite_fbbc(void)
+
+{
+  scsite_2576c();
+  return 0;
+}
+
+
+
+##### fn scfn_1e29a @ 0x1E29A (body 0x1E19A-0x1E59A) #####
+
+void scfn_1e29a(undefined4 param_1,undefined4 param_2,int param_3,int param_4)
+
+{
+  int iVar1;
+  byte *pbVar2;
+  int unaff_r13;
+  char cStack00000000;
+  byte bStack00000001;
+  
+  if (param_4 != param_3) {
+    iVar1 = func_0x00025284();
+    pbVar2 = (byte *)(*(int *)((_cStack00000000 & 0xff) * 4 + 0x800c78) +
+                     (uint)(bStack00000001 >> 3));
+    *pbVar2 = *pbVar2 | (byte)(1 << (bStack00000001 & 7));
+    if (cStack00000000 == '\x01') {
+      pbVar2 = (byte *)(iRam00800c80 + (uint)(bStack00000001 >> 3));
+      *pbVar2 = *pbVar2 | (byte)(1 << (bStack00000001 & 7));
+    }
+    *(byte *)(unaff_r13 + 0x1c) = *(byte *)(unaff_r13 + 0x1c) | 0x20;
+    if (iVar1 != 0) {
+      func_0x000261b8();
+    }
+  }
+  return;
+}
+
+
+
+##### fn scsite_22540 @ 0x22540 (body 0x22500-0x228C0) #####
+
+void scsite_22540(undefined2 *param_1,undefined2 *param_2)
+
+{
+  *param_1 = *param_2;
+  param_1[1] = param_2[1];
+  param_1[2] = param_2[2];
+  param_1[3] = param_2[3];
+  param_1[4] = param_2[4];
+  param_1[5] = param_2[5];
+  param_1[6] = param_2[6];
+  param_1[7] = param_2[7];
+  param_1[8] = param_2[8];
+  return;
+}
+
+
+
+##### fn scsite_22a14 @ 0x22A14 (body 0x229D4-0x22D94) #####
+
+void scsite_22a14(ushort *param_1)
+
+{
+  int iVar1;
+  ushort *puVar2;
+  ushort uVar3;
+  int iVar4;
+  
+  iVar1 = 0x10;
+  do {
+    puVar2 = param_1 + iVar1;
+    iVar4 = (int)(short)*puVar2;
+    puVar2[-9] = (ushort)(iVar4 << 0xd) ^ (ushort)(iVar4 << 0xf) ^ puVar2[-9];
+    puVar2[-8] = puVar2[-8] ^
+                 (ushort)(iVar4 << 5) ^
+                 (ushort)(iVar4 >> 3) & 0x1fff ^ (ushort)(iVar4 >> 1) & 0x7fff ^ *puVar2;
+    iVar1 = (int)(char)((char)iVar1 + -1);
+    puVar2[-7] = puVar2[-7] ^ (ushort)(iVar4 >> 0xb) & 0x1f;
+  } while (8 < iVar1);
+  uVar3 = param_1[8] & 0xfff8;
+  iVar1 = (int)(short)uVar3;
+  param_1[8] = param_1[8] & 7;
+  *param_1 = *param_1 ^
+             (ushort)(iVar1 << 5) ^
+             (ushort)(iVar1 >> 3) & 0x1fff ^ (ushort)(iVar1 >> 1) & 0x7fff ^ uVar3;
+  param_1[1] = param_1[1] ^ (ushort)(iVar1 >> 0xb) & 0x1f;
+  return;
+}
+
+
+
+##### fn scsite_24c80 @ 0x24C80 (body 0x24C40-0x25000) #####
+
+void scsite_24c80(uint param_1)
+
+{
+  bRam00f0c486 = bRam00f0c486 & 0xfe | (param_1 & 1) != 0;
+  bRam00f0c4a6 = bRam00f0c4a6 & 0xfe | (param_1 & 2) != 0;
+  return;
+}
+
+
+
+##### fn scsite_2576c @ 0x2576C (body 0x2572C-0x25AEC) #####
+
+void scsite_2576c(undefined1 *param_1,byte *param_2,byte *param_3)
+
+{
+  bool bVar1;
+  byte bVar2;
+  byte bVar3;
+  byte bVar4;
+  
+  bVar1 = false;
+  bVar2 = *param_2;
+  bVar4 = 0xff;
+  bVar3 = 0;
+  if (bVar2 == 1) {
+code_r0x000257b6:
+    if ((1 << (*param_3 & 0x1f) & 0xdU) == 0) {
+      *param_1 = 0;
+      bVar3 = 0;
+    }
+    else {
+      *param_1 = 1;
+      bVar4 = *param_3;
+      if (*param_2 == 1) {
+        bVar3 = 1;
+      }
+      else {
+        bVar3 = 0;
+      }
+    }
+    bVar1 = true;
+  }
+  else {
+    if (bVar2 < 2) {
+      if (bVar2 == 0) {
+        *param_1 = 1;
+        bVar1 = true;
+        goto code_r0x00025800;
+      }
+    }
+    else {
+      if (bVar2 == 2) goto code_r0x000257b6;
+      if (bVar2 == 0xff) {
+        *param_1 = 1;
+        *param_2 = 0xd;
+        *param_3 = 0;
+        goto code_r0x00025800;
+      }
+    }
+    *param_3 = 0;
+    *param_2 = 0;
+    *param_1 = 0;
+  }
+code_r0x00025800:
+  if (bVar4 == 0) {
+    bRam00f0c42a = bRam00f0c42a & 0xfe | bVar3;
+  }
+  else if (bVar4 == 2) {
+    bRam00f0c42e = bRam00f0c42e & 0xfe | bVar3;
+  }
+  else if (bVar4 == 3) {
+    bRam00f0c562 = bRam00f0c562 & 0xfe | bVar3;
+  }
+  if (bVar1) {
+    if ((bRam00f0c42e & 1) == 0) {
+      bVar4 = 0;
+    }
+    else {
+      bVar4 = 4;
+    }
+    if ((bRam00f0c562 & 1) == 0) {
+      bVar2 = 0;
+    }
+    else {
+      bVar2 = 8;
+    }
+    *param_2 = bVar2 | (bRam00f0c42a & 1) != 0 | bVar4;
+    *param_3 = 0;
+  }
+  return;
+}
+
+

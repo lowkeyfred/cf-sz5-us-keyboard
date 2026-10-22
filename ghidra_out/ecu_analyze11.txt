@@ -1,0 +1,72 @@
+### FN FUN_00408d80 @0x408d80
+
+void __fastcall FUN_00408d80(undefined2 *param_1,LPCWSTR param_2)
+
+{
+  WCHAR WVar1;
+  BOOL BVar2;
+  WCHAR *pWVar3;
+  uint uVar4;
+  WCHAR local_424;
+  uint local_422 [129];
+  WCHAR local_21c;
+  uint local_21a [129];
+  uint local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_00432ec2;
+  local_10 = ExceptionList;
+  local_14 = DAT_00445090 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  *(undefined4 *)(param_1 + 10) = 7;
+  *(undefined4 *)(param_1 + 8) = 0;
+  *param_1 = 0;
+  local_8 = 0;
+  local_424 = L'\0';
+  FUN_004218a0(local_422,0,0x206);
+  ExpandEnvironmentStringsW(param_2,&local_424,0x104);
+  BVar2 = PathIsRelativeW(&local_424);
+  if (BVar2 == 0) {
+    if (local_424 == L'\0') {
+      uVar4 = 0;
+    }
+    else {
+      pWVar3 = &local_424;
+      do {
+        WVar1 = *pWVar3;
+        pWVar3 = pWVar3 + 1;
+      } while (WVar1 != L'\0');
+      uVar4 = (int)pWVar3 - (int)local_422 >> 1;
+    }
+    pWVar3 = &local_424;
+  }
+  else {
+    local_21c = L'\0';
+    FUN_004218a0(local_21a,0,0x206);
+    GetModuleFileNameW((HMODULE)0x0,&local_21c,0x104);
+    PathRemoveFileSpecW(&local_21c);
+    PathAppendW(&local_21c,&local_424);
+    if (local_21c == L'\0') {
+      uVar4 = 0;
+      pWVar3 = &local_21c;
+    }
+    else {
+      pWVar3 = &local_21c;
+      do {
+        WVar1 = *pWVar3;
+        pWVar3 = pWVar3 + 1;
+      } while (WVar1 != L'\0');
+      uVar4 = (int)pWVar3 - (int)local_21a >> 1;
+      pWVar3 = &local_21c;
+    }
+  }
+  FUN_004074b0(param_1,(int *)pWVar3,uVar4);
+  ExceptionList = local_10;
+  __security_check_cookie(local_14 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+

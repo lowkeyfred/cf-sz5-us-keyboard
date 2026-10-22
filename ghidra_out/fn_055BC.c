@@ -1,0 +1,9 @@
+
+void FUN_ram_000055bc(undefined4 param_1)
+
+{
+  FUN_ram_0001809c(0xf0);
+  FUN_ram_0001809c(param_1);
+  return;
+}
+

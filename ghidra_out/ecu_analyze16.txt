@@ -1,0 +1,521 @@
+### FN FUN_00411750 @0x411750
+
+void __fastcall FUN_00411750(int param_1)
+
+{
+  UINT UVar1;
+  int *piVar2;
+  LPCWSTR lpCaption;
+  undefined4 *puVar3;
+  LPCWSTR lpText;
+  void *local_5c [5];
+  uint local_48;
+  void *local_44 [4];
+  undefined4 local_34;
+  uint local_30;
+  undefined4 local_2c;
+  undefined4 local_1c;
+  uint local_18;
+  uint local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  uint local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_004333f8;
+  local_10 = ExceptionList;
+  local_14 = DAT_00445090 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  DAT_004487fc = param_1;
+  UVar1 = FUN_00411590(param_1);
+  local_18 = 7;
+  local_1c = 0;
+  local_2c = (LPCWSTR)((uint)local_2c._2_2_ << 0x10);
+  local_8 = 0;
+  FUN_00411c90((undefined2 *)local_5c,UVar1);
+  local_8 = CONCAT31(local_8._1_3_,1);
+  piVar2 = FUN_004140c0((int *)local_44,L"Following error has occurred: %s [Code=%u]");
+  if (&local_2c != piVar2) {
+    if (7 < local_18) {
+      FID_conflict__free(local_2c);
+    }
+    local_18 = 7;
+    local_1c = 0;
+    local_2c = (LPCWSTR)((uint)local_2c & 0xffff0000);
+    FUN_00407640(&local_2c,(undefined8 *)piVar2);
+  }
+  if (7 < local_30) {
+    FID_conflict__free(local_44[0]);
+  }
+  local_8 = local_8 & 0xffffff00;
+  local_30 = 7;
+  local_34 = 0;
+  local_44[0] = (void *)((uint)local_44[0] & 0xffff0000);
+  if (7 < local_48) {
+    FID_conflict__free(local_5c[0]);
+  }
+  FUN_00413750(&DAT_00449900,1,L"%s");
+  FUN_00411c90((undefined2 *)local_5c,UVar1);
+  local_8 = CONCAT31(local_8._1_3_,2);
+  piVar2 = FUN_004140c0((int *)local_44,L"%s\n\n[Code=%u]");
+  if (&local_2c != piVar2) {
+    if (7 < local_18) {
+      FID_conflict__free(local_2c);
+    }
+    local_18 = 7;
+    local_1c = 0;
+    local_2c = (LPCWSTR)((uint)local_2c & 0xffff0000);
+    FUN_00407640(&local_2c,(undefined8 *)piVar2);
+  }
+  if (7 < local_30) {
+    FID_conflict__free(local_44[0]);
+  }
+  local_8 = local_8 & 0xffffff00;
+  local_30 = 7;
+  local_34 = 0;
+  local_44[0] = (void *)((uint)local_44[0] & 0xffff0000);
+  if (7 < local_48) {
+    FID_conflict__free(local_5c[0]);
+  }
+  if (DAT_0044881c == (LPCWSTR)0x0) {
+    FUN_004137e0(&DAT_00449900,L"Uninitialized ini file");
+  }
+  else {
+    puVar3 = FUN_00411f90(3);
+    if (puVar3 != (undefined4 *)0x0) {
+      UVar1 = GetPrivateProfileIntW(L"Settings",(LPCWSTR)puVar3[1],puVar3[2],DAT_0044881c);
+      goto LAB_00411910;
+    }
+  }
+  UVar1 = 0;
+LAB_00411910:
+  if ((UVar1 != 2) && (1 < param_1 - 0x65U)) {
+    lpText = (LPCWSTR)&local_2c;
+    if (7 < local_18) {
+      lpText = local_2c;
+    }
+    lpCaption = (LPCWSTR)&DAT_004470ac;
+    if (7 < DAT_004470c0) {
+      lpCaption = DAT_004470ac;
+    }
+    MessageBoxW(DAT_004487f8,lpText,lpCaption,0x40010);
+  }
+  if (7 < local_18) {
+    FID_conflict__free(local_2c);
+  }
+  ExceptionList = local_10;
+  __security_check_cookie(local_14 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+### FN FUN_00411510 @0x411510
+
+byte FUN_00411510(void)
+
+{
+  HMODULE hInstance;
+  INT_PTR IVar1;
+  undefined4 *puVar2;
+  UINT UVar3;
+  LPCWSTR lpTemplateName;
+  HWND hWndParent;
+  code *lpDialogFunc;
+  LPARAM dwInitParam;
+  
+  if (DAT_0044881c == (LPCWSTR)0x0) {
+    FUN_004137e0(&DAT_00449900,L"Uninitialized ini file");
+  }
+  else {
+    puVar2 = FUN_00411f90(3);
+    if (puVar2 != (undefined4 *)0x0) {
+      UVar3 = GetPrivateProfileIntW(L"Settings",(LPCWSTR)puVar2[1],puVar2[2],DAT_0044881c);
+      if (UVar3 != 0) {
+        return 0;
+      }
+    }
+  }
+  dwInitParam = 0;
+  lpDialogFunc = FUN_00411010;
+  lpTemplateName = (LPCWSTR)0x320;
+  hWndParent = DAT_004487f8;
+  hInstance = GetModuleHandleW((LPCWSTR)0x0);
+  IVar1 = DialogBoxParamW(hInstance,lpTemplateName,hWndParent,lpDialogFunc,dwInitParam);
+  return -(IVar1 != 1) & 0x66;
+}
+
+
+
+### FN FUN_004112b0 @0x4112b0
+
+void FUN_004112b0(void)
+
+{
+  undefined1 uVar1;
+  undefined4 *puVar2;
+  UINT UVar3;
+  LPCWSTR lpCaption;
+  LPCWSTR **lpText;
+  LPCWSTR *local_44 [4];
+  undefined4 local_34;
+  uint local_30;
+  void *local_2c [4];
+  undefined4 local_1c;
+  uint local_18;
+  uint local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_004333b0;
+  local_10 = ExceptionList;
+  local_14 = DAT_00445090 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  local_30 = 7;
+  local_34 = 0;
+  local_44[0] = (LPCWSTR *)((uint)local_44[0] & 0xffff0000);
+  local_8 = 0;
+  if (DAT_0044881c == (LPCWSTR)0x0) {
+    FUN_004137e0(&DAT_00449900,L"Uninitialized ini file");
+  }
+  else {
+    puVar2 = FUN_00411f90(3);
+    if ((puVar2 != (undefined4 *)0x0) &&
+       (UVar3 = GetPrivateProfileIntW(L"Settings",(LPCWSTR)puVar2[1],puVar2[2],DAT_0044881c),
+       UVar3 != 0)) goto LAB_004114d6;
+  }
+  puVar2 = (undefined4 *)FUN_00411c90((undefined2 *)local_2c,0x7a);
+  local_8._0_1_ = 1;
+  FUN_00406db0(local_44,puVar2,0,0xffffffff);
+  local_8._0_1_ = 0;
+  if (7 < local_18) {
+    FID_conflict__free(local_2c[0]);
+  }
+  if (DAT_0044881c == (LPCWSTR)0x0) {
+    FUN_004137e0(&DAT_00449900,L"Uninitialized ini file");
+LAB_00411366:
+    UVar3 = FUN_00412140(4);
+    if (UVar3 == 2) {
+      puVar2 = (undefined4 *)FUN_00411c90((undefined2 *)local_2c,0x87);
+      local_8._0_1_ = 3;
+      goto LAB_00411387;
+    }
+    UVar3 = FUN_00412140(4);
+    uVar1 = (undefined1)local_8;
+    if (UVar3 == 3) {
+      puVar2 = (undefined4 *)FUN_00411c90((undefined2 *)local_2c,0x8c);
+      local_8._0_1_ = 4;
+      FUN_00406db0(local_44,puVar2,0,0xffffffff);
+      local_8._0_1_ = 0;
+      FUN_004076f0(local_2c);
+      uVar1 = (undefined1)local_8;
+    }
+  }
+  else {
+    puVar2 = FUN_00411f90(4);
+    if ((puVar2 == (undefined4 *)0x0) ||
+       (UVar3 = GetPrivateProfileIntW(L"Settings",(LPCWSTR)puVar2[1],puVar2[2],DAT_0044881c),
+       UVar3 != 1)) goto LAB_00411366;
+    puVar2 = (undefined4 *)FUN_00411c90((undefined2 *)local_2c,0x6e);
+    local_8._0_1_ = 2;
+LAB_00411387:
+    FUN_00406db0(local_44,puVar2,0,0xffffffff);
+    local_8._0_1_ = 0;
+    uVar1 = (undefined1)local_8;
+    local_8._0_1_ = 0;
+    if (7 < local_18) {
+      FID_conflict__free(local_2c[0]);
+      uVar1 = (undefined1)local_8;
+    }
+  }
+  local_8._0_1_ = uVar1;
+  puVar2 = (undefined4 *)FUN_00411c90((undefined2 *)local_2c,0x6f);
+  local_8 = CONCAT31(local_8._1_3_,5);
+  FUN_00406db0(local_44,puVar2,0,0xffffffff);
+  if (7 < local_18) {
+    FID_conflict__free(local_2c[0]);
+  }
+  lpText = local_44;
+  if (7 < local_30) {
+    lpText = (LPCWSTR **)local_44[0];
+  }
+  local_2c[0] = (void *)((uint)local_2c[0] & 0xffff0000);
+  lpCaption = (LPCWSTR)&DAT_004470ac;
+  if (7 < DAT_004470c0) {
+    lpCaption = DAT_004470ac;
+  }
+  local_18 = 7;
+  local_1c = 0;
+  MessageBoxW(DAT_004487f8,(LPCWSTR)lpText,lpCaption,0x40044);
+LAB_004114d6:
+  if (7 < local_30) {
+    FID_conflict__free(local_44[0]);
+  }
+  ExceptionList = local_10;
+  __security_check_cookie(local_14 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+### FN FUN_004086b0 @0x4086b0
+
+int FUN_004086b0(void)
+
+{
+  undefined4 *puVar1;
+  UINT UVar2;
+  int iVar3;
+  HWND pHVar4;
+  uint uVar5;
+  wchar_t *pwVar6;
+  int local_10;
+  uint local_c;
+  uint local_8;
+  
+  if (DAT_0044881c == (LPCWSTR)0x0) {
+    FUN_004137e0(&DAT_00449900,L"Uninitialized ini file");
+  }
+  else {
+    puVar1 = FUN_00411f90(4);
+    if (puVar1 != (undefined4 *)0x0) {
+      UVar2 = GetPrivateProfileIntW(L"Settings",(LPCWSTR)puVar1[1],puVar1[2],DAT_0044881c);
+      if ((UVar2 == 1) || (UVar2 == 3)) {
+        local_8 = 0;
+        local_c = 0;
+        local_10 = 0;
+        pHVar4 = FindWindowW(L"Panasonic Peak Shift Control Class",(LPCWSTR)0x0);
+        if (pHVar4 == (HWND)0x0) {
+          FUN_004137e0(&DAT_00449900,
+                       L"No Peak-Shift Control Utility or Peak-Shift control is not enabled.");
+        }
+        else {
+          iVar3 = FUN_00411a20();
+          if (iVar3 != 0) {
+            FUN_004137e0(&DAT_00449900,L"PeakShift is temporary disabled.");
+            DAT_004487e8 = 1;
+            pHVar4 = FindWindowW(L"Panasonic Peak Shift Control Class",(LPCWSTR)0x0);
+            if (pHVar4 != (HWND)0x0) {
+              FUN_004137e0(&DAT_00449900,L"Peak-Shift control is %s");
+              PostMessageW(pHVar4,0x111,0x8007,0);
+            }
+            uVar5 = 0;
+            do {
+              iVar3 = FUN_00408340(&local_8,&local_c,&local_10);
+              if (iVar3 != 0) {
+                FUN_004137e0(&DAT_00449900,L"Failed to check AC/Battey status.");
+                return iVar3;
+              }
+              if (local_8 != 0) break;
+              Sleep(500);
+              uVar5 = uVar5 + 500;
+            } while (uVar5 < 5000);
+            Sleep(1000);
+          }
+        }
+        iVar3 = FUN_00408340(&local_8,&local_c,&local_10);
+        uVar5 = local_8;
+        if (iVar3 != 0) {
+          FUN_004137e0(&DAT_00449900,L"Failed to check AC/Battey status.");
+          return iVar3;
+        }
+        FUN_004137e0(&DAT_00449900,L"AC adapter: %s");
+        iVar3 = local_10;
+        FUN_004137e0(&DAT_00449900,L"Is USB PD : %s");
+        FUN_004137e0(&DAT_00449900,L"Battery   : %s");
+        if (UVar2 == 1) {
+          if ((uVar5 == 0) || (local_c == 0)) {
+            return (uint)(iVar3 != 0) * 2 + 0x140;
+          }
+          pwVar6 = L"AC/Battery check is OK.";
+        }
+        else {
+          if (UVar2 != 3) {
+            return 0;
+          }
+          if (uVar5 == 0) {
+            return (iVar3 != 0) + 0x143;
+          }
+          pwVar6 = L"AC check is OK.";
+        }
+        goto LAB_004086d9;
+      }
+      if (UVar2 == 2) {
+        iVar3 = FUN_00408530();
+        return iVar3;
+      }
+    }
+  }
+  pwVar6 = L"AC/Battery check is skipped.";
+LAB_004086d9:
+  FUN_004137e0(&DAT_00449900,pwVar6);
+  return 0;
+}
+
+
+
+### FN FUN_00404900 @0x404900
+
+/* WARNING: Type propagation algorithm not settling */
+
+undefined4 FUN_00404900(void)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  undefined4 *puVar5;
+  bool bVar6;
+  uint local_20 [6];
+  undefined1 local_6;
+  char local_5;
+  
+  local_5 = '\x01';
+  local_20[0] = 0;
+  local_20[1] = 0;
+  local_20[2] = 0;
+  local_20[4] = 0;
+  local_20[3] = 0;
+  local_20[5] = 0;
+  iVar2 = FUN_00417ca0(&local_5,(undefined2 *)local_20,(undefined2 *)(local_20 + 1),local_20 + 2,
+                       local_20 + 4,local_20 + 3,(undefined2 *)(local_20 + 5));
+  uVar1 = local_20[1];
+  uVar4 = local_20[0];
+  FUN_004137e0(&DAT_00449900,
+               L"  MF1300: Err=0x%X I/F=%X.%X, Flags=0x%X, RomSize=0x%X, BIOSSize=0x%X, Upload=0x%X"
+              );
+  if (iVar2 != 0) {
+    return 0x14;
+  }
+  if (local_5 == '\a') {
+    return 8;
+  }
+  if (local_5 != '\0') {
+    return 3;
+  }
+  DAT_0044882c = (undefined2)local_20[5];
+  DAT_00448830 = local_20[4];
+  DAT_00448834 = local_20[3];
+  DAT_00448828 = (short)uVar4;
+  DAT_0044882a = (ushort)uVar1;
+  DAT_00448838 = local_20[2];
+  if (DAT_00448828 == 0) {
+    bVar6 = 4 < DAT_0044882a;
+  }
+  else {
+    bVar6 = DAT_00448828 != 0;
+  }
+  DAT_00448904 = (uint)bVar6;
+  if (DAT_00448910 == -1) {
+    iVar2 = 1;
+    puVar5 = &DAT_00448910;
+    do {
+      *puVar5 = 0;
+      iVar3 = FUN_00404b00(iVar2);
+      if (iVar3 != 0) {
+        FUN_00404890();
+        local_6 = 0;
+        uVar4 = FUN_00404ba0(iVar2);
+        local_20[0] = uVar4 & 0xffff;
+        if ((short)uVar4 != -1) {
+          iVar3 = FUN_00417d60(&local_5,(short)uVar4,0,0,(undefined8 *)&local_6);
+          FUN_004137e0(&DAT_00449900,L"  MF1301 UploadFlag=0x%X, UploadSize=0: Err=0x%X");
+          if ((iVar3 == 0) && (local_5 == '\0')) {
+            *puVar5 = 1;
+          }
+        }
+      }
+      puVar5 = puVar5 + 1;
+      iVar2 = iVar2 + 1;
+    } while ((int)puVar5 < 0x448928);
+    FUN_00404890();
+  }
+  return 0;
+}
+
+
+
+### FN FUN_00407ac0 @0x407ac0
+
+undefined4 __fastcall FUN_00407ac0(undefined4 param_1)
+
+{
+  switch(param_1) {
+  case 0:
+    return 0;
+  default:
+    return 9999;
+  case 3:
+  case 10:
+  case 0x12:
+    return 200;
+  case 5:
+    return 0xd7;
+  case 6:
+    return 0x3f0;
+  case 8:
+    return 0x15e;
+  case 9:
+    return 0x119;
+  case 0xb:
+    return 0xd6;
+  case 0xc:
+    return 0x3f6;
+  }
+}
+
+
+
+### FN FUN_00403120 @0x403120
+
+undefined4 FUN_00403120(void)
+
+{
+  if ((DAT_0044884c != 1) && (DAT_0044884c != 3)) {
+    return 0;
+  }
+  return 1;
+}
+
+
+
+### FN FUN_004046b0 @0x4046b0
+
+uint FUN_004046b0(int *param_1,uint param_2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  
+  uVar3 = 0;
+  if (0x10f < param_2) {
+    while( true ) {
+      uVar1 = param_1[3];
+      if (param_2 < uVar1) {
+        return uVar3;
+      }
+      if (*param_1 != 0x57464250) {
+        return uVar3;
+      }
+      if (1 < *(byte *)(param_1 + 1)) {
+        return uVar3;
+      }
+      uVar2 = 1 << (*(byte *)(param_1 + 1) & 0x1f);
+      if ((uVar3 & uVar2) != 0) break;
+      param_2 = param_2 - uVar1;
+      uVar3 = uVar3 | uVar2;
+      param_1 = (int *)((int)param_1 + uVar1);
+      if (param_2 < 0x110) {
+        return uVar3;
+      }
+    }
+    FUN_004137e0(&DAT_00449900,L"Same Target is found in a single image: Target=%X\n");
+  }
+  return uVar3;
+}
+
+
+

@@ -1,0 +1,5 @@
+lsr r0,r0,1            OK 2f200200 (len 4)
+lsr r0,r0,0x7f         FAIL: Pattern conflict (Resolving ARCompact.slaspec:306 in [ARCompact.slaspec:1625])
+S
+mov_s r3,0x80          OK 80db (len 2)
+beq_s 0x286bc          OK 00f2 (len 2)

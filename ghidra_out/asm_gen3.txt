@@ -1,0 +1,5 @@
+sub_s r0,r0,120        FAIL: Syntax Error: Expected [0x0, blink, fp, gp, ilink1, ilink2, lp_count, mhi, mlo, 
+sub_s r0,r0,64         FAIL: Syntax Error: Expected [0x0, blink, fp, gp, ilink1, ilink2, lp_count, mhi, mlo, 
+tst_s r0,r3            OK 6b78 (len 2)
+mov_s r3,0x80          OK 80db (len 2)
+beq_s 0x286bc          OK 00f2 (len 2)
