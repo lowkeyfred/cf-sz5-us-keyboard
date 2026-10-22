@@ -1,5 +1,5 @@
 sudo keyd monitor
-[sudo] password for frederich:
+[sudo] password for <user>:
 device added: 05ac:024f:e352662d Keychron Keychron K3 (/dev/input/event8)
 device added: 05ac:024f:41338e31 Keychron Keychron K3 (/dev/input/event7)
 device added: 0002:0007:933252de SynPS/2 Synaptics TouchPad (/dev/input/event13)
