@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
-"""Build the FINAL v4 patched EC firmware (stock L19 code + E-table fixes only).
+"""Build the FINAL v5 patched EC firmware (stock L19 code + E-table fixes only).
 
-v4 (after v3 flash report: ';' still RCtrl, Home/End still '=', digit 8 became
-Home, RCtrl became ';'):
-  - 0x0A/0x3B were SWAPPED in v3: ';' key raw = 0x0A, RCtrl raw = 0x0B.
-    Fix: E[0x0A]=0x4C (';'), E[0x0B]=0x86 (RCtrl). Both wires proven by v3:
-    0x86 emitted RCtrl on both parities, 0x4C emitted ';' on 0x0B.
-  - E[0x28] restored to 0xE7 (KP8): it is the DIGIT 8 key, not Home/End.
-    0xE7 = KP8 — under NumLock it types '8' (why v2 looked "fine"), else Home.
-  - Home/End key = raw 0x3C: pristine E[0x3C]=0x55 -> 8042 set-2->set-1 -> 0x0D
-    '=' (the ONLY '='-producing entry in the whole E table — matches the
-    "Home/End types '=' in every version" report). Sibling 0x3D is FF (empty,
-    single-parity safe). E[0x3C]=0x8B (Home, slot13).
+v5 (after v4 flash report: '=' key became Home, Home/End key still '='):
+  - EQ key raw = 0x3C (v4's Home wire made it emit Home): E[0x3C] RESTORED to
+    pristine 0x55. The '=' key was CORRECT since stock — v1 had wrongly put
+    0x55 at E[0x50].
+  - Home/End key raw = 0x50 (sibling 0x51 = FF, single-parity safe): pristine
+    FF = DEAD (it was in the original broken-keys list). Every "Home/End types
+    '='" report since v1 came from OUR OWN E[0x50]=0x55 patch, not from
+    pristine. E[0x50]=0x8B (Home, slot13).
+  Fn+Home/End emits KP+ (JIS Fn-layer default for this position, unchanged);
+  a true Fn+Home/End=End needs an Fn-layer hook — deferred.
 
-Full patch set (17 positions, 5 of which are explicit restores = pristine):
+Full patch set (13 positions, 8 of which are explicit restores = pristine):
   E[0x0A]=0x4C  ';'      E[0x0B]=0x86  RCtrl     E[0x0C]=0x8D  Del
   E[0x0D]=0xC2  RESTORE <-             E[0x12]=E[0x13]=0x11  LAlt(+RAlt)
   E[0x28]=0xE7  RESTORE digit 8 (KP8)  E[0x36]=0x2E  RESTORE '5'
-  E[0x37]=0xD8  RESTORE F6             E[0x3C]=0x8B  Home (Home/End key)
-  E[0x3E]=0x5D  Backslash (single)     E[0x50]=0x55  = (EQ)
+  E[0x37]=0xD8  RESTORE F6             E[0x3C]=0x55  RESTORE '=' (EQ key)
+  E[0x3E]=0x5D  Backslash (single)     E[0x50]=0x8B  Home (Home/End key)
   E[0x74]=0xB6  Menu     E[0x75]=0x1B  RESTORE 's'  E[0x78]=0x8A  Ins
   E[0x7C]=0x88  PrtSc    E[0x7D]=0xC5  RESTORE ->   E[0x7E]=E[0x7F]=0x89  Pause
 
@@ -35,9 +34,9 @@ from fix_crc_sum import fix_crc_and_sum
 from build_ecupdate2 import ecu_crc, obfuscate, find_data_entries
 
 BASE = sz5env.w('ec_image_pristine.bin')
-OUT_IMG = sz5env.w('ec_firmware_final4.img')
-OUT_CAP = sz5env.w('ec_capsule_final4.bin')
-OUT_EXE = sz5env.w('EcUpdate_final4.exe')
+OUT_IMG = sz5env.w('ec_firmware_final5.img')
+OUT_CAP = sz5env.w('ec_capsule_final5.bin')
+OUT_EXE = sz5env.w('EcUpdate_final5.exe')
 PRISTINE_EXE = sz5env.UPDATER
 RSRC_RAW = 0x46000
 RSRC_RVA = 0xE1000
@@ -56,8 +55,8 @@ PATCHES = {
     0x28: 0xE7,   # RESTORE: digit 8 key = KP8 (v3 put Home here -> digit 8 became Home)
     0x36: 0x2E,   # RESTORE: '5' key (v1 wrongly Home)
     0x37: 0xD8,   # RESTORE: F6 key (v1 wrongly Home)
-    0x3C: 0x8B,   # Home   (Home/End key; pristine 0x55 -> 8042 -> '='; sib 0x3D=FF empty)
-    0x50: 0x55,   # =      (EQ key, wire 0x55)
+    0x3C: 0x55,   # RESTORE: '=' key (v4 flash PROVED raw 0x3C = EQ; v4 Home wire made it Home)
+    0x50: 0x8B,   # Home   (v4 flash PROVED raw 0x50 = Home/End key; '=' was from OUR v1 0x55 patch)
     0x74: 0xB6,   # Menu   (slot24 nav 0x2F)
     0x75: 0x1B,   # RESTORE: 's' key (v1 wrongly Menu)
     0x78: 0x8A,   # Ins    (slot12 nav 0x70)

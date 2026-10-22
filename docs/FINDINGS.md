@@ -637,3 +637,32 @@ exe 胶囊往返 == 镜像、INI blob 69B、0x3D=FF / 0x3F=LShift 完好。ALL C
 ### 待实机确认
 ';'、Home/End→Home、数字 8→'8'（NumLock 开）、RCtrl；Fn+Home/End（Fn 层未动，
 可能白送 End）；全键复扫。
+
+## §23 v4 实机结果 + v5（2026-10-22 深夜）
+
+### v4 刷后用户报告
+"现在 = 是 home（Fn 也是 home）。home 还是 =，倒是按住 fn 会变 kpplus。"
+
+### 定位——§22 的推理错误
+- **EQ 键 raw = 0x3C**：v4 把 Home 线放到 0x3C 后，`=` 键立刻出 Home → 0x3C 是
+  EQ 键。stock 0x55 本来就是对的——`=` 键从 stock 起一直是好的。
+- **Home/End 键 raw = 0x50**：v4 的 E[0x50]=0x55（v1 就放进的补丁）让它继续出
+  `=`。**从 v1 起所有 "home 出 =" 的报告都来自我们自己的补丁**，不是 pristine。
+  stock 下 Home/End 键是死的（FF）——正是最初坏键清单里的那个。
+- §22 的教训：用户报告"某键出 Y"时，Y 可能来自我们自己上一版的补丁，
+  先问"stock 下这个键是什么表现"再归因。pristine 里唯一出 '=' 的 0x3C
+  恰恰是本来就正常的 EQ 键，不是 Home/End。
+- Fn+Home/End = KP+：JIS Fn 层该位置的默认映射（fn_100AC 未动），符合预期。
+  想要 Fn+Home/End=End 需要动 Fn 层，仍挂起。
+
+### v5 补丁（11 处真实改动 + 8 处显式恢复）
+E[0x3C]=0x55（恢复 EQ）；E[0x50]=0x8B（Home，Home/End 键，兄弟 0x51=FF 空）。
+
+### v5 验证
+E diff == 意图、限定区域、header pristine、CRC=0x0810、sum=0xA88D、
+exe 胶囊往返 == 镜像、0x3D/0x51=FF、0x3F=LShift 完好。ALL CHECKS PASS。
+基线 SHA256：exe 32369746…4de3 / img 7a5e3695…e257 / cap 639c8857…c5fa。
+
+### 待实机确认
+Home/End 键 → Home；`=` 键 → '='；Fn+Home/End=KP+（JIS 默认，接受或挂起）；
+全键复扫。
